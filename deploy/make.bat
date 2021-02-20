@@ -11,7 +11,7 @@ rem ============================================================================
 
     set "VC=msvc:64:debug:static"
     set "MG=mingw:64:all:static"
-    set "order=%VC%"
+    rem set "order=%VC%"
     rem set "order=%MG%"
     rem set "order=%VC%; %MG%"
     set "order=all"
@@ -20,8 +20,8 @@ rem ============================================================================
     rem (call :generate) && (goto :success) || (goto :failed)
 
     rem (call :clean)    || (goto :failed)
-    rem (call :build)    || (goto :failed)
-    rem (call :runTests) || (goto :failed)
+    (call :build)    || (goto :failed)
+    (call :runTests) || (goto :failed)
     (call :install)  || (goto :failed)
 :success
     @echo [MAKE] completed successfully
