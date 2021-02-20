@@ -3,7 +3,7 @@
 // [2021y-02m-20d] birthday of the project
 #pragma once
 
-#define dBUILD_TARGET tools/template
+#define dBUILD_TARGET tools
 #include "confbuild.hpp"
 #include "confinfo.hpp"
 
