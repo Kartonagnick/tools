@@ -10,7 +10,7 @@
 #endif
 
 #define dBUILD_TARGET [test] tools
-#include <../sources/confbuild.hpp>
+#include <tools/confbuild.hpp>
 #include <mygtest/confinfo.hpp>
 #include <mygtest/pch_used.hpp>
 #include <mygtest/main.hpp>

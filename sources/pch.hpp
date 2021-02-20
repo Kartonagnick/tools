@@ -4,7 +4,7 @@
 #pragma once
 
 #define dBUILD_TARGET tools
-#include "confbuild.hpp"
+#include <tools/confbuild.hpp>
 #include "confinfo.hpp"
 
 //==============================================================================

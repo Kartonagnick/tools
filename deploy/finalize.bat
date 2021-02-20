@@ -74,7 +74,7 @@ exit /b
     @echo   src: %src%
     @echo   dst: %dst%
 :doCopy
-    robocopy "%src%" "%dst%" %* /xf "test.*" /s >nul 2>nul
+    robocopy "%src%" "%dst%" %* /xf "test*" /s >nul 2>nul
     if %errorlevel% LSS 8 exit /b 0
     @echo [ERROR] can`t copy files    
     @echo [ERROR] code: %errorlevel%
