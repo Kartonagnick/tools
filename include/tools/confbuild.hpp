@@ -3,7 +3,7 @@
 // [2021y-02m-20d] birthday of the project
 #pragma once
 #ifndef dTOOLS_CONFBUILD_USED_
-#define dTOOLS_CONFBUILD_USED_ 001
+#define dTOOLS_CONFBUILD_USED_ 002
 //==============================================================================
 //==============================================================================
 
@@ -43,7 +43,7 @@
 
 #define dVERSION_MAJOR      0
 #define dVERSION_MINOR      0
-#define dVERSION_PATCH      1
+#define dVERSION_PATCH      2
 
 #define dSTRINGIZE(...) #__VA_ARGS__
 #define dSSTRINGIZE(x) dSTRINGIZE(x)
