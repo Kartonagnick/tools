@@ -7,7 +7,7 @@
 //+                         Copyright @ 2019, Castle Of Dreams +
 //+                                     [author: Idrisov D. R] +
 //+                                   CastleOfDreams@yandex.ru +
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 #pragma once
 #ifndef dTOOLS_RAISE_USED_ 
