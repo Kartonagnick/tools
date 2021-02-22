@@ -21,7 +21,7 @@ namespace
     int loop(bool dir, size_t limit)
     {
         dprint(std::cout << "started: " << dir << " " << limit << std::endl);
-        for (int i = 0; i < limit; ++i)
+        for (size_t i = 0; i < limit; ++i)
         {
             if (dir)
                 ++value;

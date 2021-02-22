@@ -25,7 +25,7 @@ namespace
 
     volatile LONG flag = 0;
 
-    void foo(LPVOID param)
+    void foo(::LPVOID param)
     {
         (void) param;
         volatile size_t cnt = 0;
@@ -38,7 +38,7 @@ namespace
     }
 
     std::vector<sample> samples;
-    void bar(LPVOID param)
+    void bar(::LPVOID param)
     {
         (void) param;
         size_t cnt = 0;
@@ -81,15 +81,15 @@ TEST_COMPONENT(000)
 
 TEST_COMPONENT(001)
 {
-    prepare();
+    ::prepare();
     for(size_t i = 0; i != 10; ++i)
     {
-        const uintptr_t re = ::_beginthread(foo, 0, 0);
+        const ::uintptr_t re = ::_beginthread(foo, 0, 0);
 	    ASSERT_TRUE(re != -1);
     }
     ::Sleep(100);
 
-    LONG result = 0;
+    ::LONG result = 0;
     for(;;)
     {
         result = ::InterlockedCompareExchange(&flag, 100, 10);
@@ -97,20 +97,21 @@ TEST_COMPONENT(001)
             break;
         ::Sleep(100);
     }
-    ASSERT_TRUE(sample::instances() == 0);
+    ASSERT_TRUE(sample::instances() == 0)
+        << "[0] samples.instances() = " << sample::instances() << '\n';
 }
 
 TEST_COMPONENT(002)
 {
-    prepare();
+    ::prepare();
     for(size_t i = 0; i != 10; ++i)
     {
-        const uintptr_t re = ::_beginthread(bar, 0, 0);
+        const ::uintptr_t re = ::_beginthread(bar, 0, 0);
 	    ASSERT_TRUE(re != -1);
     }
     ::Sleep(100);
 
-    LONG result = 0;
+    ::LONG result = 0;
     for(;;)
     {
         result = ::InterlockedCompareExchange(&flag, 100, 10);
@@ -118,11 +119,15 @@ TEST_COMPONENT(002)
             break;
         ::Sleep(100);
     }
-    ASSERT_TRUE(samples.size() == 100);
-    ASSERT_TRUE(sample::instances() == 100);
+    ASSERT_TRUE(samples.size() == 100)
+        << "[0] samples.size() = " << samples.size() << '\n';
+
+    ASSERT_TRUE(sample::instances() == 100)
+        << "[1] samples.instances() = " << sample::instances() << '\n';
 
     samples.clear();
-    ASSERT_TRUE(sample::instances() == 0);
+    ASSERT_TRUE(sample::instances() == 0)
+        << "[2] samples.instances() = " << sample::instances() << '\n';
 }
 
 #endif // !_MSC_VER
