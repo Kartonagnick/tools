@@ -12,20 +12,20 @@
 //================================================================================
 
 #if dHAS_ATOMIC
-	#include <atomic>
+    #include <atomic>
 #else
-	#include <tools/counter.hpp>
+    #include <tools/counter.hpp>
 #endif
 
 namespace tools 
 {
     template<class T> class copies
     {
-		#if dHAS_ATOMIC
-			typedef ::std::atomic<size_t> count_t;
-		#else
-			typedef ::tools::counter count_t;
-		#endif
+        #if dHAS_ATOMIC
+            typedef ::std::atomic<size_t> count_t;
+        #else
+            typedef ::tools::counter count_t;
+        #endif
     public:
         ~copies()
         {

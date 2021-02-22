@@ -18,7 +18,7 @@ namespace me = ::tools;
 //=== TDD ======================================================================
 namespace 
 {
-    struct param { bool inc; int limit; };
+    struct param { bool dir; size_t limit; };
 
     me::counter ready = 0;
     me::counter value = 0;
@@ -27,10 +27,10 @@ namespace
     {
         ASSERT_TRUE(ptr);
         const param& ref = *static_cast<const param*>(ptr);
-        dprint(std::cout << "Started " << ref.inc << " " << ref.limit << std::endl);
-        for (int i = 0; i < ref.limit; ++i)
+        dprint(std::cout << "started " << ref.dir << " " << ref.limit << std::endl);
+        for (size_t i = 0; i < ref.limit; ++i)
         {
-            if (ref.inc)
+            if (ref.dir)
                 ++value;
             else
                 --value;
@@ -49,7 +49,7 @@ TEST_COMPONENT(000)
         const size_t total = 10;
     #elif defined (INCLUDE_LONG_TESTS)
         const size_t total = 5;
-    #lese
+    #else
         const size_t total = 1;
     #endif
 
