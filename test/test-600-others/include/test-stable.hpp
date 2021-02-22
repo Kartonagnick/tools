@@ -13,6 +13,8 @@
     #define INCLUDE_LONG_TESTS
 
 //==============================================================================
+//===== tools/windows ======================================||==================
+    #define TEST_TOOLS_SYNCH                                // ready!
 //===== tools ==============================================||==================
     #define TEST_TOOLS_RAISE                                // ready!
     #define TEST_TOOLS_COUNTER                              // ready!
