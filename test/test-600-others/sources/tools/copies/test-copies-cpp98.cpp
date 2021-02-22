@@ -63,7 +63,7 @@ namespace
 //==============================================================================
 //==============================================================================
 
-_TEST_COMPONENT(000)
+TEST_COMPONENT(000)
 {
     ASSERT_TRUE(sample::instances() == 0);
     {
@@ -106,7 +106,7 @@ TEST_COMPONENT(001)
         << "[1] samples.instances() = " << sample::instances() << '\n';
 }
 
-_TEST_COMPONENT(002)
+TEST_COMPONENT(002)
 {
     ::prepare();
 
