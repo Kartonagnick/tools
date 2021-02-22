@@ -78,7 +78,7 @@ TEST_COMPONENT(000)
 }
 
 //==============================================================================
-#endif // defined(_MSC_VER) && !defined(dHAS_ATOMIC)
+#endif // !_MSC_VER
 #endif // !TEST_TOOLS_COUNTER
 
 

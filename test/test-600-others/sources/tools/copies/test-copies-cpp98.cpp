@@ -1,20 +1,20 @@
 // [2021y-02m-21d] Idrisov Denis R.
-#include <mygtest/test-list.hpp>
+#include <mygtest/modern.hpp>
 //=================================================================================
 //=================================================================================
 
 #ifdef TEST_TOOLS_COPIES
+#ifdef _MSC_VER
 
-#define TEST_CASE_NAME tools
-#define TEST_NUMBER(n) copies_##n
+#define dTEST_COMPONENT tools
+#define dTEST_METHOD copies
+#define dTEST_TAG cpp98
 
-#include <test-staff.hpp>
 #include <tools/copies.hpp>
 #include <vector>
 
-#ifdef dHAS_ATOMIC
-    #include <thread>
-#endif
+#include <tools/windows.hpp>
+#include <process.h>
 
 namespace me = ::tools;
 //==============================================================================
@@ -23,15 +23,38 @@ namespace
 {
     struct sample: me::copies<sample> {};
 
-    size_t threadFunction()
+    volatile LONG flag = 0;
+
+    void foo(LPVOID param)
     {
-        size_t cnt = 0;
+        (void) param;
+        volatile size_t cnt = 0;
         for(size_t i = 0; i!=10; ++i)
         {
             sample s;
             cnt += sample::instances();
         }
-        return cnt;
+        ::InterlockedExchangeAdd(&flag, 1);
+    }
+
+    std::vector<sample> samples;
+    void bar(LPVOID param)
+    {
+        (void) param;
+        size_t cnt = 0;
+        for(size_t i = 0; i!=10; ++i)
+        {
+			sample obj;
+            samples.push_back(obj);
+            cnt += sample::instances();
+        }
+        ::InterlockedExchangeAdd(&flag, 1);
+    }
+
+    void prepare()
+    {
+        flag = 0;
+        samples.clear();
     }
 
 }//namespace
@@ -56,73 +79,52 @@ TEST_COMPONENT(000)
     ASSERT_TRUE(sample::instances() == 0);
 }
 
-#ifdef dHAS_ATOMIC
 TEST_COMPONENT(001)
 {
-    std::vector<std::thread> vec;
-
-    for(size_t i = 0; i!=10; ++i)
-        vec.emplace_back(threadFunction);
-
-    for(size_t i = 0; i!=10; ++i)
-        if(vec[i].joinable())
-            vec[i].join();
-
-    ASSERT_TRUE(sample::instances() == 0);
-}
-#endif // dHAS_ATOMIC
-
-#if defined(_MSC_VER) && !defined(dHAS_ATOMIC)
-#include <windows.h>
-#include <process.h>
-
-volatile LONG flag = 0;
-
-void threadFunction(LPVOID param)
-{
-    (void) param;
-
-    ::InterlockedExchangeAdd(&flag, 1);
-
-    volatile size_t cnt = 0;
-    for(size_t i = 0; i!=10; ++i)
+    prepare();
+    for(size_t i = 0; i != 10; ++i)
     {
-        sample s;
-        cnt += sample::instances();
-    }
-
-    ::InterlockedExchangeAdd(&flag, -1);
-
-    ::_endthread();
-}
-
-TEST_COMPONENT(001)
-{
-	unsigned id = 0; 
-    for(size_t i = 0; i!=10; ++i)
-    {
-        const uintptr_t re 
-            = ::_beginthread(threadFunction, 0, &id);
+        const uintptr_t re = ::_beginthread(foo, 0, 0);
 	    ASSERT_TRUE(re != -1);
-
     }
-
     ::Sleep(100);
 
-    LONG fl = 0;
+    LONG result = 0;
     for(;;)
     {
-        fl = ::InterlockedCompareExchange(&flag, 0, 0);
-        if(fl == 0)
+        result = ::InterlockedCompareExchange(&flag, 100, 10);
+        if(result == 100)
             break;
         ::Sleep(100);
     }
-
     ASSERT_TRUE(sample::instances() == 0);
 }
-#endif // dHAS_ATOMIC
 
+TEST_COMPONENT(002)
+{
+    prepare();
+    for(size_t i = 0; i != 10; ++i)
+    {
+        const uintptr_t re = ::_beginthread(bar, 0, 0);
+	    ASSERT_TRUE(re != -1);
+    }
+    ::Sleep(100);
 
+    LONG result = 0;
+    for(;;)
+    {
+        result = ::InterlockedCompareExchange(&flag, 100, 10);
+        if(result == 100)
+            break;
+        ::Sleep(100);
+    }
+    ASSERT_TRUE(samples.size() == 100);
+    ASSERT_TRUE(sample::instances() == 100);
 
+    samples.clear();
+    ASSERT_TRUE(sample::instances() == 0);
+}
+
+#endif // !_MSC_VER
 #endif // !TEST_TOOLS_COPIES
 

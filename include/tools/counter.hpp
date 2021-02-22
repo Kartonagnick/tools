@@ -6,13 +6,12 @@
 #define dTOOLS_COUNTER_USED_ 100
 
 #include <tools/features.hpp>
-#include <cstddef>
 //================================================================================
 //================================================================================
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1600
-// pragma message("Visual Studio 2010 or newer")
+#ifdef dHAS_ATOMIC
 #include <atomic>
+#include <cstddef>
 
 namespace tools 
 {
@@ -76,7 +75,7 @@ namespace tools
 
 } //namespace tools
 
-#endif
+#endif // !dHAS_ATOMIC
 
 //================================================================================
 //================================================================================

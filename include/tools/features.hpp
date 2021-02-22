@@ -2,7 +2,7 @@
 // [2021y-02m-05d] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 101
+#define dTOOLS_FEATURES_USED_ 102
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -14,19 +14,31 @@
 #endif
 
 //==============================================================================
-//=== dHAS_ATOMIC ==============================================================
+//=== dHAS_NULLPTR =============================================================
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1600
-    // pragma message("Visual Studio 2010 or newer")
-    #define dHAS_ATOMIC 1
+#if defined(__GNUC__) && __GNUC__ * 10 + __GNUC_MINOR__ >= 46
+    #define dHAS_NULLPTR 1
 #endif
 
+#if defined(_MSC_VER) && _MSC_VER >= 1600
+    #define dHAS_NULLPTR 1
+#endif
+
+#if __cplusplus >= 201103L
+    #define dHAS_NULLPTR 1
+#endif
+
+#ifdef dHAS_NULLPTR
+    typedef decltype(nullptr) nullptr_t;
+#endif
+        
 //==============================================================================
-//=== dHAS_RVALUE_REFERENCES ===================================================
+//=== dHAS_RVALUE_REFERENCES/dHAS_ATOMIC =======================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1700
-    // #pragma message("build for msvc2010 (or newer) or other compiler")
+    // #pragma message("build for msvc2012 (or newer) or other compiler")
     #define dHAS_RVALUE_REFERENCES 1
+    #define dHAS_ATOMIC 1
 #endif
     
 //==============================================================================
@@ -40,10 +52,6 @@
     #define dCONSTEXPR_CPP11 constexpr
 #else 
     #define dCONSTEXPR_CPP11 inline
-#endif
-
-#ifdef dHAS_CPP11
-    using nullptr_t = decltype(nullptr);
 #endif
 
 //==============================================================================

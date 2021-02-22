@@ -3,32 +3,28 @@
 //==============================================================================
 //==============================================================================
 #ifdef TEST_TOOLS_THREAD_SAFE
-
-// examples:
-// check thread-safe consept
+#if defined(_MSC_VER) && _MSC_VER >= 1700
+// #pragma message("build for msvc2010 (or older)")
 
 #define TEST_CASE_NAME tools
-#define TEST_NUMBER(n) thred_safe_##n
-
+#define TEST_NUMBER(n) sync_consept_##n
 #include <future>
-
 //==============================================================================
 //=== TDD ======================================================================
 namespace 
 {
-    volatile int value = 0;
-    int loop(bool inc, int limit)
+    volatile long value = 0;
+    void loop(const bool dir, const size_t limit)
     {
-        dprint(std::cout << "Started " << inc << " " << limit << std::endl);
+        dprint(std::cout << "started: " << dir << " " << limit << std::endl);
 
-        for (int i = 0; i < limit; ++i)
+        for (size_t i = 0; i < limit; ++i)
         {
-            if (inc)
+            if (dir)
                 ++value;
             else
                 --value;
         }
-        return 0;
     }
 
 #if 0
@@ -122,21 +118,22 @@ TEST_COMPONENT(000)
 
         auto f = std::async(
             std::launch::async, 
-            std::bind(loop, true, 20'000'000)
+            std::bind(loop, true, 20000000)
         );
-        loop(false, 10'000'000);
+        loop(false, 10000000);
         f.wait();
 
         // --- так как нет никакой синхронизации,
         // --- то в результате должен получиться мусор
         dprint(std::cout << value << '\n');
 
-        success = value != 10'000'000;
+        success = value != 10000000;
     }
     ASSERT_TRUE(success);
 }
 
 //==============================================================================
+#endif // !(defined(_MSC_VER) && _MSC_VER >= 1700)
 #endif // !TEST_TOOLS_THREAD_SAFE
 
 

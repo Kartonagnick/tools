@@ -1,6 +1,6 @@
 
-#if defined(_MSC_VER) && _MSC_VER < 1600
-// pragma message("Visual Studio 2008 or older")
+#if defined(_MSC_VER) && _MSC_VER <= 1600
+// pragma message("Visual Studio 2010 or older")
 
 #include <tools/counter.hpp>
 #include <tools/windows.hpp>
@@ -47,4 +47,4 @@ namespace tools
 
 //================================================================================
 //================================================================================
-#endif // defined(_MSC_VER) && _MSC_VER < 1600
+#endif // !(defined(_MSC_VER) && _MSC_VER <= 1600)

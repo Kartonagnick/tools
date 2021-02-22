@@ -2,7 +2,7 @@
 #include <mygtest/modern.hpp>
 //==============================================================================
 //==============================================================================
-#ifdef TEST_TOOLS_COUNTER__
+#ifdef TEST_TOOLS_COUNTER
 #ifdef dHAS_ATOMIC
 
 #define dTEST_COMPONENT tools
@@ -53,12 +53,12 @@ TEST_COMPONENT(000)
 
         auto f = std::async(
             std::launch::async, 
-            std::bind(loop, true, 20'000'000)
+            std::bind(loop, true, 20000000)
         );
-        loop(false, 10'000'000);
+        loop(false, 10000000);
         f.wait();
 
-        ASSERT_TRUE(value == 10'000'000);
+        ASSERT_TRUE(value == 10000000);
     }
 }
 
