@@ -29,12 +29,12 @@ namespace
 
 #if 0
     // asm("LOCK");
-    int loop(bool inc, int limit)
+    int loop(bool dir, size_t limit)
     {
-        dprint(std::cout << "Started " << inc << " " << limit << std::endl);
-        for (int i = 0; i < limit; ++i)
+        dprint(std::cout << "started: " << inc << " " << limit << std::endl);
+        for (size_t i = 0; i < limit; ++i)
         {
-            if (inc)
+            if (dir)
             {
                 asm("LOCK");
                 ++value;
@@ -51,12 +51,12 @@ namespace
 
 #if 0
     // atomic
-    int loop(bool inc, int limit) 
+    int loop(bool dir, size_t limit) 
     {
-        std::cout << "Started " << inc << " " << limit << std::endl;
-        for (int i = 0; i < limit; ++i)
+        std::cout << "started: " << inc << " " << limit << std::endl;
+        for (size_t i = 0; i < limit; ++i)
         {
-            if (inc)
+            if (dir)
                 atomic_inc32(&value);
             else
                 atomic_dec32(&value);
@@ -67,13 +67,13 @@ namespace
 
 #if 0
     // spinlock
-    int loop(bool inc, int limit) 
+    int loop(bool dir, size_t limit) 
     {
-        std::cout << "Started " << inc << " " << limit << std::endl;
-        for (int i = 0; i < limit; ++i) 
+        std::cout << "started: " << inc << " " << limit << std::endl;
+        for (size_t i = 0; i < limit; ++i) 
         {
             std::lock_guard<boost::detail::spinlock> guard(lock);
-            if (inc)
+            if (dir)
                 ++value;
             else
                 --value;
@@ -84,13 +84,13 @@ namespace
 
 #if 0
     // mutex
-    int loop(bool inc, int limit) 
+    int loop(bool dir, size_t limit) 
     {
-        std::cout << "Started " << inc << " " << limit << std::endl;
-        for (int i = 0; i < limit; ++i)
+        std::cout << "started: " << inc << " " << limit << std::endl;
+        for (size_t i = 0; i < limit; ++i)
         {
             std::lock_guard<std::mutex> guard(mutex);
-            if (inc)
+            if (dir)
                 ++value;
             else
                 --value;

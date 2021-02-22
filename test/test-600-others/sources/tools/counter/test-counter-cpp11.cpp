@@ -18,12 +18,12 @@ namespace me = ::tools;
 namespace 
 {
     me::counter value = 0;
-    int loop(bool inc, int limit)
+    int loop(bool dir, size_t limit)
     {
-        dprint(std::cout << "Started " << inc << " " << limit << std::endl);
-        for (int i = 0; i < limit; ++i)
+        dprint(std::cout << "started: " << dir << " " << limit << std::endl);
+        for (size_t i = 0; i < limit; ++i)
         {
-            if (inc)
+            if (dir)
                 ++value;
             else
                 --value;
@@ -42,7 +42,7 @@ TEST_COMPONENT(000)
         const size_t total = 10;
     #elif defined (INCLUDE_LONG_TESTS)
         const size_t total = 5;
-    #lese
+    #else
         const size_t total = 1;
     #endif
 

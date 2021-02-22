@@ -2,40 +2,40 @@
 #include <mygtest/modern.hpp>
 //==============================================================================
 //==============================================================================
-#ifdef TEST_TOOLS_COUNTER
-#ifdef _MSC_VER
+#ifdef TEST_TOOLS_SYNCH
+#ifdef dHAS_ATOMIC
 
 #define dTEST_COMPONENT tools
-#define dTEST_METHOD counter
-#define dTEST_TAG cpp98
+#define dTEST_METHOD synch
+#define dTEST_TAG cpp11
 
-#include <tools/windows.hpp>
-#include <tools/counter.hpp>
-#include <process.h>
+#include <future>
+#include <tools/platform/windows/synch.hpp>
 namespace me = ::tools;
 
 //==============================================================================
 //=== TDD ======================================================================
 namespace 
 {
-    struct param { bool dir; size_t limit; };
+    size_t value = 0;
+    me::synch sync;
 
-    me::counter ready = 0;
-    me::counter value = 0;
-
-    void threadFunction(void* ptr)
+    void loop(const bool dir, const size_t limit)
     {
-        ASSERT_TRUE(ptr);
-        const param& ref = *static_cast<const param*>(ptr);
-        dprint(std::cout << "started " << ref.dir << " " << ref.limit << std::endl);
-        for (size_t i = 0; i < ref.limit; ++i)
+        dprint(std::cout << "started: " << dir << " " << limit << std::endl);
+        for (size_t i = 0; i < limit; ++i)
         {
-            if (ref.dir)
+            if (dir)
+            {
+                me::synch_guard lock(sync);
                 ++value;
+            }
             else
+            {
+                me::synch_guard lock(sync);
                 --value;
+            }
         }
-        ++ready;
     }
 
 } // namespace
@@ -53,33 +53,25 @@ TEST_COMPONENT(000)
         const size_t total = 1;
     #endif
 
-    ::param positive = { true , 20000000 };
-    ::param negative = { false, 10000000 };
-
     for (size_t i = 0; i != total; ++i)
     {
         dprint(std::cout << "generation: " << i << '\n');
-        ready = 0;
         value = 0;
 
-        const uintptr_t re 
-            = ::_beginthread(::threadFunction, 0, &positive);
-	    ASSERT_TRUE(re != -1);
+        auto f = std::async(
+            std::launch::async, 
+            std::bind(loop, true, 20000000)
+        );
+        loop(false, 10000000);
+        f.wait();
 
-        ::threadFunction(&negative);
-
-        while (ready != 2)
-            ::Sleep(100);
-
-        ::Sleep(50);
-        ASSERT_TRUE(value == 10000000)
-            << "real = " << value << '\n';
+        ASSERT_TRUE(value == 10000000);
     }
 }
 
 //==============================================================================
-#endif // !_MSC_VER
-#endif // !TEST_TOOLS_COUNTER
+#endif // !dHAS_ATOMIC
+#endif // !TEST_TOOLS_SYNCH
 
 
 

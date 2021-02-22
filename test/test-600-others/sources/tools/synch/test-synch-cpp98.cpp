@@ -2,15 +2,14 @@
 #include <mygtest/modern.hpp>
 //==============================================================================
 //==============================================================================
-#ifdef TEST_TOOLS_COUNTER
+#ifdef TEST_TOOLS_SYNCH
 #ifdef _MSC_VER
 
 #define dTEST_COMPONENT tools
-#define dTEST_METHOD counter
+#define dTEST_METHOD synch
 #define dTEST_TAG cpp98
 
-#include <tools/windows.hpp>
-#include <tools/counter.hpp>
+#include <tools/platform/windows/synch.hpp>
 #include <process.h>
 namespace me = ::tools;
 
@@ -20,21 +19,29 @@ namespace
 {
     struct param { bool dir; size_t limit; };
 
-    me::counter ready = 0;
-    me::counter value = 0;
+    size_t ready = 0;
+    size_t value = 0;
+    me::synch sync;
 
     void threadFunction(void* ptr)
     {
         ASSERT_TRUE(ptr);
         const param& ref = *static_cast<const param*>(ptr);
-        dprint(std::cout << "started " << ref.dir << " " << ref.limit << std::endl);
+        dprint(std::cout << "Started " << ref.dir << " " << ref.limit << std::endl);
         for (size_t i = 0; i < ref.limit; ++i)
         {
             if (ref.dir)
+            {
+                me::synch_guard lock(sync);
                 ++value;
+            }
             else
+            {
+                me::synch_guard lock(sync);
                 --value;
+            }
         }
+        me::synch_guard lock(sync);
         ++ready;
     }
 
@@ -79,7 +86,7 @@ TEST_COMPONENT(000)
 
 //==============================================================================
 #endif // !_MSC_VER
-#endif // !TEST_TOOLS_COUNTER
+#endif // !TEST_TOOLS_SYNCH
 
 
 

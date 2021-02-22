@@ -2,8 +2,8 @@
 // [2021y-02m-21d] Idrisov Denis R.
 
 #pragma once
-#ifndef dTOOLS_SYNC_USED_ 
-#define dTOOLS_SYNC_USED_ 100
+#ifndef dTOOLS_SYNCH_USED_ 
+#define dTOOLS_SYNCH_USED_ 100
 //==============================================================================
 //==============================================================================
 
@@ -15,18 +15,18 @@
 
 namespace tools
 {
-    class sync
+    class synch
     {
         ::CRITICAL_SECTION m_section;
     public:
-        sync() dNOEXCEPT
+        synch() dNOEXCEPT
             : m_section()
         {
             ZeroMemory(&this->m_section, sizeof(this->m_section)); 
             ::InitializeCriticalSection(&this->m_section);
         }
 
-        ~sync() 
+        ~synch() 
         {
             ::DeleteCriticalSection(&this->m_section);
         }
@@ -42,18 +42,18 @@ namespace tools
         }
     };
 
-    class sync_guard
+    class synch_guard
     {
-        sync& ref;
+        synch& ref;
     public:
-        dNOCOPYABLE(sync_guard);
+        dNOCOPYABLE(synch_guard);
 
-        sync_guard(sync& s) dNOEXCEPT 
+        synch_guard(synch& s) dNOEXCEPT 
             : ref(s)
         {
             ref.lock();
         }
-        ~sync_guard() dNOEXCEPT
+        ~synch_guard() dNOEXCEPT
         {
             ref.unlock();
         }
@@ -63,4 +63,4 @@ namespace tools
 
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_SYNC_USED_
+#endif // !dTOOLS_SYNCH_USED_
