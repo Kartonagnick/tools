@@ -1,47 +1,74 @@
 
 // [2021y-02m-21d] Idrisov Denis R.
+// [2021y-02m-23d] Idrisov Denis R.
 
 #pragma once
 #ifndef dTOOLS_SYNCH_USED_ 
-#define dTOOLS_SYNCH_USED_ 100
+#define dTOOLS_SYNCH_USED_ 101
 //==============================================================================
 //==============================================================================
 
-#include <tools/windows.hpp>
 #include <tools/features.hpp>
+
+#ifdef dHAS_ATOMIC
+
+#include <mutex>
+
+namespace tools
+{
+    class synch
+    {
+        ::std::recursive_mutex m_mutex;
+    public:
+        dNOCOPYABLE(synch);
+
+        synch() dNOEXCEPT : m_mutex() {}
+
+        void lock() dNOEXCEPT
+        {
+            this->m_mutex.lock();
+        }
+        void unlock() dNOEXCEPT
+        {
+            this->m_mutex.unlock();
+        }
+    };
+
+} // namespace tools
+
+#else
+
+// --- old compiler
+namespace tools
+{
+    class synch
+    {
+        typedef char arr_t[40];
+        union storage
+        {
+            void* ptr;
+            arr_t arr;
+        };
+        storage m_storage;
+    public:
+        dNOCOPYABLE(synch);
+
+        ~synch();
+        synch() dNOEXCEPT;
+
+        void lock()   dNOEXCEPT;
+        void unlock() dNOEXCEPT;
+    };
+
+} // namespace tools
+
+#endif
 
 //==============================================================================
 //==============================================================================
 
 namespace tools
 {
-    class synch
-    {
-        ::CRITICAL_SECTION m_section;
-    public:
-        synch() dNOEXCEPT
-            : m_section()
-        {
-            ZeroMemory(&this->m_section, sizeof(this->m_section)); 
-            ::InitializeCriticalSection(&this->m_section);
-        }
-
-        ~synch() 
-        {
-            ::DeleteCriticalSection(&this->m_section);
-        }
-
-        inline void lock() dNOEXCEPT
-        {
-            ::EnterCriticalSection(&this->m_section);
-        }
-
-        inline void unlock() dNOEXCEPT 
-        {
-            ::LeaveCriticalSection(&this->m_section);
-        }
-    };
-
     class synch_guard
     {
         synch& ref;

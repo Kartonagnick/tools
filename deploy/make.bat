@@ -9,7 +9,9 @@ rem ============================================================================
 
     rem set "eDEBUG=ON"
 
-    set "VC=msvc:64:debug:static"
+    set "VC1=msvc:64:debug:static"
+    set "VC2=msvc2008:64:debug:static"
+    set "VC=%VC1%;%VC2%"
     set "MG=mingw:64:all:static"
     rem set "order=%VC%"
     rem set "order=%MG%"
