@@ -9,7 +9,7 @@
 #define dTEST_METHOD synch
 #define dTEST_TAG cpp98
 
-#include <tools/platform/windows/synch.hpp>
+#include <tools/synch.hpp>
 #include <process.h>
 namespace me = ::tools;
 

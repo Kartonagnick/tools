@@ -13,7 +13,7 @@
 #include <tools/copies.hpp>
 #include <vector>
 
-#include <tools/platform/windows/synch.hpp>
+#include <tools/synch.hpp>
 #include <process.h>
 
 namespace me = ::tools;

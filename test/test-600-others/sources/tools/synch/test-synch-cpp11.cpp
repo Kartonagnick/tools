@@ -10,7 +10,7 @@
 #define dTEST_TAG cpp11
 
 #include <future>
-#include <tools/platform/windows/synch.hpp>
+#include <tools/synch.hpp>
 namespace me = ::tools;
 
 //==============================================================================
