@@ -14,6 +14,7 @@
 #include <vector>
 
 #include <tools/synch.hpp>
+#include <tools/windows.hpp>
 #include <process.h>
 
 namespace me = ::tools;
@@ -23,7 +24,7 @@ namespace
 {
     struct sample: me::copies<sample> {};
 
-    volatile LONG flag = 0;
+    volatile ::LONG flag = 0;
 
     void foo(::LPVOID param)
     {
