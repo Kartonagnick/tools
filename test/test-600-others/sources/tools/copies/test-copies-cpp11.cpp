@@ -51,6 +51,10 @@ namespace
     void prepare()
     {
         samples.clear();
+
+        ASSERT_TRUE(sample::instances() == 0)
+            << "[prepare] samples.size() = "
+            << samples.size() << '\n';
     }
 
     void check(const size_t index, const size_t etalon)
@@ -97,7 +101,9 @@ TEST_COMPONENT(001)
         if(vec[i].joinable())
             vec[i].join();
 
-    ASSERT_TRUE(sample::instances() == 0);
+    ASSERT_TRUE(sample::instances() == 0)
+        << "[0] samples.size() = " 
+        << samples.size() << '\n';
 }
 
 TEST_COMPONENT(002)
@@ -112,13 +118,17 @@ TEST_COMPONENT(002)
             vec[i].join();
 
     ASSERT_TRUE(samples.size() == 100)
-        << "[0] samples.size() = " << samples.size() << '\n';
+        << "[0] samples.size() = " 
+        << samples.size() << '\n';
 
     ASSERT_TRUE(sample::instances() == 100)
-        << "[2] samples.instances() = " << sample::instances() << '\n';
+        << "[2] samples.instances() = " 
+        << sample::instances() << '\n';
 
     samples.clear();
-    ASSERT_TRUE(sample::instances() == 0);
+    ASSERT_TRUE(sample::instances() == 0)
+        << "[3] samples.instances() = "
+        << sample::instances() << '\n';
 }
 
 #endif // !dHAS_ATOMIC

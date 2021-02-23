@@ -45,6 +45,9 @@ namespace
         ++ready;
     }
 
+    const size_t count_positive = 2000000;
+    const size_t count_negative = 1000000;
+
 } // namespace
 
 //==============================================================================
@@ -60,8 +63,8 @@ TEST_COMPONENT(000)
         const size_t total = 1;
     #endif
 
-    ::param positive = { true , 20000000 };
-    ::param negative = { false, 10000000 };
+    ::param positive = { true , count_positive };
+    ::param negative = { false, count_negative };
 
     for (size_t i = 0; i != total; ++i)
     {
@@ -79,8 +82,8 @@ TEST_COMPONENT(000)
             ::Sleep(100);
 
         ::Sleep(50);
-        ASSERT_TRUE(value == 10000000)
-            << "real = " << value << '\n';
+        ASSERT_TRUE(value == count_negative)
+            << "[0] value = " << value << '\n';
     }
 }
 

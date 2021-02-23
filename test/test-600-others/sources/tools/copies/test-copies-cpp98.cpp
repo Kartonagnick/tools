@@ -57,7 +57,21 @@ namespace
     {
         flag = 0;
         samples.clear();
+
+        ASSERT_TRUE(sample::instances() == 0)
+            << "[prepare] samples.instances() = " 
+            << sample::instances() << '\n';
     }
+
+    void check(const size_t index, const size_t etalon)
+    {
+        const size_t count = sample::instances();
+        ASSERT_TRUE(count == etalon)
+            << index << ") "
+            << "etalon = " << etalon << ", "
+            << "real = "   << count << '\n';
+    }
+
 
 }//namespace
 //==============================================================================
@@ -65,21 +79,21 @@ namespace
 
 TEST_COMPONENT(000)
 {
-    ASSERT_TRUE(sample::instances() == 0);
+    check(0, 0);
     {
         sample obj1, obj2;
         (void) obj1;
         (void) obj2;
-        ASSERT_TRUE(sample::instances() == 2);
+        check(1, 2);
         {
             sample obj3, obj4;
             (void) obj3;
             (void) obj4;
-            ASSERT_TRUE(sample::instances() == 4);
+            check(2, 4);
         }
-        ASSERT_TRUE(sample::instances() == 2);
+        check(3, 2);
     }
-    ASSERT_TRUE(sample::instances() == 0);
+    check(4, 0);
 }
 
 TEST_COMPONENT(001)
