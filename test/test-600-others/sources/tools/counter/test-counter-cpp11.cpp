@@ -31,6 +31,10 @@ namespace
         return 0;
     }
 
+    const size_t count_positive = 2000000;
+    const size_t count_negative = 1000000;
+
+
 } // namespace
 
 //==============================================================================
@@ -53,12 +57,13 @@ TEST_COMPONENT(000)
 
         auto f = std::async(
             std::launch::async, 
-            std::bind(loop, true, 20000000)
+            std::bind(loop, true, count_positive)
         );
-        loop(false, 10000000);
+        loop(false, count_negative);
         f.wait();
 
-        ASSERT_TRUE(value == 10000000);
+        ASSERT_TRUE(value == count_negative)
+            << "[0] value = " << value << '\n';
     }
 }
 
