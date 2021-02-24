@@ -12,7 +12,7 @@
 #include <tools/features.hpp>
 
 #ifndef dHAS_NULLPTR
-	dMESSAGE("[test] tools: disabled -> dHAS_NULLPTR")
+    dMESSAGE("[test] tools: disabled -> dHAS_NULLPTR")
 #else
 
 #include <tools/features.hpp>
@@ -34,7 +34,6 @@ namespace
         ASSERT_TRUE(p == 0);
     }
 
-
 } // namespace
 //==============================================================================
 //==============================================================================
@@ -42,7 +41,7 @@ namespace
 TEST_COMPONENT(000)
 {
     char* p = nullptr;
-	foo(p);
+    foo(p);
 }
 
 TEST_COMPONENT(001)

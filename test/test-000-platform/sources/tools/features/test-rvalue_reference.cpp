@@ -12,7 +12,7 @@
 #include <tools/features.hpp>
 
 #ifndef dHAS_RVALUE_REFERENCES
-	dMESSAGE("[test] tools: disabled -> dHAS_RVALUE_REFERENCES")
+    dMESSAGE("[test] tools: disabled -> dHAS_RVALUE_REFERENCES")
 #else
 
 #include <tools/features.hpp>
