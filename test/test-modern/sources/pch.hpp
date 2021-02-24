@@ -20,6 +20,7 @@
 
 #include <tools/features.hpp>
 #include <tools/assert.hpp>
+#include <stdexcept>
 #include <cassert>
 #include <cstddef>
 #include <sstream>
