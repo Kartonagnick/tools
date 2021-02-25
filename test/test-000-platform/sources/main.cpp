@@ -1,19 +1,17 @@
 
-// [2021y-02m-20d] Idrisov Denis R.
+// [2021y-02m-05d] Idrisov Denis R.
 // [2021y-02m-20d] birthday of the project
-#pragma once
-
-#define dBUILD_TARGET tools
-#include <tools/confbuild.hpp>
-#include "confinfo.hpp"
-
+#include <mygtest/main.hpp>
 //==============================================================================
 //==============================================================================
 
-#include <cassert>
-#include <cstddef>
-#include <tools/assert.hpp>
-#include <tools/features.hpp>
+GTEST_API_ int main(int argc, char** argv)
+{
+    // example settings:
+    //   test.ext --gtest_filter=tools.stopwatch* --stress
+    //   testing::GTEST_FLAG(filter) = "tools.stopwatch_*";
+    return ::testing::run(argc, argv);
+}
 
 //==============================================================================
 //==============================================================================

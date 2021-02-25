@@ -21,6 +21,7 @@
 #endif
 
 #if defined(_MSC_VER) && _MSC_VER >= 1600
+    // #pragma message("build for msvc2010 (or newer)")
     #define dHAS_NULLPTR 1
 #endif
 

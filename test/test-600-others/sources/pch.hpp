@@ -24,8 +24,11 @@
 #include <cstddef>
 #include <sstream>
 #include <string>
-//#include <thread>
 #include <vector>
+
+#ifdef dHAS_ATOMIC
+    #include <thread>
+#endif
 
 //==============================================================================
 //==============================================================================

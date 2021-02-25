@@ -17,6 +17,7 @@ project(${gNAME_PROJECT})
 
 make_target()
 make_target(PATH_TO_SOURCES "test/test-modern")
+make_target(PATH_TO_SOURCES "test/test-000-platform")
 make_target(PATH_TO_SOURCES "test/test-600-others")
 
 ################################################################################
