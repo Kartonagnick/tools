@@ -13,7 +13,8 @@ rem ============================================================================
     set "order=msvc2008:64:debug:static"
     set "order=msvc2013:64:debug:static"
     set "order=msvc2010:64:debug:static"
-    set "order=msvc2019:64:release:static"
+    set "order=msvc2019:64:debug:static"
+
 
     call "%eDIR_BAT_ENGINE%\run.bat"  ^
         "--generate: cmake-makefiles" ^
