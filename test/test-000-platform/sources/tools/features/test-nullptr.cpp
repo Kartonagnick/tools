@@ -31,7 +31,9 @@ namespace
 
     void bar(std::nullptr_t p)
     {
+        void* a = p;
         ASSERT_TRUE(p == 0);
+        ASSERT_TRUE(!a);
     }
 
 } // namespace

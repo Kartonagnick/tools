@@ -9,13 +9,21 @@ rem ============================================================================
 
     rem set "eDEBUG=ON"
 
-    set "VC1=msvc:64:debug:static"
-    set "VC2=msvc2008:64:debug:static"
-    set "VC=%VC1%;%VC2%"
-    set "MG=mingw:64:all:static"
+    set "VC=msvc:64:debug:static"
+    set "VC08=msvc2008:64:debug:static"
+    set "VC10=msvc2010:64:release:static"
+    set "VC12=msvc2012:32:debug:static"
+    set "VC13=msvc2013:64:release:static"
+    set "VC15=msvc2015:32:debug:static"
+    set "VC17=msvc2017:64:release:static"
+    set "VC19=msvc2019:64:debug:static"
+
+    set "VC=%VC08%;%VC10%;%VC12%;%VC13%;%VC15%;%VC17%;%VC19%"
+    set "MG=mingw:64:release:static"
     rem set "order=%VC%"
     rem set "order=%MG%"
     rem set "order=%VC%; %MG%"
+    rem set "order=%VC%;%MG%"
     set "order=all"
 
     rem for development

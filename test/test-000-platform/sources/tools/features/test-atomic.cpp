@@ -24,17 +24,14 @@
 namespace 
 {
     std::atomic<size_t> value = 0;
-    int loop(bool inc, int limit)
+    void loop(const bool dir, const size_t limit)
     {
-        dprint(std::cout << "Started " << inc << " " << limit << std::endl);
-        for (int i = 0; i < limit; ++i)
-        {
-            if (inc)
+        dprint(std::cout << "started: " << dir << " " << limit << std::endl);
+        for (size_t i = 0; i < limit; ++i)
+            if (dir)
                 ++value;
             else
                 --value;
-        }
-        return 0;
     }
 } // namespace
 //==============================================================================
@@ -45,25 +42,27 @@ TEST_COMPONENT(000)
     // --- check std::atomic with std::async
 
     #ifdef INCLUDE_LONG_LONG_TESTS
+        const size_t count = 10000000;
         const size_t total = 10;
     #elif defined (INCLUDE_LONG_TESTS)
+        const size_t count = 1000000;
         const size_t total = 5;
     #else
+        const size_t count = 100000;
         const size_t total = 1;
     #endif
 
     for (size_t i = 0; i != total; ++i)
     {
-        dprint(std::cout << "generation: " << i << '\n');
         value = 0;
-
+        dprint(std::cout << "generation: " << i << '\n');
         auto f = std::async(
             std::launch::async, 
-            std::bind(loop, true, 20000000)
+            std::bind(loop, true, 2 * count)
         );
-        loop(false, 10000000);
+        loop(false, count);
         f.wait();
-        ASSERT_TRUE(value == 10000000);
+        ASSERT_TRUE(value == count);
     }
 }
 

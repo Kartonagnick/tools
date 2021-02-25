@@ -6,10 +6,12 @@
 #ifdef TEST_TOOLS_FEATURE_CPP11
 
 #define dTEST_COMPONENT tools, features
-#define dTEST_METHOD test_HAS_CPP11
+#define dTEST_METHOD test_HAS_CPP14
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
+
+#include <cassert>
 
 #ifdef dHAS_CPP11
     dMESSAGE("[test] tools: enabled -> dHAS_CPP11")
@@ -22,22 +24,23 @@
 
 namespace 
 {
-    #ifdef dHAS_CPP11
-        constexpr size_t len(const char* p, const size_t i = 0)
-            { return p[i] == 0 ? i : len(p, i + 1); }
+    #ifdef dHAS_CPP14
 
-        constexpr const char* ptr = "1234";
+        #ifndef dHAS_CONSTEXPR_CPP14
+            #error must be defined
+        #endif
 
-        static_assert(len(ptr) == 4, "expected 4");
-    #endif
-
-    #ifdef dHAS_CONSTEXPR_CPP11
-        constexpr size_t foo(const char* p, const size_t i = 0)
-            { return p[i] == 0 ? i : foo(p, i + 1); }
-
-        constexpr const char* msg = "1234";
-
-        static_assert(foo(msg) == 4, "expected 4");
+        template<class s>
+        dCONSTEXPR_CPP14 size_t len(s&& text) noexcept
+        {
+            assert(text);
+            const auto* p = text;
+            while (*p != 0)
+                ++p;
+            return static_cast<size_t>(p - text);
+        }
+        constexpr const char* text = "1234";
+        static_assert(len(text) == 4, "expected 4");
     #endif
 
 } // namespace
