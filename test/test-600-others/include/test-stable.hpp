@@ -20,6 +20,7 @@
     #define TEST_TOOLS_SYNCH                                // ready!
     #define TEST_TOOLS_RAISE                                // ready!
     #define TEST_TOOLS_ASSERT                               // ready!
+    #define TEST_TOOLS_FLAG                                 // ready!
 //==============================================================================
 //==============================================================================
 

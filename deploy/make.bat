@@ -23,7 +23,7 @@ rem ============================================================================
     rem set "order=%VC%"
     rem set "order=%MG%"
     rem set "order=%VC%; %MG%"
-    rem set "order=%VC%;%MG%"
+    set "order=%VC%;%MG%"
     set "order=all"
 
     rem for development

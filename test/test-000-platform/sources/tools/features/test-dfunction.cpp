@@ -6,7 +6,7 @@
 #ifdef TEST_TOOLS_FEATURE_DFUNCTION
 
 #define dTEST_COMPONENT tools, features
-#define dTEST_METHOD test_dFUNCTION
+#define dTEST_METHOD test_FUNCTION
 #define dTEST_TAG tdd
 
 #include <tools/dfunction.hpp>
@@ -14,7 +14,7 @@
 #include <string>
 
 #ifdef dHAS_CPP11
-    dMESSAGE("[test] tools: enabled -> DFUNCTION")
+    dMESSAGE("[test] tools: enabled -> dFUNCTION")
 #endif
 
 //==============================================================================

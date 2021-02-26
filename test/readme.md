@@ -5,7 +5,27 @@ unit tests
 Зарезервированные имена юнит-тестов.  
 
 test-000-platform    тесты свойств платформы.  
-  - [x] макросы версии 102
+  - [x] макросы версии 103  
+    - [x] dMESSAGE  
+    - [x] dHAS_NULLPTR  
+    - [x] dHAS_RVALUE_REFERENCES  
+    - [x] dHAS_ENUM_CLASS  
+    - [x] dHAS_ATOMIC  
+    - [x] dHAS_CPP11  
+    - [x] dHAS_CONSTEXPR_CPP11  
+    - [x] dCONSTEXPR_CPP11  
+    - [x] dHAS_TEMPLATE_FUNCTION_DEFAULT_PARAM  
+    - [x] dHAS_DELETING_FUNCTIONS  
+    - [x] dHAS_USING_ALIAS  
+    - [x] dNOCOPYABLE  
+    - [x] dHAS_NOEXCEPT  
+    - [x] dNOEXCEPT  
+    - [x] dCONSTEXPR_CPP14  
+    - [x] dHAS_CONSTEXPR_CPP14  
+    - [x] dHAS_CPP14  
+    - [x] dHAS_RVALUE_ARRAY  
+    - [x] dHAS_CPP17  
+    - [x] dNODISCARD  
 
 test-100-macro       тесты модуля препроцессорной магии.  
 test-200-types       тесты модуля анализа типов.  
@@ -19,6 +39,7 @@ test-600-others      тесты мелких инструментов:
   - [x] counter  
   - [x] copies  
   - [x] synch  
+  - [x] flag  
 
 test-700-thread      тесты модуля работы с потоками.  
 test-800-time        тесты модуля для работы со временем.  

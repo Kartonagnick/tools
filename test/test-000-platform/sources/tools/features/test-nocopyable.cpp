@@ -6,7 +6,7 @@
 #ifdef TEST_TOOLS_FEATURE_COPYABLE
 
 #define dTEST_COMPONENT tools, features
-#define dTEST_METHOD test_dNOCOPYABLE
+#define dTEST_METHOD test_NOCOPYABLE
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
