@@ -23,6 +23,7 @@
     #define TEST_TOOLS_FEATURE_CPP11                        // ready
     #define TEST_TOOLS_FEATURE_CPP14                        // ready
     #define TEST_TOOLS_FEATURE_CPP17                        // ready
+    #define TEST_TOOLS_FEATURE_DFUNCTION                    // in progress...
 //==============================================================================
 //==============================================================================
 
