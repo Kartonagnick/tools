@@ -222,8 +222,6 @@ TEST_COMPONENT(002)
     std::thread t1(thread1);
     std::thread t2(thread2);
 
-    //std::this_thread::sleep_for(std::chrono::milliseconds(30));
-
     while (flag1 == 0) {}
     while (flag2 == 0) {}
 

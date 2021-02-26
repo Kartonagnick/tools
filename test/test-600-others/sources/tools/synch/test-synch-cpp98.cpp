@@ -90,12 +90,12 @@ TEST_COMPONENT(000)
         ::threadFunction(&negative);
 
         while (ready != 2)
-            ::Sleep(100);
+            ::Sleep(30);
 
-        ::Sleep(50);
         ASSERT_TRUE(value == count_negative)
             << "[0] value = " << value << '\n';
     }
+    ::Sleep(30);
 }
 
 //==============================================================================
