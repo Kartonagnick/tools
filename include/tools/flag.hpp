@@ -186,18 +186,13 @@ namespace tools
 
     dTEMPLATE dCLASS::flag(const enum_t& fl) dNOEXCEPT
         : m_flags()
-    { 
-        this->set_(fl);
-    }
+    { this->set_(fl); }
 
     dTEMPLATE dCLASS::flag(const flag& fl) dNOEXCEPT
         : m_flags()
     {
         namespace x = ::tools::detail_flag;
-        x::copy_from_to(
-            fl.m_flags, 
-            this->m_flags
-        );
+        x::copy_from_to(fl.m_flags, this->m_flags);
     }
 
     dTEMPLATE dCLASS::flag() dNOEXCEPT
@@ -237,10 +232,7 @@ namespace tools
     dTEMPLATE dCLASS& dCLASS::operator=(const flag& fl) dNOEXCEPT
     { 
         namespace x = ::tools::detail_flag;
-        x::copy_from_to(
-            fl.m_flags, 
-            this->m_flags
-        );
+        x::copy_from_to(fl.m_flags, this->m_flags);
         return *this;
     }
 
