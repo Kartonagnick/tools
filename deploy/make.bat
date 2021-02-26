@@ -32,6 +32,7 @@ rem ============================================================================
     rem (call :clean)    || (goto :failed)
     (call :build)    || (goto :failed)
     (call :runTests) || (goto :failed)
+    rem (call :runStress) || (goto :failed)
     (call :install)  || (goto :failed)
 :success
     @echo [MAKE] completed successfully
@@ -66,6 +67,14 @@ exit /b
     call "%eDIR_BAT_ENGINE%\run.bat"  ^
         "--runTests: test*.exe"       ^
         "--exclude: mingw*-dynamic"   ^
+        "--configurations: %order%"
+exit /b
+
+:runStress
+    call "%eDIR_BAT_ENGINE%\run.bat"  ^
+        "--runTests: test*.exe"       ^
+        "--exclude: mingw*-dynamic"   ^
+        "--args: stress"              ^
         "--configurations: %order%"
 exit /b
 
