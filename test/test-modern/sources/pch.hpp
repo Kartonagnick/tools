@@ -9,7 +9,7 @@
     #define WIN32_LEAN_AND_MEAN
 #endif
 
-#define dBUILD_TARGET [test] tools
+#define dBUILD_TARGET [test-modern] tools
 #include <tools/confbuild.hpp>
 #include <mygtest/confinfo.hpp>
 #include <mygtest/pch_used.hpp>
