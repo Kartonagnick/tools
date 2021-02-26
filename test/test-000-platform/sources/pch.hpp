@@ -9,7 +9,7 @@
     #define WIN32_LEAN_AND_MEAN
 #endif
 
-#define dBUILD_TARGET [test] tools
+#define dBUILD_TARGET [test-000-platform] tools
 #include <tools/confbuild.hpp>
 #include <mygtest/confinfo.hpp>
 #include <mygtest/pch_used.hpp>
@@ -24,8 +24,11 @@
 #include <cstddef>
 #include <sstream>
 #include <string>
-//#include <thread>
 #include <vector>
+
+#ifdef dHAS_ATOMIC
+    #include <thread>
+#endif
 
 //==============================================================================
 //==============================================================================

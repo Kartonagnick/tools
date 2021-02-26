@@ -41,21 +41,24 @@ TEST_COMPONENT(000)
 {
     // --- check std::atomic with std::async
 
+    const size_t payload
+        = testing::stress ? 100000 : 100;
+
     #ifdef INCLUDE_LONG_LONG_TESTS
-        const size_t count = 10000000;
+        const size_t count = payload * 100;
         const size_t total = 10;
     #elif defined (INCLUDE_LONG_TESTS)
-        const size_t count = 1000000;
+        const size_t count = payload * 10;
         const size_t total = 5;
     #else
-        const size_t count = 100000;
+        const size_t count = payload;
         const size_t total = 1;
     #endif
 
     for (size_t i = 0; i != total; ++i)
     {
         value = 0;
-        dprint(std::cout << "generation: " << i << '\n');
+        dprint(std::cout << "generation(" << count << "): " << i + 1 << "/" << total << '\n');
         auto f = std::async(
             std::launch::async, 
             std::bind(loop, true, 2 * count)

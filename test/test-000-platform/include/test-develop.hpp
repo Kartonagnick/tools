@@ -14,6 +14,7 @@
 //==============================================================================
 //===== tools/features =====================================||==================
     #define TEST_TOOLS_FEATURE_ATOMIC                       // ready
+    #define TEST_TOOLS_FEATURE_DFUNCTION                    // ready
     #define TEST_TOOLS_FEATURE_RVALUE_REFERENCE             // ready
     #define TEST_TOOLS_FEATURE_RVALUE_ARRAY                 // ready
     #define TEST_TOOLS_FEATURE_NULLPTR                      // ready

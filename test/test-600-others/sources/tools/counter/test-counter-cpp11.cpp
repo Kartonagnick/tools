@@ -31,9 +31,15 @@ namespace
         return 0;
     }
 
-    const size_t count_positive = 2000000;
-    const size_t count_negative = 1000000;
+    size_t count_positive = 2000000;
+    size_t count_negative = 1000000;
 
+    void prepare()
+    {
+        count_negative = testing::stress ? 1000000 : 100;
+        count_positive = count_negative * 2;
+        value = 0;
+    }
 
 } // namespace
 
@@ -42,6 +48,8 @@ namespace
 
 TEST_COMPONENT(000)
 {
+    prepare();
+
     #ifdef INCLUDE_LONG_LONG_TESTS
         const size_t total = 10;
     #elif defined (INCLUDE_LONG_TESTS)
@@ -52,7 +60,7 @@ TEST_COMPONENT(000)
 
     for (size_t i = 0; i != total; ++i)
     {
-        dprint(std::cout << "generation: " << i << '\n');
+        dprint(std::cout << "generation(" << count_negative << "): " << i + 1 << "/" << total << '\n');
         value = 0;
 
         auto f = std::async(

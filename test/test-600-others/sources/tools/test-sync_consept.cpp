@@ -3,6 +3,7 @@
 //==============================================================================
 //==============================================================================
 #ifdef TEST_TOOLS_SYNC_CONSEPT
+
 #if defined(_MSC_VER) && _MSC_VER >= 1700
 // #pragma message("build for msvc2010 (or older)")
 
@@ -133,6 +134,8 @@ TEST_COMPONENT(000)
         dprint(std::cout << value << '\n');
 
         success = value != count_experimant;
+        if (success)
+            break;
     }
     ASSERT_TRUE(success);
 }
@@ -142,9 +145,13 @@ namespace
     char memory[2 * 1024];
     volatile uint32_t* test = 0;
     volatile uint32_t stop = 0;
- 
+
+    volatile uint32_t flag1 = 0;
+    volatile uint32_t flag2 = 0;
+
     void thread1() 
     {
+        flag1 = 1;
         for (;;)
         {
             *test = 0;
@@ -156,6 +163,7 @@ namespace
  
     void thread2() 
     {
+        flag2 = 1;
         for (;;)
         {
             *test = uint32_t(-1); // 0xFFFFFFFF
@@ -214,11 +222,13 @@ TEST_COMPONENT(002)
     std::thread t1(thread1);
     std::thread t2(thread2);
 
+    while (flag1 == 0) {}
+    while (flag2 == 0) {}
+
     size_t i = 0;
     bool success = false;
     for (i = 0; i != count_experimant; ++i)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
         const uint32_t t = *test;
         success = t != 0 && t != uint32_t(-1);
         if (success)
