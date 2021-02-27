@@ -5,11 +5,11 @@
 
 #ifdef TEST_TOOLS_FLAG
 
-#include <tools/flag.hpp>
-
 #define dTEST_COMPONENT tools
 #define dTEST_METHOD flag
 #define dTEST_TAG enum
+
+#include <tools/flag.hpp>
 
 namespace me = ::tools;
 //==============================================================================
@@ -24,14 +24,15 @@ namespace
         eTWO   = 1<<2,
         eTHREE = 1<<3
     };
-	typedef me::flag<eFLAGS> flag_t;
+    typedef me::flag<eFLAGS> 
+        flag_t;
 
     #if dHAS_ENUM_CLASS
     enum eFLAGS1 : int { eSAMPLE = 0 };
     enum class eFLAGS2 : int { eEXAMPLE = 0 };
     #endif
 
-}//namespace
+} // namespace
 
 //==============================================================================
 //==============================================================================

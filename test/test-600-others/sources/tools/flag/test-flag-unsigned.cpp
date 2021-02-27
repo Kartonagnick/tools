@@ -5,11 +5,11 @@
 
 #ifdef TEST_TOOLS_FLAG
 
-#include <tools/flag.hpp>
-
 #define dTEST_COMPONENT tools
 #define dTEST_METHOD flag
 #define dTEST_TAG unsigned
+
+#include <tools/flag.hpp>
 
 namespace me = ::tools;
 //==============================================================================
@@ -24,9 +24,10 @@ namespace
         eTWO   = 1<<2,
         eTHREE = 1<<3
     };
-	typedef me::flag<unsigned> flag_t;
+    typedef me::flag<unsigned> 
+        flag_t;
 
-}//namespace
+} // namespace
 
 //==============================================================================
 //==============================================================================

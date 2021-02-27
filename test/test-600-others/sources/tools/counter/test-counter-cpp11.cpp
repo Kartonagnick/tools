@@ -3,6 +3,9 @@
 //==============================================================================
 //==============================================================================
 #ifdef TEST_TOOLS_COUNTER
+
+#include <tools/features.hpp>
+
 #ifdef dHAS_ATOMIC
 
 #define dTEST_COMPONENT tools

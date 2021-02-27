@@ -5,13 +5,13 @@
 
 #ifdef TEST_TOOLS_COPIES
 
-#define dTEST_COMPONENT tools
-#define dTEST_METHOD copies
-#define dTEST_TAG cpp11
-
 #include <tools/features.hpp>
 
 #ifdef dHAS_ATOMIC
+
+#define dTEST_COMPONENT tools
+#define dTEST_METHOD copies
+#define dTEST_TAG cpp11
 
 #include <tools/copies.hpp>
 #include <vector>

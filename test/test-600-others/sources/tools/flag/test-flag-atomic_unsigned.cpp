@@ -4,15 +4,14 @@
 //=================================================================================
 
 #ifdef TEST_TOOLS_FLAG
-
-#include <tools/flag.hpp>
-
 #if !defined(_MSC_VER) || _MSC_VER >= 1700
+// #pragma message("build for msvc2012 (or newer) or other compiler")
 
 #define dTEST_COMPONENT tools
 #define dTEST_METHOD flag
 #define dTEST_TAG atomic_unsigned
 
+#include <tools/flag.hpp>
 #include <atomic>
 
 namespace me = ::tools;
@@ -29,11 +28,13 @@ namespace
         eTHREE = 1<<3
     };
 
-    typedef std::atomic<unsigned> atom_t;
+    typedef std::atomic<unsigned> 
+        atom_t;
 
-	typedef me::flag<atom_t> flag_t;
+    typedef me::flag<atom_t> 
+        flag_t;
 
-}//namespace
+} // namespace
 
 //==============================================================================
 //==============================================================================

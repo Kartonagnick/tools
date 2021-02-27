@@ -5,7 +5,7 @@
 // [2021y-02m-26d] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_CONFBUILD_USED_
-#define dTOOLS_CONFBUILD_USED_ 007
+#define dTOOLS_CONFBUILD_USED_ 007  
 //==============================================================================
 //==============================================================================
 
@@ -45,7 +45,7 @@
 
 #define dVERSION_MAJOR      0
 #define dVERSION_MINOR      0
-#define dVERSION_PATCH      7
+#define dVERSION_PATCH      7 
 
 #define dSTRINGIZE(...) #__VA_ARGS__
 #define dSSTRINGIZE(x) dSTRINGIZE(x)
