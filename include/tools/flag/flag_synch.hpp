@@ -460,7 +460,8 @@ namespace tools
             {
                 const int cur = static_cast<int>(this->m_flags);
                 const int del = cur & (~oldFlag);
-                x::copy_from_to(del | newFlag, this->m_flags);
+                const int res = del | newFlag;
+                x::copy_from_to(res, this->m_flags);
             }
         }
     }
