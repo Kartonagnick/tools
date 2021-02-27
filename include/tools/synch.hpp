@@ -4,7 +4,7 @@
 
 #pragma once
 #ifndef dTOOLS_SYNCH_USED_ 
-#define dTOOLS_SYNCH_USED_ 101
+#define dTOOLS_SYNCH_USED_ 102
 //==============================================================================
 //==============================================================================
 
@@ -69,22 +69,29 @@ namespace tools
 
 namespace tools
 {
-    class synch_guard
+    class synch_dummy
     {
-        synch& ref;
     public:
-        dNOCOPYABLE(synch_guard);
-
-        synch_guard(synch& s) dNOEXCEPT 
-            : ref(s)
-        {
-            ref.lock();
-        }
-        ~synch_guard() dNOEXCEPT
-        {
-            ref.unlock();
-        }
+        void lock()   dNOEXCEPT {}
+        void unlock() dNOEXCEPT {}
     };
+
+    template<class Synch> class synch_lock
+    {
+        Synch& ref;
+    public:
+        dNOCOPYABLE(synch_lock);
+
+        synch_lock(Synch& s) dNOEXCEPT 
+            : ref(s)
+        { ref.lock(); }
+
+        ~synch_lock() dNOEXCEPT
+        { ref.unlock(); }
+    };
+
+    typedef synch_lock<synch> 
+        synch_guard;
 
 } // namespace tools
 
