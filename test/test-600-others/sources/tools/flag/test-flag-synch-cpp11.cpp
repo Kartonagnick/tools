@@ -14,6 +14,7 @@
 #define dTEST_METHOD flag
 #define dTEST_TAG synch_cpp11
 
+#include <atomic>
 #include <future>
 #include <tools/flag.hpp>
 namespace me = ::tools;
@@ -41,7 +42,7 @@ namespace
     const int change1 = eVAL2 | eVAL3 | eVAL4;
     const int change2 = eVAL5 | eVAL6 | eVAL7;
 
-    std::atomic_size_t started = 0;
+    std::atomic<size_t> started = 0;
 
     void loop(bool dir, size_t limit)
     {
@@ -65,6 +66,7 @@ namespace
 
     void prepare()
     {
+        started = 0;
         g_flags = eVAL1;
         count_negative = testing::stress ? 1000000 : 100;
         count_positive = count_negative * 2;
@@ -72,6 +74,9 @@ namespace
 
     void title(const size_t i, const size_t t)
     {
+        (void)i;
+        (void)t;
+
         dprint(
             std::cout << "generation(" << count_negative << "): " 
                 << i + 1 << "/" << t << '\n'

@@ -11,6 +11,9 @@
 #define dTEST_TAG synch_cpp98
 
 #include <tools/flag.hpp>
+#include <tools/windows.hpp>
+#include <process.h>
+
 namespace me = ::tools;
 //==============================================================================
 //==============================================================================
@@ -49,7 +52,7 @@ namespace
         dprint(std::cout << "started: " << ref.dir << " " << ref.limit << std::endl);
         ++started;
         while (started != 2)
-            std::this_thread::sleep_for(std::chrono::milliseconds(30));
+			::Sleep(30);
 
         for (size_t i = 0; i < ref.limit; ++i)
         {
@@ -77,6 +80,8 @@ namespace
 
     void title(const size_t i, const size_t t)
     {
+        (void)i;
+        (void)t;
         dprint(
             std::cout << "generation(" << count_negative << "): " 
                 << i + 1 << "/" << t << '\n'
