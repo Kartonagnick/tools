@@ -3,7 +3,7 @@
 //+ created: 2019y-10m-24d 19:22:08 october   Idrisov D. R     +
 //+ changed: 2021y-02m-26d 05:39:00 february  Idrisov D. R     +
 //+ changed: 2021y-02m-27d 02:20:05 february  Idrisov D. R     +
-//+ flag.hpp                                                   +
+//+ tools/flag/flag_synch.hpp                                  +
 //+                                            Tools's library +
 //+                         Copyright @ 2019, Castle Of Dreams +
 //+                                     [author: Idrisov D. R] +
@@ -159,14 +159,18 @@ namespace tools
     dTEMPLATE dCLASS::flag() dNOEXCEPT
         : m_synch()
         , m_flags()
-    {}
+    {
+        const synch_guard lock(this->m_synch);
+        this->set_(0); 
+    }
 
 //==============================================================================
 //=== implementation ===========================================================
 
     dTEMPLATE bool dCLASS::is_empty_() const dNOEXCEPT 
     {
-        return this->m_flags == Enum();
+        const int fl = static_cast<int>(this->m_flags);
+        return fl == 0;
     }
 
     dTEMPLATE bool dCLASS::is_full_() const dNOEXCEPT

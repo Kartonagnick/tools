@@ -3,7 +3,7 @@
 //+ created: 2019y-10m-24d 19:22:08 october   Idrisov D. R     +
 //+ changed: 2021y-02m-26d 05:39:00 february  Idrisov D. R     +
 //+ changed: 2021y-02m-27d 02:20:05 february  Idrisov D. R     +
-//+ flag.hpp                                                   +
+//+ tools/flag/flag_void.hpp                                   +
 //+                                            Tools's library +
 //+                         Copyright @ 2019, Castle Of Dreams +
 //+                                     [author: Idrisov D. R] +
@@ -140,7 +140,7 @@ namespace tools
     }
 
     dTEMPLATE dCLASS::flag() dNOEXCEPT
-        : m_flags()
+        : flag(0)
     {}
 
 //==============================================================================
@@ -148,7 +148,8 @@ namespace tools
 
     dTEMPLATE bool dCLASS::is_empty() const dNOEXCEPT 
     {
-        return this->m_flags == Enum();
+        const int fl = static_cast<int>(this->m_flags);
+        return fl == 0;
     }
 
     dTEMPLATE bool dCLASS::is_full() const dNOEXCEPT
