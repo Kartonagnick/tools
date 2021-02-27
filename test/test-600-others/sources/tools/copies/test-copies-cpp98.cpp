@@ -115,7 +115,7 @@ TEST_COMPONENT(001)
         result = ::InterlockedCompareExchange(&flag, 100, 10);
         if(result == 100)
             break;
-        ::Sleep(100);
+        ::Sleep(30);
     }
     ASSERT_TRUE(sample::instances() == 0)
         << "[1] samples.instances() = " << sample::instances() << '\n';
@@ -141,7 +141,7 @@ TEST_COMPONENT(002)
         result = ::InterlockedCompareExchange(&flag, 100, 10);
         if(result == 100)
             break;
-        ::Sleep(100);
+        ::Sleep(30);
     }
     ASSERT_TRUE(samples.size() == 100)
         << "[1] samples.size() = " << samples.size() << '\n';

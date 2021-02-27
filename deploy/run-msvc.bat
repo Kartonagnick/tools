@@ -15,6 +15,7 @@ rem ============================================================================
     set "order=msvc2012:64:debug:static"
     set "order=msvc2013:64:debug:static"
     set "order=msvc2015:64:debug:static"
+    set "order=msvc2017:64:debug:static"
     set "order=msvc2019:64:debug:static"
 
     call "%eDIR_BAT_ENGINE%\run.bat"  ^
