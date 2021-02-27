@@ -2,7 +2,7 @@
 // [2021y-02m-05d] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 103
+#define dTOOLS_FEATURES_USED_ 104
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -20,8 +20,9 @@
     #define dHAS_NULLPTR 1
 #endif
 
-#if defined(_MSC_VER) && _MSC_VER >= 1600
+#if !defined(_MSC_VER) || _MSC_VER >= 1600
     // #pragma message("build for msvc2010 (or newer)")
+    #define dHAS_STATIC_ASSERT 1
     #define dHAS_NULLPTR 1
 #endif
 
