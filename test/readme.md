@@ -26,6 +26,8 @@ test-000-platform    тесты свойств платформы.
     - [x] dHAS_RVALUE_ARRAY  
     - [x] dHAS_CPP17  
     - [x] dNODISCARD  
+  - [x] макросы версии 104  
+    - [x] dHAS_STATIC_ASSERT  
 
 test-100-macro       тесты модуля препроцессорной магии.  
 test-200-types       тесты модуля анализа типов.  
@@ -40,6 +42,10 @@ test-600-others      тесты мелких инструментов:
   - [x] copies  
   - [x] synch  
   - [x] flag  
+    - [x] flag\flag_synch  
+    - [x] flag\flag_void  
+    - [x] flag\function  
+    - [x] flag\template  
 
 test-700-thread      тесты модуля работы с потоками.  
 test-800-time        тесты модуля для работы со временем.  
