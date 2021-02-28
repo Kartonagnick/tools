@@ -1,9 +1,10 @@
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+ created: 2021y-02m-27d 21:41:43 february  Idrisov D. R     +
+//+ created: 2020y-09m-04d          september  Idrisov D. R    +
+//+ changed: 2021y-02m-27d 21:41:43 february   Idrisov D. R    +
 //+ tools/flag/function.hpp                                    +
 //+                                            Tools's library +
-//+                         Copyright @ 2019, Castle Of Dreams +
+//+                         Copyright @ 2020, Castle Of Dreams +
 //+                                     [author: Idrisov D. R] +
 //+                                   CastleOfDreams@yandex.ru +
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 

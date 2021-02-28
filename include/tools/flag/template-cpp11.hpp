@@ -1,4 +1,15 @@
-// [2020y-09m-04d] Idrisov Denis R.
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+ created: 2020y-09m-04d          september  Idrisov D. R    +
+//+ changed: 2021y-02m-28d 00:58:48 february   Idrisov D. R    +
+//+ tools/flag/template-cpp11.hpp                              +
+//+                                            Tools's library +
+//+                         Copyright @ 2020, Castle Of Dreams +
+//+                                     [author: Idrisov D. R] +
+//+                                   CastleOfDreams@yandex.ru +
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+
 //==============================================================================
 #pragma once
 
