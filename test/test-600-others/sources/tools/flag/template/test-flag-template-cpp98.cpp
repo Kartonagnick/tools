@@ -32,33 +32,41 @@ namespace
         eVALUE    = 1 << 9
     };
 
-    #define has_flag_test(flags, what, etalon)                   \
-        static_assert(                                           \
-            ::tools::has_flag<what, flags>::value == etalon,     \
-            "tools::has_flag<" #what ", " #flags ">::value "     \
-            "must be '" #etalon "'"                              \
-        )
+    #define dCHECK(etalon, ...) \
+        ASSERT_TRUE((__VA_ARGS__) == (etalon))
 
-    #define has_any_flag_test(flags, what, etalon)               \
-        static_assert(                                           \
-            ::tools::has_any_flag<what, flags>::value == etalon, \
-            "tools::has_any_flag<" #what ", " #flags ">::value " \
-            "must be '" #etalon "'"                              \
-        )
+    #define dCHECK_HAS_FLAG(flags, what, etalon)                     \
+        dCHECK(etalon, ::tools::has_flag<what, flags>::value)        \
+            << "tools::has_flag<" #what ", " #flags ">::value\n"     \
+            << "must be '" #etalon "'\n"
 
-    #define del_flag_test(flags, what, etalon)                   \
-        static_assert(                                           \
-            ::tools::del_flag<what, flags>::value == (etalon),   \
-            "tools::del_flag<" #what ", " #flags ">::value "     \
-            "must be '" #etalon "'"                              \
-        )                                                        
-                                                                 
-    #define add_flag_test(flags, what, etalon)                   \
-        static_assert(                                           \
-            ::tools::add_flag<what, flags>::value == (etalon),   \
-            "tools::addl_flag<" #what ", " #flags ">::value "    \
-            "must be '" #etalon "'"                              \
-        )
+    #define dCHECK_HAS_ANY_FLAG(flags, what, etalon)                 \
+        dCHECK(etalon, ::tools::has_any_flag<what, flags>::value)    \
+            << "tools::has_any_flag<" #what ", " #flags ">::value\n" \
+            << "must be '" #etalon "'\n"
+
+    #define dCHECK_DEL_FLAG(flags, what, etalon)                     \
+        dCHECK(etalon, ::tools::del_flag<what, flags>::value)        \
+            << "tools::del_flag<" #what ", " #flags ">::value\n"     \
+            << "must be '" #etalon "'\n"
+
+    #define dCHECK_ADD_FLAG(flags, what, etalon)                     \
+        dCHECK(etalon, ::tools::add_flag<what, flags>::value)        \
+            << "tools::add_flag<" #what ", " #flags ">::value\n"     \
+            << "must be '" #etalon "'\n"
+
+
+    #define has_flag_test(flags, what, etalon) \
+        dCHECK_HAS_FLAG(flags, what, etalon)
+
+    #define has_any_flag_test(flags, what, etalon) \
+        dCHECK_HAS_ANY_FLAG(flags, what, etalon)
+
+    #define del_flag_test(flags, what, etalon) \
+        dCHECK_DEL_FLAG(flags, what, etalon)
+
+    #define add_flag_test(flags, what, etalon) \
+        dCHECK_ADD_FLAG(flags, what, etalon)
 
 } // namespace
 

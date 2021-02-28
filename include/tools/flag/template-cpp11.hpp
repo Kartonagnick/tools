@@ -1,0 +1,67 @@
+// [2020y-09m-04d] Idrisov Denis R.
+//==============================================================================
+#pragma once
+
+#ifndef dTOOLS_FLAG_TEMPLATE_CPP11_USED_ 
+#define dTOOLS_FLAG_TEMPLATE_CPP11_USED_ 1
+
+#include <tools/features.hpp>
+#ifndef dHAS_CPP11
+    #error only c++11
+#endif
+
+//================================================================================
+//================================================================================
+namespace tools
+{
+    template<unsigned flag, unsigned flags> struct add_flag
+    {
+        // 0 --- none
+        // 1 --- enable all
+        static constexpr const unsigned
+            value = 
+              flag == 0 ? flags
+            : flag == 1 ? 1
+            : flags | flag;
+    };
+
+    template<unsigned flag, unsigned flags> struct del_flag
+    {
+        // 0 --- none
+        // 1 --- disable all
+        static constexpr const unsigned
+            value = 
+              flag == 0 ? flags
+            : flag == 1 ? 0
+            : flags & (~flag);
+    };
+
+    template<unsigned flag, unsigned flags> struct has_any_flag
+    {
+        // 0 --- none
+        // 1 --- all
+        static constexpr const unsigned
+            value = 
+              flag  == 0 ? flags == 0
+            : flag  == 1 ? flags != 0
+            : flags == 1 ? flag == 0 ? false : true
+            : (flag & flags) != 0;
+    };
+
+    template<unsigned flag, unsigned flags> struct has_flag
+    {
+        // 0 --- none
+        // 1 --- all
+        static constexpr const unsigned
+            value = 
+              flag  == 0 ? flags == 0
+            : flag  == 1 ? flags == 1
+            : flags == 1 ? flag == 0 ? false : true
+            : (flag & flags) == flag;
+    };
+
+} // namespace tools
+
+//================================================================================
+//================================================================================
+#endif // !dTOOLS_FLAG_TEMPLATE_CPP11_USED_

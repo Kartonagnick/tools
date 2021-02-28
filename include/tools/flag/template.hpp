@@ -15,55 +15,13 @@
 //==============================================================================
 //==============================================================================
 
-namespace tools
-{
-    template<unsigned flag, unsigned flags> struct has_flag
-    {
-        // 0 --- none
-        // 1 --- all
-        enum { value =
-              flag  == 0 ? flags == 0
-            : flag  == 1 ? flags == 1
-            : flags == 1 ? flag == 0 ? false : true
-            : (flag & flags) == flag
-        };
-    };
+#include <tools/features.hpp>
 
-    template<unsigned flag, unsigned flags> struct has_any_flag
-    {
-        // 0 --- none
-        // 1 --- all
-        enum { value =
-               flag  == 0 ? flags == 0
-            :  flag  == 1 ? flags != 0
-            :  flags == 1 ? flag == 0 ? false : true
-            : (flag & flags) != 0
-        };
-    };
-
-    template<unsigned flag, unsigned flags> struct del_flag
-    {
-        // 0 --- none
-        // 1 --- disable all
-        enum { value =
-               flag == 0 ? flags
-            :  flag == 1 ? 0
-            :  flags & (~flag)
-        };
-    };
-
-    template<unsigned flag, unsigned flags> struct add_flag
-    {
-        // 0 --- none
-        // 1 --- enable all
-        enum { value =
-               flag == 0 ? flags
-            :  flag == 1 ? 1
-            :  flags | flag
-        };
-    };
-
-} // namespace tools
+#ifdef dHAS_CPP11
+    #include <tools/flag/template-cpp11.hpp>
+#else
+    #include <tools/flag/template-cpp98.hpp>
+#endif
 
 //==============================================================================
 //==============================================================================
