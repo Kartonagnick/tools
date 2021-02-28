@@ -9,7 +9,6 @@ rem ============================================================================
 
     rem set "eDEBUG=ON"
 
-    set "VC=msvc:64:debug:static"
     set "VC08=msvc2008:64:debug:static"
     set "VC10=msvc2010:64:release:static"
     set "VC12=msvc2012:32:debug:static"
@@ -17,9 +16,13 @@ rem ============================================================================
     set "VC15=msvc2015:32:debug:static"
     set "VC17=msvc2017:64:release:static"
     set "VC19=msvc2019:64:debug:static"
-
     set "VC=%VC08%;%VC10%;%VC12%;%VC13%;%VC15%;%VC17%;%VC19%"
-    set "MG=mingw:64:release:static"
+
+    set "MG81=mingw810:64:release:static"
+    set "MG73=mingw730:64:release:static"
+    set "MG72=mingw720:64:release:static"
+    set "MG=%MG72%;%MG73%;%MG81%;"
+
     rem set "order=%VC%"
     rem set "order=%MG%"
     rem set "order=%VC%; %MG%"
@@ -29,7 +32,7 @@ rem ============================================================================
     rem for development
     rem (call :generate) && (goto :success) || (goto :failed)
 
-    rem (call :clean)    || (goto :failed)
+    (call :clean)    || (goto :failed)
     (call :build)    || (goto :failed)
     (call :runTests) || (goto :failed)
     rem (call :runStress) || (goto :failed)

@@ -22,10 +22,9 @@
 namespace
 {
     #if dHAS_STATIC_ASSERT
-        constexpr const char* ptr = "123";
+        enum { value = 1 };
         static_assert(
-            ptr[1] == '2',
-            "'static_assert' not worked"
+            value, "'static_assert' not worked"
         );
     #endif
 

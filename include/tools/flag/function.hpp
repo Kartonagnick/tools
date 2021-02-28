@@ -39,17 +39,6 @@ namespace tools
             : flags & (~flag);
     }
 
-    dCONSTEXPR_CPP11 bool has_any_flags(const int flag, const int flags) dNOEXCEPT
-    {
-        // 0 --- none
-        // 1 --- all
-        return
-              flag  == 0 ? flags == 0
-            : flag  == 1 ? flags != 0
-            : flags == 1 ? flag == 0 ? false : true
-            : (flag & flags) != 0;
-    }
-
     dCONSTEXPR_CPP11 bool has_flags(const int flag, const int flags) dNOEXCEPT
     {
         // 0 --- none
@@ -59,6 +48,17 @@ namespace tools
             : flag  == 1 ? flags == 1
             : flags == 1 ? flag == 0 ? false : true
             : (flag & flags) == flag;
+    }
+
+    dCONSTEXPR_CPP11 bool has_any_flags(const int flag, const int flags) dNOEXCEPT
+    {
+        // 0 --- none
+        // 1 --- all
+        return
+              flag  == 0 ? flags == 0
+            : flag  == 1 ? flags != 0
+            : flags == 1 ? flag == 0 ? false : true
+            : (flag & flags) != 0;
     }
 
 } // namespace tools
