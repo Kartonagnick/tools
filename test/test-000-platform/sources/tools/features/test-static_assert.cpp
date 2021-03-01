@@ -21,12 +21,13 @@
 //==============================================================================
 namespace
 {
+    enum { value = 1 };
+
     #if dHAS_STATIC_ASSERT
-        enum { value = 1 };
-        static_assert(
-            value, "'static_assert' not worked"
-        );
+        static_assert(value, "'static_assert' not worked");
     #endif
+
+    dSTATIC_ASSERT(value, STATIC_ASSERT_NOT_WORKED);
 
 }//namespace
 

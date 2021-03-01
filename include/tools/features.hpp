@@ -22,7 +22,6 @@
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1600
     // #pragma message("build for msvc2010 (or newer)")
-    #define dHAS_STATIC_ASSERT 1
     #define dHAS_NULLPTR 1
 #endif
 
@@ -33,7 +32,36 @@
 #ifdef dHAS_NULLPTR
     typedef decltype(nullptr) nullptr_t;
 #endif
-        
+
+//==============================================================================
+//=== dSTATIC_ASSERT ===========================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1600
+    // #pragma message("build for msvc2010 (or newer)")
+    #define dHAS_STATIC_ASSERT 1
+
+    #define dSTATIC_ASSERT(expr, msg) \
+        static_assert(expr, #msg);
+#else
+
+    namespace check_
+    {
+        template<bool> 
+            struct static_assert_;
+
+        template<> 
+            struct static_assert_<true> {};
+
+    } // namespace old_check_
+
+    #define dSTATIC_ASSERT(expr, msg)         \
+    {                                         \
+        ::check_::static_assert_<(expr)> msg; \
+        (void) msg;                           \
+    } 
+
+#endif
+
 //==============================================================================
 //=== dHAS_RVALUE_REFERENCES/dHAS_ATOMIC =======================================
 
