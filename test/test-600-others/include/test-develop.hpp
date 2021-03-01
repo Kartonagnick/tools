@@ -1,4 +1,3 @@
-
 // [2021y-02m-16d] Idrisov Denis R.
 #pragma once
 #ifndef dTEST_DEVELOP_USED_ 
