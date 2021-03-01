@@ -1,4 +1,3 @@
-                                   
 // [2021y-02m-16d] Idrisov Denis R.
 #pragma once
 
@@ -21,6 +20,7 @@
     #define TEST_TOOLS_RAISE                                // ready!
     #define TEST_TOOLS_ASSERT                               // ready!
     #define TEST_TOOLS_FLAG                                 // ready!
+    #define TEST_TOOLS_ERRNO                                // ready!
 //==============================================================================
 //==============================================================================
 

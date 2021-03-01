@@ -1,4 +1,3 @@
-
 // [2021y-02m-16d] Idrisov Denis R.
 #pragma once
 #ifndef dTEST_DEVELOP_USED_ 
@@ -13,13 +12,14 @@
 
 //==============================================================================
 //===== tools ==============================================||==================
-    // #define TEST_TOOLS_SYNC_CONSEPT                         // ready!
-    // #define TEST_TOOLS_COPIES                               // ready!
-    // #define TEST_TOOLS_COUNTER                              // ready!
-    // #define TEST_TOOLS_SYNCH                                // ready!
-    // #define TEST_TOOLS_RAISE                                // ready!
-    // #define TEST_TOOLS_ASSERT                               // ready!
-    #define TEST_TOOLS_FLAG                                 // ready!
+    // #define TEST_TOOLS_SYNC_CONSEPT                      // ready!
+    // #define TEST_TOOLS_COPIES                            // ready!
+    // #define TEST_TOOLS_COUNTER                           // ready!
+    // #define TEST_TOOLS_SYNCH                             // ready!
+    // #define TEST_TOOLS_RAISE                             // ready!
+    // #define TEST_TOOLS_ASSERT                            // ready!
+    // #define TEST_TOOLS_FLAG                              // ready!
+    #define TEST_TOOLS_ERRNO                                // ready!
 //==============================================================================
 //==============================================================================
 // in progress...

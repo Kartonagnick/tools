@@ -13,23 +13,11 @@
 
 namespace
 {
-    ::CRITICAL_SECTION* cast(char* storage)
+    ::CRITICAL_SECTION* cast(char* storage) dNOEXCEPT
     {
         dASSERT(storage);
         return reinterpret_cast<::CRITICAL_SECTION*>(storage);
     }
-
-    template<bool> 
-        struct static_assert_;
-
-    template<> 
-        struct static_assert_<true> {};
-
-    #define dSTATIC_ASSERT(expr, msg) \
-    {                                 \
-        static_assert_<(expr)> msg;   \
-        (void) msg;                   \
-    } 
 
     void dummy() dNOEXCEPT
     {

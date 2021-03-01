@@ -28,6 +28,7 @@ test-000-platform    тесты свойств платформы.
     - [x] dNODISCARD  
   - [x] макросы версии 104  
     - [x] dHAS_STATIC_ASSERT  
+    - [x] dSTATIC_ASSERT  
 
 test-100-macro       тесты модуля препроцессорной магии.  
 test-200-types       тесты модуля анализа типов.  
@@ -46,6 +47,7 @@ test-600-others      тесты мелких инструментов:
     - [x] flag\flag_void  
     - [x] flag\function  
     - [x] flag\template  
+  - [x] errno  
 
 test-700-thread      тесты модуля работы с потоками.  
 test-800-time        тесты модуля для работы со временем.  
