@@ -27,9 +27,15 @@ namespace
         static_assert(value, "'static_assert' not worked");
     #endif
 
-    dSTATIC_ASSERT(value, STATIC_ASSERT_NOT_WORKED);
-
 }//namespace
+
+TEST_COMPONENT(000)
+{
+    dSTATIC_ASSERT(
+        value, 
+        STATIC_ASSERT_NOT_WORKED
+    );
+}
 
 //==============================================================================
 //==============================================================================
