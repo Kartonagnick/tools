@@ -41,24 +41,21 @@
     #define dHAS_STATIC_ASSERT 1
 
     #define dSTATIC_ASSERT(expr, msg) \
-        static_assert(expr, #msg);
+        static_assert(expr, #msg)
 #else
 
-    namespace check_
+    namespace static_
     {
-        template<bool> 
-            struct static_assert_;
+        template<bool> struct assert_;
+        template<> struct assert_<true> {};
 
-        template<> 
-            struct static_assert_<true> {};
+    } // namespace static_
 
-    } // namespace old_check_
-
-    #define dSTATIC_ASSERT(expr, msg)         \
-    {                                         \
-        ::check_::static_assert_<(expr)> msg; \
-        (void) msg;                           \
-    } 
+    #define dSTATIC_ASSERT(expr, msg)   \
+    {                                   \
+        ::static_::assert_<(expr)> msg; \
+        (void) msg;                     \
+    } void()
 
 #endif
 
