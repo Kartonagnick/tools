@@ -1,4 +1,3 @@
-
 // [2021y-02m-20d][18:41:19] Idrisov Denis R.
 // [2021y-02m-20d][18:41:19] birthday of the project
 // [2021y-02m-25d][04:10:xx] Idrisov Denis R.

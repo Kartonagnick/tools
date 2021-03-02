@@ -1,7 +1,4 @@
-
-// [2021y-02m-21d] Idrisov Denis R.
-// [2021y-02m-23d] Idrisov Denis R.
-
+// [2021y-02m-22d][23:57:05] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_SYNCH_USED_ 
 #define dTOOLS_SYNCH_USED_ 102

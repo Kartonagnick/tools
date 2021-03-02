@@ -1,5 +1,5 @@
 
-// [2021y-02m-05d] Idrisov Denis R.
+// [2021y-02m-05d][18:41:19] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
 #define dTOOLS_FEATURES_USED_ 104

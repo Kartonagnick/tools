@@ -1,6 +1,6 @@
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+ created: 2020y-09m-04d          september  Idrisov D. R    +
+//+ created: 2020y-09m-04d 18:40:18 september  Idrisov D. R    +
 //+ changed: 2021y-02m-27d 21:41:43 february   Idrisov D. R    +
 //+ tools/flag/function.hpp                                    +
 //+                                            Tools's library +

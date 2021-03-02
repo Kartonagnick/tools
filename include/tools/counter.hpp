@@ -1,6 +1,4 @@
-
-// [2021y-02m-21d] Idrisov Denis R.
-
+// [2021y-02m-21d][15:47:06] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_COUNTER_USED_ 
 #define dTOOLS_COUNTER_USED_ 100
