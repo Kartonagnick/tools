@@ -1,4 +1,3 @@
-
 // [2021y-02m-20d] Idrisov Denis R.
 // [2021y-02m-20d] birthday of the project
 #pragma once
