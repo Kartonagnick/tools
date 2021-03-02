@@ -1,4 +1,4 @@
-
+// [2021y-02m-20d][18:40:18] Idrisov Denis R.
 #include <stdexcept>
 #include <cstring>
 #include <string>

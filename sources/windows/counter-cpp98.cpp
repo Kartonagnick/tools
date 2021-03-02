@@ -1,4 +1,4 @@
-
+// [2021y-02-23d][20:36:58] Idrisov Denis R.
 #if defined(_MSC_VER) && _MSC_VER <= 1600
 // pragma message("Visual Studio 2010 or older")
 
