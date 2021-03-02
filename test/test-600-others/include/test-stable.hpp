@@ -1,4 +1,4 @@
-// [2021y-02m-16d] Idrisov Denis R.
+// [2021y-02m-16d][00:01:43] Idrisov Denis R.
 #pragma once
 
 #ifndef dTEST_STABLE_USED_ 
