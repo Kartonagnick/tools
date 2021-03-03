@@ -29,6 +29,10 @@ test-000-platform    тесты свойств платформы.
   - [x] макросы версии 104  
     - [x] dHAS_STATIC_ASSERT  
     - [x] dSTATIC_ASSERT  
+  - [x] макросы версии 105  
+    - [x] dHAS_VARIADIC_TEMPLATE  
+    - [x] dHAS_HASH  
+
 
 test-100-macro       тесты модуля препроцессорной магии.  
 test-200-types       тесты модуля анализа типов.  
@@ -48,6 +52,10 @@ test-600-others      тесты мелких инструментов:
     - [x] flag\function  
     - [x] flag\template  
   - [x] errno  
+  - [x] hash  
+    - [x] hash\combine  
+    - [x] hash\accum  
+    - [x] hash\hash  
 
 test-700-thread      тесты модуля работы с потоками.  
 test-800-time        тесты модуля для работы со временем.  
