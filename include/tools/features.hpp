@@ -2,7 +2,7 @@
 // [2021y-02m-05d][18:41:19] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 104
+#define dTOOLS_FEATURES_USED_ 105
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -22,6 +22,7 @@
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1600
     // #pragma message("build for msvc2010 (or newer)")
+    #define dHAS_HASH 1
     #define dHAS_NULLPTR 1
 #endif
 
@@ -90,6 +91,7 @@
     // #pragma message("build for c++11 (or newer)")
     #define dHAS_TEMPLATE_FUNCTION_DEFAULT_PARAM 1
     #define dHAS_DELETING_FUNCTIONS 1
+    #define dHAS_VARIADIC_TEMPLATE 1
     #define dHAS_USING_ALIAS 1
 #endif
 

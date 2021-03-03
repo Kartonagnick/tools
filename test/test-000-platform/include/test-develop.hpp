@@ -15,6 +15,7 @@
     #define TEST_TOOLS_FEATURE_ATOMIC                       // ready
     #define TEST_TOOLS_FEATURE_DFUNCTION                    // ready
     #define TEST_TOOLS_FEATURE_STASTIC_ASSERT               // ready
+    #define TEST_TOOLS_FEATURE_VARIADIC_TEMPLATE            // ready
     #define TEST_TOOLS_FEATURE_RVALUE_REFERENCE             // ready
     #define TEST_TOOLS_FEATURE_RVALUE_ARRAY                 // ready
     #define TEST_TOOLS_FEATURE_NULLPTR                      // ready
@@ -24,6 +25,7 @@
     #define TEST_TOOLS_FEATURE_CPP14                        // ready
     #define TEST_TOOLS_FEATURE_CPP17                        // ready
     #define TEST_TOOLS_FEATURE_ENUM                         // ready
+    #define TEST_TOOLS_FEATURE_HASH                         // ready
 //==============================================================================
 //==============================================================================
 // in progress...
