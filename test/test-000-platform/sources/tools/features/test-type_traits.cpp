@@ -1,37 +1,37 @@
-// [2021y-02m-25d][04:21:08] Idrisov Denis R.
+// [2021y-02m-26d][06:07:32] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 //=================================================================================
 //=================================================================================
 
-#ifdef TEST_TOOLS_FEATURE_RVALUE_ARRAY
+#ifdef TEST_TOOLS_FEATURE_TYPE_TRAITS
 
 #define dTEST_COMPONENT tools, features
-#define dTEST_METHOD test_HAS_RVALUE_ARRAY
+#define dTEST_METHOD test_HAS_TYPE_TRAITS
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
 
-#include <cassert>
-
-#ifdef dHAS_RVALUE_ARRAY
-    dMESSAGE("[test] tools: enabled -> dHAS_RVALUE_ARRAY")
+#ifdef dHAS_TYPE_TRAITS
+    dMESSAGE("[test] tools: enabled -> dHAS_TYPE_TRAITS")
+    #include <type_traits>
 #else
-    dMESSAGE("[test] tools: disabled -> dHAS_RVALUE_ARRAY")
+    dMESSAGE("[test] tools: disabled -> dHAS_TYPE_TRAITS")
 #endif
 
 //==============================================================================
 //==============================================================================
-
-TEST_COMPONENT(000) 
+namespace
 {
-    #ifdef dHAS_RVALUE_ARRAY
-    char arr[2];
-    auto&& ref = std::move(arr);
-    (void)ref;
+    #ifdef dHAS_TYPE_TRAITS
+        enum { value = std::is_array<char[1]>::value };
+        dSTATIC_ASSERT(value, MUST_BE_ARRAY);
     #endif
-}
+
+}//namespace
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_FEATURE_RVALUE_ARRAY
+#endif // ! TEST_TOOLS_FEATURE_TYPE_TRAITS
+
+
 
