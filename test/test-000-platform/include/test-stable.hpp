@@ -15,6 +15,7 @@
 //===== tools/features =====================================||==================
     #define TEST_TOOLS_FEATURE_ATOMIC                       // ready
     #define TEST_TOOLS_FEATURE_DFUNCTION                    // ready
+    #define TEST_TOOLS_FEATURE_THREAD_LOCAL                 // ready
     #define TEST_TOOLS_FEATURE_STASTIC_ASSERT               // ready
     #define TEST_TOOLS_FEATURE_VARIADIC_TEMPLATE            // ready
     #define TEST_TOOLS_FEATURE_RVALUE_REFERENCE             // ready

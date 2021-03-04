@@ -138,9 +138,9 @@
 //=== dTHREAD_LOCAL ============================================================
 
 #ifdef _MSC_VER
-    #define dTHREAD_LOCAL_POINTER  __declspec(thread)
+    #define dTHREAD_LOCAL_EXTENSION  __declspec(thread)
 #else
-    #define dTHREAD_LOCAL_POINTER  __thread
+    #define dTHREAD_LOCAL_EXTENSION  __thread
 #endif
 
 #if defined (_MSC_VER) && _MSC_VER >= 1900

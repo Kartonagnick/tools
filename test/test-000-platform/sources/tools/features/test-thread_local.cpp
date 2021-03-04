@@ -1,37 +1,47 @@
-// [2021y-03m-04d][01:29:32] Idrisov Denis R.
+// [2021y-03m-04d][19:34:26] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 //=================================================================================
 //=================================================================================
 
-#ifdef TEST_TOOLS_FEATURE_TYPE_TRAITS
+#ifdef TEST_TOOLS_FEATURE_THREAD_LOCAL
 
 #define dTEST_COMPONENT tools, features
-#define dTEST_METHOD test_HAS_TYPE_TRAITS
+#define dTEST_METHOD test_HAS_THREAD_LOCAL
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
+#include <string>
 
-#ifdef dHAS_TYPE_TRAITS
-    dMESSAGE("[test] tools: enabled -> dHAS_TYPE_TRAITS")
-    #include <type_traits>
+#ifdef dHAS_THREAD_LOCAL
+    dMESSAGE("[test] tools: enabled -> dHAS_THREAD_LOCAL")
 #else
-    dMESSAGE("[test] tools: disabled -> dHAS_TYPE_TRAITS")
+    dMESSAGE("[test] tools: disabled -> dHAS_THREAD_LOCAL")
 #endif
 
 //==============================================================================
 //==============================================================================
 namespace
 {
-    #ifdef dHAS_TYPE_TRAITS
-        enum { value = std::is_array<char[1]>::value };
-        dSTATIC_ASSERT(value, MUST_BE_ARRAY);
+
+    #ifdef dHAS_THREAD_LOCAL
+        thread_local std::string txt = "11";
+    #else
+        std::string txt = "11";
     #endif
 
-}//namespace
+    dTHREAD_LOCAL_EXTENSION int val = 10;
+
+} // namespace
+
+TEST_COMPONENT(000)
+{
+    ASSERT_TRUE(txt == "11");
+    ASSERT_TRUE(val ==  10 );
+}
 
 //==============================================================================
 //==============================================================================
-#endif // ! TEST_TOOLS_FEATURE_TYPE_TRAITS
+#endif // ! TEST_TOOLS_FEATURE_THREAD_LOCAL
 
 
 
