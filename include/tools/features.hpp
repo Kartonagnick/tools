@@ -2,7 +2,7 @@
 // [2021y-02m-05d][18:41:19] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 105
+#define dTOOLS_FEATURES_USED_ 106
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -22,8 +22,9 @@
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1600
     // #pragma message("build for msvc2010 (or newer)")
-    #define dHAS_HASH 1
+    #define dHAS_TYPE_TRAITS 1
     #define dHAS_NULLPTR 1
+    #define dHAS_HASH 1
 #endif
 
 #if __cplusplus >= 201103L
@@ -67,6 +68,7 @@
     // #pragma message("build for msvc2012 (or newer) or other compiler")
     #define dHAS_RVALUE_REFERENCES 1
     #define dHAS_ENUM_CLASS 1
+    #define dHAS_CHRONO 1
     #define dHAS_ATOMIC 1
 #endif
     
@@ -76,9 +78,9 @@
 #if (defined(_MSC_VER) && _MSC_VER >= 1900) || __cplusplus >= 201103L
     // #pragma message("build for msvc2015 (or newer) or other compiler")
     // #pragma message("build for c++11 (or newer)")
-    #define dHAS_CPP11 1
-    #define dHAS_CONSTEXPR_CPP11 1
     #define dCONSTEXPR_CPP11 constexpr
+    #define dHAS_CONSTEXPR_CPP11 1
+    #define dHAS_CPP11 1
 #else 
     #define dCONSTEXPR_CPP11 inline
 #endif
@@ -131,6 +133,24 @@
     #define dNOEXCEPT throw()
 #endif
 
+
+//==============================================================================
+//=== dTHREAD_LOCAL ============================================================
+
+#ifdef _MSC_VER
+    #define dTHREAD_LOCAL_EXTENSION  __declspec(thread)
+#else
+    #define dTHREAD_LOCAL_EXTENSION  __thread
+#endif
+
+#if defined (_MSC_VER) && _MSC_VER >= 1900
+    // #pragma message("build for msvc2015 (or newer) or other compiler")
+    #define dHAS_THREAD_LOCAL 1
+#elif __cplusplus >= 201103L
+    // #pragma message("build for c++11")
+    #define dHAS_THREAD_LOCAL 1
+#endif
+
 //==============================================================================
 //=== dCONSTEXPR_CPP14 =========================================================
 
@@ -157,8 +177,8 @@
 
 #if (defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L
     // #pragma message("build for c++17 (or newer))
-    #define dHAS_CPP17 1
     #define dNODISCARD [[nodiscard]]
+    #define dHAS_CPP17 1
 #else
     #define dNODISCARD
 #endif

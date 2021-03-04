@@ -14,13 +14,16 @@
 //===== tools/features =====================================||==================
     #define TEST_TOOLS_FEATURE_ATOMIC                       // ready
     #define TEST_TOOLS_FEATURE_DFUNCTION                    // ready
+    #define TEST_TOOLS_FEATURE_THREAD_LOCAL                 // ready
     #define TEST_TOOLS_FEATURE_STASTIC_ASSERT               // ready
     #define TEST_TOOLS_FEATURE_VARIADIC_TEMPLATE            // ready
     #define TEST_TOOLS_FEATURE_RVALUE_REFERENCE             // ready
     #define TEST_TOOLS_FEATURE_RVALUE_ARRAY                 // ready
+    #define TEST_TOOLS_FEATURE_TYPE_TRAITS                  // ready
+    #define TEST_TOOLS_FEATURE_NOEXCEPT                     // ready
     #define TEST_TOOLS_FEATURE_NULLPTR                      // ready
     #define TEST_TOOLS_FEATURE_COPYABLE                     // ready
-    #define TEST_TOOLS_FEATURE_NOEXCEPT                     // ready
+    #define TEST_TOOLS_FEATURE_CHRONO                       // ready
     #define TEST_TOOLS_FEATURE_CPP11                        // ready
     #define TEST_TOOLS_FEATURE_CPP14                        // ready
     #define TEST_TOOLS_FEATURE_CPP17                        // ready
