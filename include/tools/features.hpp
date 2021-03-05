@@ -78,6 +78,8 @@
 #if (defined(_MSC_VER) && _MSC_VER >= 1900) || __cplusplus >= 201103L
     // #pragma message("build for msvc2015 (or newer) or other compiler")
     // #pragma message("build for c++11 (or newer)")
+    // #define dHAS_TRAILING_RETURN_TYPE 1
+    // #define dHAS_AUTO_RETURN_TYPE 1
     #define dCONSTEXPR_CPP11 constexpr
     #define dHAS_CONSTEXPR_CPP11 1
     #define dHAS_CPP11 1

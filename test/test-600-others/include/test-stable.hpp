@@ -23,6 +23,8 @@
     #define TEST_TOOLS_FLAG                                 // ready!
     #define TEST_TOOLS_ERRNO                                // ready!
     #define TEST_TOOLS_HASH                                 // ready!
+
+    #define TEST_TOOLS_UTF8                                 // in progress...
 //==============================================================================
 //==============================================================================
 
