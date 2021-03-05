@@ -38,11 +38,8 @@ namespace tools
 
         inline ::std::default_random_engine& rnd_() dNOEXCEPT
         {
-            //using clock_type = ::std::chrono::steady_clock;
-
             typedef ::std::chrono::steady_clock
                 clock_type;
-
 
             dTHREAD_SAFE static ::std::default_random_engine engine(
                 static_cast<unsigned>(
