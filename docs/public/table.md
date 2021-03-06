@@ -1,17 +1,17 @@
 
 [![logo](../logo.png)](../home.md "for developers") 
 
-[L1]: ../images/limited-well.png   "2021y-03m-05d"
-[B1]: ../images/limited-bad.png    "2021y-03m-05d"
-[F1]: ../images/limited-fail.png   "2021y-03m-05d"
+[L1]: ../images/limited-well.png   "2021y-03m-06d"
+[B1]: ../images/limited-bad.png    "2021y-03m-06d"
+[F1]: ../images/limited-fail.png   "2021y-03m-06d"
 
-[P1]: ../images/progress.png  "2021y-03m-05d"
-[X1]: ../images/failed.png    "2021y-03m-05d"
-[V1]: ../images/success.png   "2021y-03m-05d"
-[E1]: ../images/nodata.png    "2021y-03m-05d"
-[N1]: ../images/na.png        "2021y-03m-05d"
+[P1]: ../images/progress.png  "2021y-03m-06d"
+[X1]: ../images/failed.png    "2021y-03m-06d"
+[V1]: ../images/success.png   "2021y-03m-06d"
+[E1]: ../images/nodata.png    "2021y-03m-06d"
+[N1]: ../images/na.png        "2021y-03m-06d"
 
-version 0.1.1
+version 0.1.2  ![P1]
 
 | **ID** | **компоненты**      |  mingw810   |  mingw730   |  msvc720    |  
 |:------:|:-------------------:|:-----------:|:-----------:|:-----------:|  
@@ -31,6 +31,7 @@ version 0.1.1
 |  0013  | [hash\combine][13]  | [![V1]][13] | [![V1]][13] | [![V1]][13] |  
 |  0014  | [random][14]        | [![V1]][14] | [![V1]][14] | [![V1]][14] |  
 |  0015  | [utf8][15]          | [![V1]][15] | [![V1]][15] | [![V1]][15] |  
+|  0016  | [conv][16]          | [![V1]][16] | [![V1]][16] | [![V1]][16] |  
 
 <br />
 <br />
@@ -53,6 +54,7 @@ version 0.1.1
 |  0013  | [hash\combine][13]  | [![V1]][13] | [![V1]][13] | [![V1]][13] |  
 |  0014  | [random][14]        | [![V1]][14] | [![V1]][14] | [![V1]][14] |  
 |  0015  | [utf8][15]          | [![V1]][15] | [![V1]][15] | [![V1]][15] |  
+|  0016  | [conv][16]          | [![V1]][16] | [![V1]][16] | [![V1]][16] |  
 
 <br />
 <br />
@@ -75,6 +77,7 @@ version 0.1.1
 |  0013  | [hash\combine][13]  | [![V1]][13] | [![E1]][13] | [![E1]][13] | [![E1]][11] |  
 |  0014  | [random][14]        | [![L1]][14] | [![L1]][14] | [![E1]][14] | [![E1]][14] |  
 |  0015  | [utf8][15]          | [![L1]][15] | [![L1]][15] | [![L1]][15] | [![L1]][15] |  
+|  0016  | [conv][16]          | [![L1]][16] | [![L1]][16] | [![L1]][16] | [![L1]][16] |  
 
 <br />
 <br />
