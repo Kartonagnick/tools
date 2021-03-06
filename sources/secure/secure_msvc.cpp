@@ -65,12 +65,13 @@ namespace
                 data.begin() + 2 * i,  
                 data.begin() + 2 * i + 2
             );
-            //const int t = std::stoi(str, nullptr, 16);
 
-            const int t = ::atoi(str.c_str());
+            char* p;
+            const long v = strtol(str.c_str(), &p, 16);
+            dASSERT(p);
 
-            dASSERT(t <= UCHAR_MAX);
-            const byte i_hex = static_cast<byte>(t);
+            dASSERT(v <= UCHAR_MAX);
+            const byte i_hex = static_cast<byte>(v);
             vb[i] = i_hex;
         }
         return vb;
@@ -171,8 +172,8 @@ namespace tools
 
         if (!result.empty())
         {
-            dASSERT(*result.rend() == 0);
-            if(*result.rend() == 0)
+            dASSERT(*result.rbegin() == 0);
+            if(*result.rbegin() == 0)
                 result.erase(result.length() - 1);
         }
         return result;
