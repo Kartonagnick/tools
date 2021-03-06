@@ -24,13 +24,12 @@ namespace tools
         ::std::wstring convert(const char* s);
         ::std::wstring convert(const std::string& s);
 
+        #ifdef dHAS_CPP11
         // 'char' or 'wchar_t' only
         // char ------> std::wstring
         // wchar_t ---> std::string
-        // template<class s> auto convert(const s& src);
+        template<class s> auto convert(const s& src);
 
-
-        #ifdef dHAS_CPP11
         // 'char' or 'wchar_t' only
         // ch == deduce_symbol_t<s> ? 
         //     string& -----> string&      (from reference returned reference)
@@ -68,7 +67,7 @@ namespace tools
         ::std::wstring convert(const std::string& s);
 
         //----------------
-        #if 0
+        #ifdef dHAS_CPP11
         // char ------> std::wstring
         // wchar_t ---> std::string
         template<class s> auto convert(const s& src);
@@ -77,9 +76,7 @@ namespace tools
             const str& s, 
             const ::std::locale& loc
         );
-        #endif
 
-        #ifdef dHAS_CPP11
         // 'char' or 'wchar_t' only
         // ch == deduce_symbol_t<s> ? 
         //     string& -----> string&               (from reference returned reference)
@@ -140,13 +137,11 @@ namespace tools
 {
     namespace multibyte
     {
-        #if 0
         template<class s> auto convert(const s& src)
         {
             const auto* p = &src[0];
             return ::tools::multibyte::convert(p);
         }
-        #endif
 
         namespace detail
         {
@@ -188,13 +183,11 @@ namespace tools
 
     namespace stdlocal
     {
-        #if 0
         template<class s> auto convert(const s& src)
         {
             const auto* p = &src[0];
             return ::tools::stdlocal::convert(p);
         }
-        #endif
 
         namespace detail
         {
