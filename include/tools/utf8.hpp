@@ -8,7 +8,6 @@
 #define dTOOLS_UTF8_USED_ 100
 
 #include <tools/features.hpp>
-#include <tools/assert.hpp>
 #include <string>
 
 //==============================================================================
@@ -28,6 +27,7 @@ namespace tools
         std::wstring convert(const char* text);
 
         #ifdef dHAS_CPP11
+#if 0
 
         // char ------------> std::string
         // wchar_t ---------> std::wstring
@@ -37,7 +37,7 @@ namespace tools
             dASSERT(p);
             return ::tools::utf8::convert(p); 
         } 
-
+#endif
         #endif // !dHAS_CPP11
 
         #ifdef dHAS_CPP11
@@ -62,6 +62,7 @@ namespace tools
 //==============================================================================
 //==============================================================================
 #ifdef dHAS_CPP11
+#include <tools/assert.hpp>
 #include <type_traits>
 
 //==============================================================================
