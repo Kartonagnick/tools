@@ -8,7 +8,6 @@
 #define dTOOLS_UTF8_USED_ 100
 
 #include <tools/features.hpp>
-#include <tools/assert.hpp>
 #include <string>
 
 //==============================================================================
@@ -28,19 +27,9 @@ namespace tools
         std::wstring convert(const char* text);
 
         #ifdef dHAS_CPP11
-
         // char ------------> std::string
         // wchar_t ---------> std::wstring
-        template<class s> auto convert(const s& src)
-        { 
-            const auto* p = &src[0];
-            dASSERT(p);
-            return ::tools::utf8::convert(p); 
-        } 
-
-        #endif // !dHAS_CPP11
-
-        #ifdef dHAS_CPP11
+        template<class s> auto convert(const s& src);
 
         // return std::basic_string<ch>
         // if 'ch' == 's' -> return reference
@@ -62,6 +51,7 @@ namespace tools
 //==============================================================================
 //==============================================================================
 #ifdef dHAS_CPP11
+#include <tools/assert.hpp>
 #include <type_traits>
 
 //==============================================================================
@@ -95,6 +85,12 @@ namespace tools
 {
     namespace utf8 
     {
+        template<class s> auto convert(const s& src)
+        {
+            const auto* p = &src[0];
+            return ::tools::utf8::convert(p);
+        }
+
         namespace detail
         {
             template<bool> struct converter

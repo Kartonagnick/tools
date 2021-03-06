@@ -8,9 +8,10 @@
 // [2021y-03m-03d][23:47:55] Idrisov Denis R. 009
 // [2021y-03m-04d][20:27:52] Idrisov Denis R. 010
 // [2021y-03m-05d][23:19:34] Idrisov Denis R. 011
+// [2021y-03m-06d][02:26:57] Idrisov Denis R. 012 PRE
 #pragma once
 #ifndef dTOOLS_CONFBUILD_USED_
-#define dTOOLS_CONFBUILD_USED_ 011
+#define dTOOLS_CONFBUILD_USED_ 012 PRE
 //==============================================================================
 //==============================================================================
 
@@ -50,7 +51,7 @@
 
 #define dVERSION_MAJOR      0
 #define dVERSION_MINOR      1
-#define dVERSION_PATCH      1
+#define dVERSION_PATCH      2
 
 #define dSTRINGIZE(...) #__VA_ARGS__
 #define dSSTRINGIZE(x) dSTRINGIZE(x)
