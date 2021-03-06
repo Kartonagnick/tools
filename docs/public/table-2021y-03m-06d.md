@@ -11,7 +11,7 @@
 [E1]: ../images/nodata.png    "2021y-03m-06d"
 [N1]: ../images/na.png        "2021y-03m-06d"
 
-version 0.1.2  ![P1]
+version 0.1.2  
 
 | **ID** | **компоненты**      |  mingw810   |  mingw730   |  msvc720    |  
 |:------:|:-------------------:|:-----------:|:-----------:|:-----------:|  
@@ -98,6 +98,7 @@ version 0.1.2  ![P1]
 [13]: #hash_combine   "умеет комбинировать несколько хэшей"  
 [14]: #random         "генератор случайных чисел. начиная с msvc2015 - thread-safe"  
 [15]: #utf8           "преобразование utf8 <--> wchar_t"  
+[16]: #conv           "преобразование char <--> wchar_t"  
 
 ## synch
 примитив синхронизации (критическая секция)  
@@ -133,6 +134,27 @@ decltype(auto) convert_to(s&& src);
 ```
 функция позволяет получить результат указанного типа.
 
+
+## conv
+преобразование между char <--> wchar_t  
+работает с любыми строковыми типами, образованными от `char` или `wchar_t`
+
+синопсис:
+``` 
+// wchar_t --> string
+// char -----> wstring                          
+auto convert(const t& src);
+```
+
+начиная с++11 добавлена функция:
+```                           
+// wchart_t, wchar_t ---> reference
+// wchart_t, char ------> wstring
+// chart, wchar_t ------> string
+template<class ch, class s>
+decltype(auto) convert_to(s&& src);
+```
+функция позволяет получить результат указанного типа.
 
 
 
