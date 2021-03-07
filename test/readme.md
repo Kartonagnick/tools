@@ -65,6 +65,7 @@ test-600-others      тесты мелких инструментов:
     - [x] hash\combine  
     - [x] hash\accum  
     - [x] hash\hash  
+  - [x] seh  
 
 
 test-700-thread      тесты модуля работы с потоками.  
