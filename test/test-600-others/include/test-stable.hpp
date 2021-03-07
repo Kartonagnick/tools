@@ -26,6 +26,7 @@
     #define TEST_TOOLS_HASH                                 // ready!
     #define TEST_TOOLS_UTF8                                 // ready!
     #define TEST_TOOLS_CONV                                 // ready!
+    #define TEST_TOOLS_SEH                                  // ready!
 //==============================================================================
 //==============================================================================
 
