@@ -2,12 +2,15 @@
 //================================================================================
 //================================================================================
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) || defined(__MINGW__) || defined(__MINGW32__)
 
 #include <tools/assert.hpp>
 #include <tools/windows.hpp>
 
-#pragma comment(lib, "crypt32.lib")
+#ifdef _MSC_VER
+    #pragma comment(lib, "crypt32.lib")
+#endif
+
 #include <WTypes.h>
 #include <Wincrypt.h>
 
@@ -58,13 +61,15 @@ namespace
 
     vecbyte strHex2bytes(const str_t& data)
     {
+        typedef str_t::const_iterator it;
         vecbyte vb(data.size() / 2);
         for(size_t i = 0, e = vb.size(); i != e; ++i)
         {
-            const str_t str(
-                data.begin() + 2 * i,  
-                data.begin() + 2 * i + 2
-            );
+            dASSERT(2 * i < INT_MAX);
+            const int n = static_cast<int>(2 * i);
+            const it a = data.begin() + n;
+            const it b = a + 2;
+            const str_t str(a, b);
 
             char* p;
             const long v = strtol(str.c_str(), &p, 16);
@@ -110,9 +115,9 @@ namespace tools
         if(src.empty() || access.empty())
             return "";
 
-        ::DATA_BLOB data_out  = {0};
-        ::DATA_BLOB data_in   = {0};
-        ::DATA_BLOB data_pass = {0};
+        ::DATA_BLOB data_out  = {};
+        ::DATA_BLOB data_in   = {};
+        ::DATA_BLOB data_pass = {};
 
         str2blob(src   , data_in  );
         str2blob(access, data_pass);
@@ -183,7 +188,7 @@ namespace tools
 
 //================================================================================
 //================================================================================
-#endif // !_MSC_VER
+#endif // !defined(_MSC_VER) || defined(__MINGW__) || defined(__MINGW32__)
 
 
 #if 0
