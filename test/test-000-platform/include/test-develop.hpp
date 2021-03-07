@@ -29,6 +29,8 @@
     #define TEST_TOOLS_FEATURE_CPP17                        // ready
     #define TEST_TOOLS_FEATURE_ENUM                         // ready
     #define TEST_TOOLS_FEATURE_HASH                         // ready
+
+    #define TEST_TOOLS_FEATURE_HAS_EMPLACE                  // in progress...
 //==============================================================================
 //==============================================================================
 // in progress...
