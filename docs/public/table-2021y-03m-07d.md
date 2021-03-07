@@ -1,17 +1,17 @@
 
 [![logo](../logo.png)](../home.md "for developers") 
 
-[L1]: ../images/limited-well.png   "2021y-03m-06d"
-[B1]: ../images/limited-bad.png    "2021y-03m-06d"
-[F1]: ../images/limited-fail.png   "2021y-03m-06d"
+[L1]: ../images/limited-well.png   "2021y-03m-07d"
+[B1]: ../images/limited-bad.png    "2021y-03m-07d"
+[F1]: ../images/limited-fail.png   "2021y-03m-07d"
 
-[P1]: ../images/progress.png  "2021y-03m-06d"
-[X1]: ../images/failed.png    "2021y-03m-06d"
-[V1]: ../images/success.png   "2021y-03m-06d"
-[E1]: ../images/nodata.png    "2021y-03m-06d"
-[N1]: ../images/na.png        "2021y-03m-06d"
+[P1]: ../images/progress.png  "2021y-03m-07d"
+[X1]: ../images/failed.png    "2021y-03m-07d"
+[V1]: ../images/success.png   "2021y-03m-07d"
+[E1]: ../images/nodata.png    "2021y-03m-07d"
+[N1]: ../images/na.png        "2021y-03m-07d"
 
-version 0.1.3  ![P1]
+version 0.1.3
 
 | **ID** | **компоненты**      |  mingw810   |  mingw730   |  msvc720    |  
 |:------:|:-------------------:|:-----------:|:-----------:|:-----------:|  
