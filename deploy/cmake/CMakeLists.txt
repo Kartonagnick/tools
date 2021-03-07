@@ -1,6 +1,7 @@
 
 # 2021y-02m-12d. WorkSpace project.
 # 2021y-02m-20d. WorkSpace project.
+# 2021y-03m-05d. WorkSpace project.
 ################################################################################
 ################################################################################
 
@@ -15,7 +16,12 @@ project(${gNAME_PROJECT})
 ################################################################################
 ################################################################################
 
-make_target()
+if(MINGW)
+    make_target(DEPENDENCIES "crypt32")
+else()
+    make_target()
+endif()
+
 make_target(PATH_TO_SOURCES "test/test-modern")
 make_target(PATH_TO_SOURCES "test/test-000-platform")
 make_target(PATH_TO_SOURCES "test/test-600-others")
