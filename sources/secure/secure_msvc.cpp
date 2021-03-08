@@ -40,7 +40,7 @@ namespace
     void str2blob(const str_t& src, ::DATA_BLOB& blob)
     {
         dASSERT(!src.empty());
-        byte* data  = const_cast<byte*>(
+        byte* data = const_cast<byte*>(
             reinterpret_cast<const byte*>(&src[0])
         );
         const size_t len = src.length() + 1;
@@ -72,7 +72,7 @@ namespace
             const str_t str(a, b);
 
             char* p;
-            const long v = strtol(str.c_str(), &p, 16);
+            const long v = ::strtol(str.c_str(), &p, 16);
             dASSERT(p);
 
             dASSERT(v <= UCHAR_MAX);
@@ -110,7 +110,7 @@ namespace
 
 namespace tools
 {
-    str_t encrypt(const str_t& src, const str_t &access)
+    str_t encrypt(const str_t& src, const str_t& access)
     {
         if(src.empty() || access.empty())
             return "";
@@ -135,13 +135,23 @@ namespace tools
         ) == TRUE;
 
         if(!success)
-            return "";
+            return str_t();
 
         vecbyte vb;
-        vb.assign(data_out.pbData, data_out.pbData + data_out.cbData);
-
-        const str_t result = toStrHex(vb);
+        try
+        {
+            vb.assign(data_out.pbData, data_out.pbData + data_out.cbData);
+        }
+        catch (const std::exception&)
+        {
+            dASSERT(false && "encrypt(std::exception)");
+        }
+        catch (...)
+        {
+            dASSERT(false && "encrypt(seh-exception)");
+        }
         ::LocalFree(data_out.pbData);
+        const str_t result = toStrHex(vb);
         return result;
     }
 
@@ -170,9 +180,22 @@ namespace tools
         ) == TRUE;
 
         if(!success)
-            return "";
+            return str_t();
 
-        str_t result = toString(data_out);
+        str_t result;
+        try
+        {
+            result = toString(data_out);
+        }
+        catch (const std::exception&)
+        {
+            dASSERT(false && "decrypt(std::exception)");
+        }
+        catch (...)
+        {
+            dASSERT(false && "decrypt(seh-exception)");
+        }
+
         ::LocalFree(data_out.pbData);
 
         if (!result.empty())
