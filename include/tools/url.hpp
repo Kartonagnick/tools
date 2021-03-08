@@ -10,7 +10,7 @@
 
 namespace tools
 {
-    ::std::string url(const ::std::string& url);
+    ::std::string url(const ::std::string& request);
 
 } // namespace tools
 
