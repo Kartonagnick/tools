@@ -5,6 +5,8 @@ unit tests
 Зарезервированные имена юнит-тестов.  
 
 test-000-platform    тесты свойств платформы.  
+  - [x] макросы версии 107  
+    - [x] dHAS_EMPLACE  
   - [x] макросы версии 106  
     - [x] dTHREAD_LOCAL_EXTENSION  
     - [x] dHAS_THREAD_LOCAL  
