@@ -2,7 +2,7 @@
 // [2021y-02m-05d][18:41:19] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 106
+#define dTOOLS_FEATURES_USED_ 107
 
 //==============================================================================
 //=== dMESSAGE =================================================================

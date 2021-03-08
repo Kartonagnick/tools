@@ -66,7 +66,7 @@ test-600-others      тесты мелких инструментов:
     - [x] hash\accum  
     - [x] hash\hash  
   - [x] seh  
-
+  - [x] marker  
 
 test-700-thread      тесты модуля работы с потоками.  
 test-800-time        тесты модуля для работы со временем.  
