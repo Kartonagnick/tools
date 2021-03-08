@@ -59,8 +59,7 @@ namespace tools
             #ifdef dHAS_CPP11
                 using base::base;
             #else
-                template<class t>
-                exception(const t& reason)
+                template<class t> exception(const t& reason)
                     : base(reason)
                 {}
             #endif

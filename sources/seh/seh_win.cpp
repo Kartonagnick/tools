@@ -24,8 +24,10 @@ namespace tools
         {
             typedef ::_se_translator_function
                 func_t;
+
             func_t ptr 
                 = static_cast<func_t>(this->m_agent);
+
             ::_set_se_translator(ptr); 
         }
 
