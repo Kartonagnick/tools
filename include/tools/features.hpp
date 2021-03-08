@@ -1,4 +1,3 @@
-
 // [2021y-02m-05d][18:41:19] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
