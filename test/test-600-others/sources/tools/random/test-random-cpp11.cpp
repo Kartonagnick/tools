@@ -10,6 +10,7 @@
 
 #include <tools/random.hpp>
 #include <string>
+#include <atomic>
 #include <list>
 
 #define dTEST_COMPONENT tools
@@ -21,7 +22,27 @@ namespace me = ::tools;
 //=== TDD ======================================================================
 namespace 
 {
-    const size_t count = 1000;
+    #ifdef INCLUDE_LONG_LONG_TESTS
+        size_t g_total = 1000;
+        size_t g_count = 1000;
+    #elif defined (INCLUDE_LONG_TESTS)
+        size_t g_total = 500;
+        size_t g_count = 500;
+    #else
+        size_t g_total = 50;
+        size_t g_count = 50;
+    #endif
+
+    std::atomic_size_t start = 0;
+    size_t total = g_total;
+    size_t count = g_count;
+
+    void prepare()
+    {
+        total = testing::stress ? g_total : 10;
+        count = testing::stress ? g_count : 10;
+        start = 0;
+    }
 
     template<class T1, class T2> 
     void check_random(T1 a, T2 b) dNOEXCEPT
@@ -45,6 +66,12 @@ namespace
 
     void test_functionality()
     {
+        ++start;
+        while (start != 10)
+            ::std::this_thread::sleep_for(
+                ::std::chrono::milliseconds(10)
+            );
+
         const int arr[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         check_random(-1000, 1000 );
         check_random(0u   , 1000u);
@@ -60,16 +87,11 @@ namespace
 
 TEST_COMPONENT(000)
 {
-    #ifdef INCLUDE_LONG_LONG_TESTS
-        const size_t total = 1000;
-    #elif defined (INCLUDE_LONG_TESTS)
-        const size_t total = 500;
-    #else
-        const size_t total = 50;
-    #endif
+    prepare();
 
     for (size_t x = 0; x != total; ++x)
     {
+        start = 0;
         std::vector<std::thread> vec;
 
         for (size_t i = 0; i != 10; ++i)

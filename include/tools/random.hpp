@@ -178,3 +178,6 @@ namespace tools
 //==============================================================================
 
 #endif // !dTOOLS_RANDOM_USED_
+
+// float r3 = LO + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(HI-LO)));
+// srand (static_cast <unsigned> (time(0)));
