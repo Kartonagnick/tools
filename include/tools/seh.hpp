@@ -1,4 +1,5 @@
 // [2019y-01m-24d][19:22:08] Idrisov Denis R
+// [2021y-03m-08d][19:22:08] Idrisov Denis R
 //==============================================================================
 //==============================================================================
 
@@ -47,6 +48,11 @@
 //==============================================================================
 //==============================================================================
 
+#ifdef _MSC_VER
+    struct _EXCEPTION_POINTERS;
+    typedef void (__cdecl *_se_translator_function)(unsigned int, struct _EXCEPTION_POINTERS*);
+#endif
+
 namespace tools
 {
     namespace seh
@@ -67,12 +73,18 @@ namespace tools
 
         class guard
         {
+            #ifdef _MSC_VER
+            typedef ::_se_translator_function
+                agent_t;
+            #else
+            typedef void* agent_t;
+            #endif
         public:
             dNOCOPYABLE(guard);
             guard() dNOEXCEPT;
            ~guard();
         private:
-            void* m_agent;
+            agent_t m_agent;
         };
 
     } // namespace seh 

@@ -21,8 +21,7 @@ if(MINGW)
         DEPENDENCIES 
             "crypt32"  # secure
             "urlmon"   # url
-            "psapi"    # seh
-   )
+    )
 else()
     make_target()
 endif()

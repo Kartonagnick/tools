@@ -23,14 +23,11 @@ namespace
     const size_t count = 1000;
 
     template<class T1, class T2> 
-    void check_random(T1&& a, T2&& b) dNOEXCEPT
+    void check_random(T1 a, T2 b) dNOEXCEPT
     {
         for(size_t n = 0; n < count; ++n)
         {
-            const auto re = me::random(
-                ::std::forward<T1>(a), 
-                ::std::forward<T1>(b)
-            );
+            const auto re = me::random(a, b);
             ASSERT_TRUE(re >= a && re <= b);
         }
     }
@@ -46,9 +43,9 @@ namespace
     }
 
     template<class T1, class T2>
-    void check_death_random(T1&& a, T2&& b) dNOEXCEPT
+    void check_death_random(T1 a, T2 b) dNOEXCEPT
     {
-        ASSERT_DEATH_DEBUG(me::random(a,b));
+        ASSERT_DEATH_DEBUG(me::random(a, b));
         (void) a;
         (void) b;
     }
