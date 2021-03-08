@@ -23,6 +23,7 @@ typedef ::std::string
 namespace
 {
     #if defined(_MSC_VER) && _MSC_VER <= 1600
+    // #pragma message("build for msvc2010 (or older)")
 
     template<bool> 
     unsigned long adopt_(char*& next, const unsigned uval) dNOEXCEPT;
@@ -133,7 +134,7 @@ namespace tools
         str_t get_last_error(const ::DWORD error_id)
         {
             if (error_id == 0) 
-                return ""; 
+                return str_t(); 
 
             dSTATIC_ASSERT(
                 sizeof(int) == sizeof(::DWORD),
@@ -152,9 +153,20 @@ namespace tools
                 dNULL_PTR
             );
 
-            const str_t message(buf, size);
+            str_t message;
+            try
+            {
+                message.assign(buf, size);
+            }
+            catch (const ::std::exception&)
+            {
+                dASSERT(false && "get_last_error(std::exception)");
+            }
+            catch (...)
+            {
+                dASSERT(false && "get_last_error(seh-exception)");
+            }
             ::LocalFree(buf);
-
             const str_t sid = int_to_string_(error_id);
             return  "(" + sid + "): " + message;
         }
@@ -162,7 +174,7 @@ namespace tools
         str_t get_last_error(const int errorId)
         {
             if (errorId == 0) 
-                return ""; 
+                return str_t(); 
 
             dSTATIC_ASSERT(
                 sizeof(int) == sizeof(::DWORD),

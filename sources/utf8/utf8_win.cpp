@@ -1,3 +1,5 @@
+// [2020y-12m-01d][14:06:17] Idrisov Denis R.
+// [2021y-03m-05d][20:25:47] Idrisov Denis R.
 
 #ifdef _WIN32
 
@@ -51,7 +53,7 @@ namespace tools
                 NULL, 0, NULL, NULL
             );
 
-            assert(size_needed > 0);
+            dASSERT(size_needed > 0);
             const size_t cnt 
                 = static_cast<size_t>(size_needed);
             ::std::string strTo(cnt, 0);

@@ -1,4 +1,3 @@
-
 // [2021y-02m-28d][18:05:26] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 

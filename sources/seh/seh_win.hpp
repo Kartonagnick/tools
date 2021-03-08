@@ -67,7 +67,6 @@ namespace tools
                 ::PVOID& address
                     = frame.ExceptionRecord->ExceptionAddress;
 
-
                 ::ULONG_PTR* info
                     = frame.ExceptionRecord->ExceptionInformation;
 

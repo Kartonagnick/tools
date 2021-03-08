@@ -23,7 +23,7 @@ namespace tools
             dASSERT(length <= ::wcslen(s));
             const size_t len = length + 1;
 
-            ::std::string result(256, '\0');
+            ::std::string result(len, '\0');
 
             #if 0
             //TODO: check posix version
@@ -33,7 +33,8 @@ namespace tools
 
             size_t count = 0;
             const ::errno_t err
-                = ::wcstombs_s(&count, &result[0], 256, s, len * sizeof(wchar_t));
+                = ::wcstombs_s(&count, &result[0], len, s, length);
+
             dASSERT(err == 0);
             (void) err;
 
@@ -50,7 +51,7 @@ namespace tools
             return ::tools::multibyte::convert(s, len);
         }
 
-        ::std::string convert(const std::wstring& s)
+        ::std::string convert(const ::std::wstring& s)
         {
             return ::tools::multibyte::convert(
                 s.c_str(), s.length()
@@ -94,7 +95,7 @@ namespace tools
             return ::tools::multibyte::convert(s, len);
         }
 
-        ::std::wstring convert(const std::string& s)
+        ::std::wstring convert(const ::std::string& s)
         {
             return ::tools::multibyte::convert(
                 s.c_str(), s.length()

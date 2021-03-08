@@ -1,4 +1,5 @@
 // [2019y-01m-24d][19:22:08] Idrisov Denis R
+// [2021y-03m-08d][19:22:08] Idrisov Denis R
 //==============================================================================
 //==============================================================================
 
@@ -22,11 +23,7 @@ namespace tools
 
         guard::~guard() 
         {
-            typedef ::_se_translator_function
-                func_t;
-            func_t ptr 
-                = static_cast<func_t>(this->m_agent);
-            ::_set_se_translator(ptr); 
+            ::_set_se_translator(this->m_agent);
         }
 
     } // namespace seh

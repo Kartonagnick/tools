@@ -1,10 +1,11 @@
 
 // [2019y-10m-24d][19:22:08] Idrisov Denis R.
 // [2021y-03m-04d][01:06:10] Idrisov Denis R.
+// [2021y-03m-08d][22:55:41] Idrisov Denis R.
 #pragma once
 
 #ifndef dTOOLS_RANDOM_USED_ 
-#define dTOOLS_RANDOM_USED_ 100
+#define dTOOLS_RANDOM_USED_ 101
 
 #ifndef dHAS_CHRONO
     #error expected msvc2012 or newest
@@ -12,9 +13,15 @@
 
 #include <tools/features.hpp>
 #include <type_traits>
+#include <exception>
 #include <cassert>
 #include <random>
 #include <chrono>
+
+#ifndef dHAS_THREAD_LOCAL
+    #include <tools/synch.hpp>
+#endif
+
 //==============================================================================
 //==============================================================================
 namespace tools
@@ -31,9 +38,9 @@ namespace tools
     namespace detail_random
     {
         #ifdef dHAS_THREAD_LOCAL
-            #define dTHREAD_SAFE thread_local
+            #define dTHREAD_SAFE_ thread_local
         #else
-            #define dTHREAD_SAFE 
+            #define dTHREAD_SAFE_ 
         #endif
 
         inline ::std::default_random_engine& rnd_() dNOEXCEPT
@@ -41,7 +48,8 @@ namespace tools
             typedef ::std::chrono::steady_clock
                 clock_type;
 
-            dTHREAD_SAFE static ::std::default_random_engine engine(
+            dTHREAD_SAFE_ static 
+            ::std::default_random_engine engine(
                 static_cast<unsigned>(
                     clock_type::now().time_since_epoch().count()
                 )
@@ -49,9 +57,9 @@ namespace tools
             return engine;
         }
 
-        #define dFOR_INTEGER_                    \
-            typename ::std::enable_if<           \
-                ::std::is_integral<T>::value, T  \
+        #define dFOR_INTEGER_                   \
+            typename ::std::enable_if<          \
+                ::std::is_integral<T>::value, T \
             >::type
 
         #define dFOR_FLOATING_                        \
@@ -60,27 +68,68 @@ namespace tools
             >::type
 
         template<class T>
-        dFOR_INTEGER_ random_(const T& a, const T& b) dNOEXCEPT
+        inline dFOR_INTEGER_ random_(const T& a, const T& b) dNOEXCEPT
         {
-            assert(a <= b);
-            namespace detail = ::tools::detail_random;
-            ::std::uniform_int_distribution<T> distribution(a, b);
-            return distribution(detail::rnd_());
+            try
+            {
+                assert(a <= b);
+                ::std::uniform_int_distribution<T> 
+                    calculation(a, b);
+
+                #ifndef dHAS_THREAD_LOCAL
+                static ::tools::synch mut;
+                ::tools::synch_lock<::tools::synch> 
+                    lock(mut);
+                #endif
+
+                namespace detail = ::tools::detail_random;
+                return calculation(detail::rnd_());
+            }
+            catch (const ::std::exception&)
+            {
+                dASSERT(false && "[0] tools::random_(std::exception)");
+            }
+            catch (...)
+            {
+                dASSERT(false && "[0] tools::random_(...)");
+            }
+            return (a + b) / 2;
         }
 
         template<class T>
-        dFOR_FLOATING_ random_(const T& a, const T& b) dNOEXCEPT
+        inline dFOR_FLOATING_ random_(const T& a, const T& b) dNOEXCEPT
         {
-            assert(a <= b);
-            namespace detail = ::tools::detail_random;
-            ::std::uniform_real_distribution<T> distribution(a, b);
-            return distribution(detail::rnd_());
+            try
+            {
+                assert(a <= b);
+                ::std::uniform_real_distribution<T> 
+                    calculation(a, b);
+
+                #ifndef dHAS_THREAD_LOCAL
+                static ::tools::synch mut;
+                ::tools::synch_lock<::tools::synch> 
+                    lock(mut);
+                #endif
+
+                namespace detail = ::tools::detail_random;
+                return calculation(detail::rnd_());
+            }
+            catch (const ::std::exception&)
+            {
+                dASSERT(false && "[1] tools::random_(std::exception)");
+            }
+            catch (...)
+            {
+                dASSERT(false && "[1] tools::random_(...)");
+            }
+            return (a + b) / 2.0;
         }
 
         #undef dFOR_FLOATING_
         #undef dFOR_INTEGER_
+        #undef dTHREAD_SAFE_
 
-    }//namespace detail_random
+    } // namespace detail_random
 
     inline bool random(const bool a, const bool b) dNOEXCEPT
     {

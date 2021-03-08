@@ -17,7 +17,11 @@ project(${gNAME_PROJECT})
 ################################################################################
 
 if(MINGW)
-    make_target(DEPENDENCIES "crypt32" "urlmon")
+    make_target(
+        DEPENDENCIES 
+            "crypt32"  # secure
+            "urlmon"   # url
+    )
 else()
     make_target()
 endif()
