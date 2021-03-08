@@ -2,7 +2,7 @@
 // [2021y-02m-05d][18:41:19] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 106
+#define dTOOLS_FEATURES_USED_ 107
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -68,10 +68,11 @@
     // #pragma message("build for msvc2012 (or newer) or other compiler")
     #define dHAS_RVALUE_REFERENCES 1
     #define dHAS_ENUM_CLASS 1
+    #define dHAS_EMPLACE 1    
     #define dHAS_CHRONO 1
     #define dHAS_ATOMIC 1
 #endif
-    
+
 //==============================================================================
 //=== dHAS_CPP11 ===============================================================
 

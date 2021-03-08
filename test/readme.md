@@ -5,6 +5,8 @@ unit tests
 Зарезервированные имена юнит-тестов.  
 
 test-000-platform    тесты свойств платформы.  
+  - [x] макросы версии 107  
+    - [x] dHAS_EMPLACE  
   - [x] макросы версии 106  
     - [x] dTHREAD_LOCAL_EXTENSION  
     - [x] dHAS_THREAD_LOCAL  
@@ -66,7 +68,7 @@ test-600-others      тесты мелких инструментов:
     - [x] hash\accum  
     - [x] hash\hash  
   - [x] seh  
-
+  - [x] marker  
 
 test-700-thread      тесты модуля работы с потоками.  
 test-800-time        тесты модуля для работы со временем.  
