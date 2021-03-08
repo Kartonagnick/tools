@@ -11,6 +11,7 @@
 Разработка
 ----------
 1) [Таблица](public/table.md)  
-2) [История](history.md)  
+2) [Корреляции](dev/correlations.md)  
+3) [История](history.md)  
 
 
