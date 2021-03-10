@@ -1,7 +1,8 @@
 // [2021y-02m-05d][18:41:19] Idrisov Denis R.
+// [2021y-03m-10d][23:23:35] Idrisov Denis R. 108
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 107
+#define dTOOLS_FEATURES_USED_ 108
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -39,6 +40,8 @@
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1600
     // #pragma message("build for msvc2010 (or newer)")
+    #define dHAS_CSTDINT 1
+
     #define dHAS_STATIC_ASSERT 1
 
     #define dSTATIC_ASSERT(expr, msg) \
@@ -85,6 +88,12 @@
     #define dHAS_CPP11 1
 #else 
     #define dCONSTEXPR_CPP11 inline
+#endif
+
+#ifdef dHAS_CONSTEXPR_CPP11
+    #define dCONSTANT constexpr
+#else
+    #define dCONSTANT const
 #endif
 
 //==============================================================================
