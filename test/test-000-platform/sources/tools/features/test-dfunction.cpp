@@ -20,14 +20,7 @@
 //==============================================================================
 //==============================================================================
 
-#if defined(_MSC_VER) && defined(dHAS_CPP11)
-    #define dCONSTANT dCONSTEXPR_CPP11
-#else
-    // __PRETTY_FUNCTION__ is not constant of compile time
-    #define dCONSTANT inline
-#endif
-
-static dCONSTANT const char* dfunction() dNOEXCEPT
+static dCONSTEXPR_CPP11 const char* dfunction() dNOEXCEPT
 {
     return dFUNCTION;
 }
