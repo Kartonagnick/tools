@@ -31,6 +31,7 @@
     #define TEST_TOOLS_FEATURE_CPP17                        // ready
     #define TEST_TOOLS_FEATURE_ENUM                         // ready
     #define TEST_TOOLS_FEATURE_HASH                         // ready
+    #define TEST_TOOLS_FEATURE_CSTDINT                      // ready
 //==============================================================================
 //==============================================================================
 
