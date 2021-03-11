@@ -17,7 +17,7 @@ dMESSAGE("[test] tools: enabled -> dHAS_CONSTEXPR_CPP11")
 #define dTEST_METHOD can_numeric_cast
 #define dTEST_TAG cpp11
 
-#include <tools/cast.hpp>
+#include <tools/numeric_cast.hpp>
 #include <tools/types/fixed.hpp>
 #include "test-staff.hpp"
 

@@ -1,4 +1,3 @@
-
 // [2020y-09-25d][20:13:18] Idrisov Denis R.
 // [2020y-12-01d][14:06:17] Idrisov Denis R.
 // [2021y-02-20d][18:40:18] Idrisov Denis R.
@@ -28,7 +27,10 @@ namespace tools
             namespace my = ::tools;
         #endif
 
-        template<class a, class b, bool> struct select_big_
+        template<class a, class b, int> 
+            struct select_big_;
+
+        template<class a, class b, int> struct select_big_
         {
             enum { v = sizeof(a) >= sizeof(b) };
             typedef my::conditional<v, a, b> x;
@@ -61,35 +63,45 @@ namespace tools
             return static_cast<r>(tools::limit<t>::min_value);
         }
 
+        template<class ret_type, class from_type>
+        struct adapt
+        {
+            #ifdef dHAS_ENUM_CLASS
+                typedef typename
+                my::remove_cv<ret_type>::type
+                    ret_t;
+
+                typedef typename
+                my::remove_cv<from_type>::type
+                    from_t;
+
+                typedef typename
+                tools::type_of_enum<ret_t>::type
+                    ret;
+
+                typedef typename
+                tools::type_of_enum<from_t>::type
+                    from;
+            #else
+                typedef typename
+                my::remove_cv<ret_type>::type
+                    ret;
+
+                typedef typename
+                my::remove_cv<from_type>::type
+                    from;
+            #endif
+        };
 
         template<class ret_type, class from_type>
         class help
         {
-            #ifdef dHAS_ENUM_CLASS
-                typedef typename 
-                my::remove_cv<ret_type>::type 
-                    ret_t;
-
-                typedef typename 
-                my::remove_cv<from_type>::type
-                    from_t;
-
-                typedef typename 
-                tools::type_of_enum<ret_t>::type
-                    ret;
-
-                typedef typename 
-                tools::type_of_enum<from_t>::type
-                    from;
-            #else
-                typedef typename 
-                my::remove_cv<ret_type>::type 
-                    ret;
-
-                typedef typename 
-                my::remove_cv<from_type>::type
-                    from;
-            #endif
+            typedef adapt<ret_type, from_type>
+                adaptor;
+            typedef typename adaptor::ret
+                ret;
+            typedef typename adaptor::from
+                from;
 
             enum { a = my::is_floating_point<from>::value };
             enum { b = my::is_floating_point<ret>::value  };
@@ -148,7 +160,8 @@ namespace tools
         template<> struct agent<0>
         {
             template<class ret, class from>
-            static dCONSTEXPR_CPP11 bool can(const from) dNOEXCEPT
+            static dCONSTEXPR_CPP11
+            bool can(const from) dNOEXCEPT
                 { return sizeof(ret) >= sizeof(from); }
         };
 
@@ -156,26 +169,28 @@ namespace tools
         template<> struct agent<1>
         {
             template<class ret, class from>
-            static dCONSTEXPR_CPP11 bool can(const from) dNOEXCEPT
+            static dCONSTEXPR_CPP11
+            bool can(const from) dNOEXCEPT
                 { return true; }
         };
 
-        // --- small ---> big       (unsigned)
+        // --- small -> big       (unsigned)
         template<> struct agent<2>
         {
             template<class ret, class from>
-            static dCONSTEXPR_CPP11 bool can(const from) dNOEXCEPT
+            static dCONSTEXPR_CPP11
+            bool can(const from) dNOEXCEPT
                 { return true; }
         };
 
-        // --- big ---> small       (unsigned)
+        // --- big -> small       (unsigned)
         template<> struct agent<3>
         {
             template<class ret, class from>
-            static dCONSTEXPR_CPP11 bool can(const from v) dNOEXCEPT
+            static dCONSTEXPR_CPP11
+            bool can(const from v) dNOEXCEPT
             {
                 return max_value<from,ret>() >= v;
-                //return static_cast<from>(limit<ret>::max_value) >= v;
             }
         };
 
@@ -188,22 +203,27 @@ namespace tools
                 typedef select_big<ret, from> x;
                 typedef typename x::type big;
                 return max_value<big,ret>() >= static_cast<big>(v);
-                //return static_cast<big>(limit<ret>::max_value) >= static_cast<big>(v);
             }
         };
 
-        // --- from(signed) to unsigned
+        template<class t>
+        dCONSTEXPR_CPP11
+        bool compare_bug(const t l, const t r) dNOEXCEPT
+            { return l >= r; }
+
+        // from(signed) to unsigned
         template<> struct agent<5>
         {
             template<class ret, class from>
-            static dCONSTEXPR_CPP11 bool can(const from v) dNOEXCEPT
+            static dCONSTEXPR_CPP11
+            bool can(const from v) dNOEXCEPT
             {
                 typedef select_big<ret, from> x;
                 typedef typename x::type big;
-
                 return v < 0 ? false:
-                    //max_value<big,ret>() >= static_cast<big>(v);
-                    static_cast<big>(limit<ret>::max_value) >= static_cast<big>(v);
+                    // mingw810: without this function
+                    // compiler generate warning
+                    compare_bug(max_value<big,ret>(), static_cast<big>(v));
             }
         };
 
@@ -211,16 +231,14 @@ namespace tools
         template<> struct agent<6>
         {
             template<class ret, class from>
-            static dCONSTEXPR_CPP11 bool can(const from v) dNOEXCEPT
+            static dCONSTEXPR_CPP11
+            bool can(const from v) dNOEXCEPT
             {
                 typedef select_big<ret, from> x;
                 typedef typename x::type big;
-
                 return
                     max_value<big,ret>() >= static_cast<big>(v) &&
                     min_value<big,ret>() <  static_cast<big>(v) ;
-                    //static_cast<big>(limit<ret>::max_value) >= static_cast<big>(v) &&
-                    //static_cast<big>(limit<ret>::min_value) < static_cast<big>(v);
             }
         };
 
@@ -231,33 +249,16 @@ namespace tools
     bool can_numeric_cast(const from v) dNOEXCEPT
     {
         namespace x = ::tools::detail_cast;
-
-        #ifdef dHAS_ENUM_CLASS
-            typedef typename remove_cv<ret>::type 
-                ret_ty;
-            typedef typename remove_cv<from>::type 
-                from_ty;
-
-            typedef typename 
-            tools::type_of_enum<ret_ty>::type
-                ret_t;
-
-            typedef typename 
-            tools::type_of_enum<from_ty>::type
-                from_t;
-        #else
-            typedef typename remove_cv<ret>::type 
-                ret_t;
-            typedef typename remove_cv<from>::type 
-                from_t;
-        #endif
-
-        typedef x::help<ret_t, from_t> 
+        typedef x::adapt<ret, from>
+            adaptor;
+        typedef typename adaptor::ret
+            ret_t;
+        typedef typename adaptor::from
+            from_t;
+        typedef x::help<ret_t, from_t>
             help;
-
         typedef x::agent<help::value> 
             agent;
-
         return agent::template can<ret_t, from_t>(
             static_cast<from_t>(v)
         );

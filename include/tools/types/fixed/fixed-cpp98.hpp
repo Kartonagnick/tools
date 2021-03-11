@@ -1,18 +1,9 @@
-// [2021y-03m-10d][12:44:35] Idrisov Denis R.
+// [2021y-03m-11d][10:15:38] Idrisov Denis R.
 #pragma once
-#ifndef dTOOLS_FIXED_USED_
-#define dTOOLS_FIXED_USED_ 100
+#ifndef dTOOLS_FIXED_CPP98_USED_
+#define dTOOLS_FIXED_CPP98_USED_ 100
 //==============================================================================
 //==============================================================================
-
-#if (defined(_MSC_VER) && _MSC_VER >= 1900) || __cplusplus >= 201103L
-    // #pragma message("build for msvc2015 (or newer) or other compiler")
-    #include <tools/types/fixed/fixed-cpp11.hpp>
-#else
-    #include <tools/types/fixed/fixed-cpp98.hpp>
-#endif
-
-#if 0
 
 #include <tools/features.hpp>
 
@@ -102,7 +93,6 @@ namespace tools
 
     #endif // !dHAS_CSTDINT
 
-
     #ifdef _MSC_VER
         #pragma warning( push )
         // warning C4480: nonstandard extension used: specifying underlying type for enum
@@ -114,32 +104,41 @@ namespace tools
     template<> struct map_signed<1>
     {
         typedef ::tools::int8_t type; 
-
-        static constexpr type minVal = INT8_MIN;
-
-        enum { min_value = INT8_MIN };
-        enum { max_value = INT8_MAX };
+        enum
+        { 
+            min_value = INT8_MIN,
+            max_value = INT8_MAX
+        };
     };
 
     template<> struct map_signed<2>
     {
         typedef ::tools::int16_t type; 
-        enum { min_value = INT16_MIN };
-        enum { max_value = INT16_MAX };
+        enum
+        { 
+            min_value = INT16_MIN,
+            max_value = INT16_MAX
+        };
     };
 
     template<> struct map_signed<4>
     {
         typedef ::tools::int32_t type;
-        enum:__int32 { min_value = INT32_MIN };
-        enum:__int32 { max_value = INT32_MAX };
+        enum: type
+        { 
+            min_value = INT32_MIN,
+            max_value = INT32_MAX
+        };
     };
 
     template<> struct map_signed<8>
     {
         typedef ::tools::int64_t type; 
-        enum:__int64 { min_value = INT64_MIN };
-        enum:__int64 { max_value = INT64_MAX };
+        enum: type
+        { 
+            min_value = INT64_MIN,
+            max_value = INT64_MAX
+        };
     };
 
     template<size_t Size> struct map_unsigned;
@@ -147,29 +146,38 @@ namespace tools
     template<> struct map_unsigned<1>
     {
         typedef ::tools::uint8_t type; 
-        enum: unsigned { min_value = 0 };
-        enum: unsigned __int8 { max_value = UINT8_MAX };
+        enum: type
+        { 
+            min_value = 0,
+            max_value = UINT8_MAX
+        };
     };
 
     template<> struct map_unsigned<2>
     {
         typedef ::tools::uint16_t type;
-        enum: unsigned { min_value = 0 };
-        enum: unsigned __int16 { max_value = UINT16_MAX };
+        enum: type
+        { 
+            min_value = 0,
+            max_value = UINT16_MAX
+        };
     };
 
     template<> struct map_unsigned<4>
     {
         typedef ::tools::uint32_t type; 
-        enum: unsigned { min_value = 0 };
-        enum: unsigned __int32 { max_value = UINT32_MAX };
+        enum: type
+        { 
+            min_value = 0,
+            max_value = UINT32_MAX
+        };
     };
 
     template<> struct map_unsigned<8>
     {
         typedef ::tools::uint64_t type; 
-        enum: unsigned { min_value = 0 };
-        enum: unsigned __int64 { max_value = UINT64_MAX };
+        enum { min_value = 0 };
+        enum: type { max_value = UINT64_MAX };
     };
 
     #ifdef _MSC_VER
@@ -244,8 +252,6 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_LIMIT_USED_
 
-#endif
-
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_FIXED_USED_
+#endif // !dTOOLS_FIXED_CPP98_USED_
