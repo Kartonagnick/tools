@@ -68,7 +68,7 @@ version 0.1.9  ![P1]
 |  0020  | [url][20]           | [![V1]][20] | [![V1]][20] | [![V1]][20] |  
 |  0021  | [macro][21]         | [![V1]][21] | [![V1]][21] | [![V1]][21] |  
 |  0022  | [fixed][22]         | [![V1]][22] | [![V1]][22] | [![V1]][22] |  
-|  0023  | [numeric_cast][23]  | [![V1]][32] | [![V1]][23] | [![V1]][23] |  
+|  0023  | [numeric_cast][23]  | [![V1]][23] | [![V1]][23] | [![V1]][23] |  
 
 <br />
 <br />
@@ -146,16 +146,16 @@ version 0.1.9  ![P1]
 
 ## utf8
 преобразование между char <--> wchar_t  
-работает с любыми строковыми типами, образованными от `char` или `wchar_t`
+работает с любыми строковыми типами, образованными от `char` или `wchar_t`  
 
-синопсис:
+синопсис:  
 ``` 
 // wchar_t --> string
 // char -----> wstring                          
 auto convert(const t& src);
 ```
 
-начиная с++11 добавлена функция:
+начиная с++11 добавлена функция:  
 ```                           
 // wchart_t, wchar_t ---> reference
 // wchart_t, char ------> wstring
@@ -163,21 +163,21 @@ auto convert(const t& src);
 template<class ch, class s>
 decltype(auto) convert_to(s&& src);
 ```
-функция позволяет получить результат указанного типа.
+функция позволяет получить результат указанного типа.  
 
 
 ## conv
 преобразование между char <--> wchar_t  
-работает с любыми строковыми типами, образованными от `char` или `wchar_t`
+работает с любыми строковыми типами, образованными от `char` или `wchar_t`  
 
-синопсис:
+синопсис:  
 ``` 
 // wchar_t --> string
 // char -----> wstring                          
 auto convert(const t& src);
 ```
 
-начиная с++11 добавлена функция:
+начиная с++11 добавлена функция:  
 ```                           
 // wchart_t, wchar_t ---> reference
 // wchart_t, char ------> wstring
@@ -185,7 +185,29 @@ auto convert(const t& src);
 template<class ch, class s>
 decltype(auto) convert_to(s&& src);
 ```
-функция позволяет получить результат указанного типа.
+функция позволяет получить результат указанного типа.  
+
+## fixed
+ - предоставляет типы фиксированного размера  
+ - предоставляет лимиты мин/макс значений  
+
+ limit:  
+ - до msvc2015 использует enum  
+ - начиная с msvc2015 - поддержка constexpr  
+
+## numeric_cast
+возвращает true, если каст можно исполнить без потерь данных:  
+ - msvc2010: поддержка type_traits  
+ - msvc2012: поддержка enum  
+ - msvc2015:- поддержка constexpr  
+
+синопсис:  
+``` 
+template<class ret, class from>
+dCONSTEXPR_CPP11 dNODISCARD 
+bool can_numeric_cast(const from v) dNOEXCEPT
+```
+
 
 
 
