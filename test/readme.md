@@ -47,7 +47,17 @@ test-100-macro       тесты модуля препроцессорной ма
     - [x] количество поддерживаемых аргументов 7
 
 test-200-types       тесты модуля анализа типов.  
-  - [x] fixed  
+  - [x] fixed версии 100 
+  - [x] traits версии 1
+    - [x] is_same  
+    - [x] remove_cv  
+    - [x] is_signed  
+    - [x] is_floating_point  
+    - [x] is_integral  
+    - [x] conditional  
+    - [x] enable_if  
+    - [x] type_of_enum (msvc2012)  
+
 
 test-300-staff       тесты служебной библиотеки staff.  
 test-400-strlen      тесты функции вычисления длины строки.  
