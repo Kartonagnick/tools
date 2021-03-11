@@ -93,7 +93,7 @@ namespace tools
     template <class t> struct is_integral_
         { enum { value = 0 }; };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1600
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
     template <> struct is_integral_<char16_t>
         { enum { value = 1 }; };
 
