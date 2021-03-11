@@ -95,13 +95,13 @@ namespace tools
     template <class t> struct is_integral_
         { enum { value = 0 }; };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
+    #if !defined(_MSC_VER) || _MSC_VER >= 1900
     template <> struct is_integral_<char16_t>
         { enum { value = 1 }; };
 
     template <> struct is_integral_<char32_t>
         { enum { value = 1 }; };
-#endif
+    #endif
 
     template <> struct is_integral_<short>
         { enum { value = 1 }; };
