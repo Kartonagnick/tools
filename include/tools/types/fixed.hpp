@@ -86,12 +86,19 @@ namespace tools
         #define INT32_MAX        2147483647
         #define INT64_MAX        9223372036854775807
 
-        #define UINT8_MAX        0xffu
+        #define UINT8_MAX        0xff
         #define UINT16_MAX       0xffff
         #define UINT32_MAX       0xffffffff
         #define UINT64_MAX       0xffffffffffffffff
 
     #endif // !dHAS_CSTDINT
+
+
+    #ifdef _MSC_VER
+        #pragma warning( push )
+        // warning C4480: nonstandard extension used: specifying underlying type for enum
+        #pragma warning(disable : 4480)
+    #endif
 
     template<size_t Size> struct map_signed;
     
@@ -105,22 +112,16 @@ namespace tools
     template<> struct map_signed<2>
     {
         typedef ::tools::int16_t type; 
-        enum { min_value = INT16_MIN };
-        enum { max_value = INT16_MAX };
+        enum { min_value = type(INT16_MIN) };
+        enum { max_value = type(INT16_MAX) };
     };
 
     template<> struct map_signed<4>
     {
         typedef ::tools::int32_t type;
-        enum { min_value = INT32_MIN };
-        enum { max_value = INT32_MAX };
+        enum:__int32 { min_value = INT32_MIN };
+        enum:__int32 { max_value = INT32_MAX };
     };
-
-    #ifdef _MSC_VER
-        #pragma warning( push )
-        // warning C4480: nonstandard extension used: specifying underlying type for enum ''
-        #pragma warning(disable : 4480)
-    #endif
 
     template<> struct map_signed<8>
     {
@@ -134,37 +135,102 @@ namespace tools
     template<> struct map_unsigned<1>
     {
         typedef ::tools::uint8_t type; 
-        enum { min_value = 0   };
-        enum { max_value = UINT8_MAX };
+        enum: unsigned { min_value = 0 };
+        enum: unsigned __int8 { max_value = uint8_t(UINT8_MAX) };
     };
 
     template<> struct map_unsigned<2>
     {
         typedef ::tools::uint16_t type;
-        enum { min_value = 0   };
-        enum { max_value = UINT16_MAX };
+        enum: unsigned { min_value = 0 };
+        enum: unsigned __int16 { max_value = uint16_t(UINT16_MAX) };
     };
 
     template<> struct map_unsigned<4>
     {
         typedef ::tools::uint32_t type; 
-        enum { min_value = 0   };
-        enum { max_value = UINT32_MAX };
+        enum: unsigned { min_value = 0 };
+        enum: unsigned __int32 { max_value = uint32_t(UINT32_MAX) };
     };
 
     template<> struct map_unsigned<8>
     {
         typedef ::tools::uint64_t type; 
-        enum: unsigned  { min_value = 0 };
-        enum: unsigned __int64 { max_value = UINT64_MAX };
+        enum: unsigned { min_value = 0 };
+        enum: unsigned __int64 { max_value = uint64_t(UINT64_MAX) };
     };
 
     #ifdef _MSC_VER
         #pragma warning(pop)
     #endif
 
+    template<class t> struct limit_unsigned
+        : map_unsigned<sizeof(t)>
+    {};
+
+    template<class t> struct limit_signed
+        : map_signed<sizeof(t)>
+    {};
 
 } // namespace tools
+
+//==============================================================================
+//=== remove_cv ================================================================
+#ifndef dTOOLS_REMOVE_CV_USED_ 
+#define dTOOLS_REMOVE_CV_USED_ 1
+namespace tools
+{
+    template<class t> struct remove_cv                     
+        { typedef t type; };
+    template<class t> struct remove_cv <const t>           
+        { typedef t type; };
+    template<class t> struct remove_cv <volatile t>        
+        { typedef t type; };
+    template<class t> struct remove_cv <volatile  const t> 
+        { typedef t type; };
+
+} // namespace tools 
+#endif // !dTOOLS_REMOVE_CV_USED_
+
+//==============================================================================
+//=== is_signed ================================================================
+#ifndef dTOOLS_IS_SIGNED_USED_ 
+#define dTOOLS_IS_SIGNED_USED_ 1
+namespace tools
+{
+    template <class t> struct is_signed
+    {
+        typedef typename remove_cv<t>::type x;
+        enum { value = static_cast<x>(-1) < static_cast<x>(0) };
+    };
+    template <class t> struct is_unsigned
+    {
+        enum { value = !is_signed<t>::value };
+    };
+
+} // namespace tools 
+#endif // !dTOOLS_IS_SIGNED_USED_
+
+//==============================================================================
+//=== limit ====================================================================
+#ifndef dTOOLS_LIMIT_USED_ 
+#define dTOOLS_LIMIT_USED_ 1
+namespace tools
+{
+    template <class t, bool> struct limit_
+        : limit_signed<t>
+    {};
+
+    template <class t> struct limit_<t, false>
+        : limit_unsigned<t>
+    {};
+
+    template <class t> struct limit
+        : limit_<t, is_signed<t>::value>
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_LIMIT_USED_
 
 //==============================================================================
 //==============================================================================
