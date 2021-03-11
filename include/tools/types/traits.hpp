@@ -3,6 +3,8 @@
 #ifndef dTOOLS_TRAITS_USED_ 
 #define dTOOLS_TRAITS_USED_ 1
 
+#include <tools/features.hpp>
+
 //==============================================================================
 //=== is_same ==================================================================
 #ifndef dTOOLS_IS_SAME_USED_ 
@@ -165,29 +167,32 @@ namespace tools
 #endif // !dTOOLS_SELECT_USED_
 
 //================================================================================
-//================================================================================
+//=== type_of_enum ===============================================================
+#ifdef dHAS_ENUM_CLASS
 #ifndef dTOOLS_ENUM_TYPE_USED_ 
 #define dTOOLS_ENUM_TYPE_USED_ 1
 namespace tools
 {
-    namespace detail
+    template<class t, bool = ::std::is_enum<t>::value >
+    struct type_of_enum
     {
-        template<class t, bool = ::std::is_enum<t>::value >
-        struct type_of_enum
-            { using type = ::std::underlying_type_t<t>; };
-
-        template<class t>
-        struct type_of_enum<t, false>
-            { using type = t; };
-
-    } // namespace detail
+        typedef typename ::std::underlying_type<t>::type
+            type;
+    };
 
     template<class t> 
+    struct type_of_enum<t, false>
+        { typedef t type; };
+
+    #ifdef dHAS_USING_ALIAS
+    template<class t> 
     using type_of_enum_t
-        = typename ::tools::detail::type_of_enum<t>::type;
+        = typename ::tools::type_of_enum<t>::type;
+    #endif
 
 } // tools
 #endif // !dTOOLS_ENUM_TYPE_USED_
+#endif // !dHAS_ENUM_CLASS
 
 //==============================================================================
 //==============================================================================

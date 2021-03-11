@@ -28,10 +28,24 @@ namespace tools
             namespace my = ::tools;
         #endif
 
-        template<class a, class b> struct select_big
+        template<class a, class b, bool> struct select_big_
         {
             enum { v = sizeof(a) >= sizeof(b) };
             typedef my::conditional<v, a, b> x;
+            typedef typename x::type type;
+        };
+
+        template<class a, class b> struct select_big_<a,b,false>
+        {
+            enum { v = tools::is_unsigned<a>::value };
+            typedef my::conditional<v, a, b> x;
+            typedef typename x::type type;
+        };
+
+        template<class a, class b> struct select_big
+        {
+            enum { v = sizeof(a) != sizeof(b) };
+            typedef select_big_<a, b, v> x;
             typedef typename x::type type;
         };
 
@@ -39,19 +53,31 @@ namespace tools
         template<class ret_type, class from_type>
         class help
         {
-            typedef typename 
-            my::remove_cv<ret_type>::type 
-                ret_t;
+            #ifdef dHAS_ENUM_CLASS
+                typedef typename 
+                my::remove_cv<ret_type>::type 
+                    ret_t;
 
-            typedef typename 
-            my::remove_cv<from_type>::type
-                from_t;
+                typedef typename 
+                my::remove_cv<from_type>::type
+                    from_t;
 
-            typedef tools::type_of_enum_t<ret_t>
-                ret;
+                typedef typename 
+                tools::type_of_enum<ret_t>::type
+                    ret;
 
-            typedef tools::type_of_enum_t<from_t>
-                from;
+                typedef typename 
+                tools::type_of_enum<from_t>::type
+                    from;
+            #else
+                typedef typename 
+                my::remove_cv<ret_type>::type 
+                    ret;
+
+                typedef typename 
+                my::remove_cv<from_type>::type
+                    from;
+            #endif
 
             enum { a = my::is_floating_point<from>::value };
             enum { b = my::is_floating_point<ret>::value  };
@@ -188,16 +214,26 @@ namespace tools
     bool can_numeric_cast(const from v) dNOEXCEPT
     {
         namespace x = ::tools::detail_cast;
-        typedef typename remove_cv<ret>::type 
-            ret_ty;
-        typedef typename remove_cv<from>::type 
-            from_ty;
 
-        typedef tools::type_of_enum_t<ret_ty>
-            ret_t;
+        #ifdef dHAS_ENUM_CLASS
+            typedef typename remove_cv<ret>::type 
+                ret_ty;
+            typedef typename remove_cv<from>::type 
+                from_ty;
 
-        typedef tools::type_of_enum_t<from_ty>
-            from_t;
+            typedef typename 
+            tools::type_of_enum<ret_ty>::type
+                ret_t;
+
+            typedef typename 
+            tools::type_of_enum<from_ty>::type
+                from_t;
+        #else
+            typedef typename remove_cv<ret>::type 
+                ret_t;
+            typedef typename remove_cv<from>::type 
+                from_t;
+        #endif
 
         typedef x::help<ret_t, from_t> 
             help;

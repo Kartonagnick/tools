@@ -21,10 +21,12 @@ namespace me = ::tools;
 namespace
 {
     template<class ret, class from>
-    void test_can_cast(const char* msg, const from value, const bool etalon)
+    void test_can_cast(const char* msg, const from value,
+        const bool etalon)
     {
         dASSERT(msg);
-        const bool real = me::can_numeric_cast<ret>(value);
+        const bool real 
+            = me::can_numeric_cast<ret>(value);
         ASSERT_EQ(real, etalon)
             << msg << '\n'
             << "etalon = " << etalon << '\n'
@@ -214,8 +216,8 @@ TEST_COMPONENT(004)
 TEST_COMPONENT(005)
 {
     //const bool ok = me::can_numeric_cast<uint8_t>(int8_t(0));
-    const bool ok = me::can_numeric_cast<uint32_t>(int8_t(-1));
-    std::cout << ok << '\n';
+    //const bool ok = me::can_numeric_cast<uint32_t>(int8_t(-1));
+    //std::cout << ok << '\n';
 
 
     //test( uint8_t  , int8_t(0)    ,  true    );
@@ -477,35 +479,40 @@ TEST_COMPONENT(006)
 
 //=================================================================================
 //=== [enumerations types] ========================================================
+#ifdef dHAS_ENUM_CLASS
 TEST_COMPONENT(007)
 {
     enum class u_enum : unsigned char { eONE = 128 };
     enum class s_enum : signed   char { eSIG = 125 };
 
-    using s_char_t = signed char;
-    using u_char_t = unsigned char;
+    typedef signed char
+        s_char_t;
+
+    typedef unsigned char
+        u_char_t;
 
     //  |  type    |      input      | expected |
 //................................................................................. signed
     test( s_enum   , s_enum::eSIG    ,   true   );
     test( s_enum   ,      125        ,   true   );
-    test( s_enum   , unsigned{125}   ,   true   );
+    test( s_enum   , unsigned(125)   ,   true   );
     test(  int     , s_enum::eSIG    ,   true   );
 //................................................................................. unsigned
     test( u_enum   , u_enum::eONE    ,   true   );
-    test( u_enum   , unsigned{128}   ,   true   );
+    test( u_enum   , unsigned(128)   ,   true   );
     test( u_enum   ,      128        ,   true   );
     test( unsigned , u_enum::eONE    ,   true   );
 //.................................................................................
     test( s_char_t ,  u_enum::eONE   ,   false  ); 
-    test( s_char_t ,  u_char_t{128}  ,   false  ); 
-    test( s_enum   ,  u_char_t{128}  ,   false  );
+    test( s_char_t ,  u_char_t(128)  ,   false  ); 
+    test( s_enum   ,  u_char_t(128)  ,   false  );
     test( s_enum   ,  u_enum::eONE   ,   false  );
     test( u_char_t ,  u_enum::eONE   ,   true   );
     test( u_char_t ,  s_enum::eSIG   ,   true   );
     test( u_enum   ,  u_enum::eONE   ,   true   );
     test( u_enum   ,  s_enum::eSIG   ,   true   );
 }
+#endif // !dHAS_ENUM_CLASS
 
 //=================================================================================
 //=================================================================================

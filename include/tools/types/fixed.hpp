@@ -112,8 +112,8 @@ namespace tools
     template<> struct map_signed<2>
     {
         typedef ::tools::int16_t type; 
-        enum { min_value = type(INT16_MIN) };
-        enum { max_value = type(INT16_MAX) };
+        enum { min_value = INT16_MIN };
+        enum { max_value = INT16_MAX };
     };
 
     template<> struct map_signed<4>
@@ -136,28 +136,28 @@ namespace tools
     {
         typedef ::tools::uint8_t type; 
         enum: unsigned { min_value = 0 };
-        enum: unsigned __int8 { max_value = uint8_t(UINT8_MAX) };
+        enum: unsigned __int8 { max_value = UINT8_MAX };
     };
 
     template<> struct map_unsigned<2>
     {
         typedef ::tools::uint16_t type;
         enum: unsigned { min_value = 0 };
-        enum: unsigned __int16 { max_value = uint16_t(UINT16_MAX) };
+        enum: unsigned __int16 { max_value = UINT16_MAX };
     };
 
     template<> struct map_unsigned<4>
     {
         typedef ::tools::uint32_t type; 
         enum: unsigned { min_value = 0 };
-        enum: unsigned __int32 { max_value = uint32_t(UINT32_MAX) };
+        enum: unsigned __int32 { max_value = UINT32_MAX };
     };
 
     template<> struct map_unsigned<8>
     {
         typedef ::tools::uint64_t type; 
         enum: unsigned { min_value = 0 };
-        enum: unsigned __int64 { max_value = uint64_t(UINT64_MAX) };
+        enum: unsigned __int64 { max_value = UINT64_MAX };
     };
 
     #ifdef _MSC_VER

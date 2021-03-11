@@ -7,15 +7,27 @@
 #define dTEST_METHOD type_of_enum
 #define dTEST_TAG tdd
 
-#include <tools/types/traits.hpp>
 #include <tools/features.hpp>
+
+#ifndef dHAS_ENUM_CLASS
+    dMESSAGE("[test] tools: disabled -> dHAS_ENUM_CLASS")
+#else
+
+dMESSAGE("[test] tools: enabled -> dHAS_ENUM_CLASS")
+#include <tools/types/traits.hpp>
+
 namespace me = ::tools;
 //==============================================================================
 //=== TDD ======================================================================
 namespace
 {
-    #define dVAL(a) \
-        me::type_of_enum_t<a>
+    #ifdef dHAS_USING_ALIAS
+        #define dVAL(a) \
+            me::type_of_enum_t<a>
+    #else
+        #define dVAL(a) \
+            typename me::type_of_enum<a>::type
+    #endif
 
     #ifdef dHAS_STATIC_ASSERT
         #define dCHECK(a, b, v)                          \
@@ -49,5 +61,6 @@ TEST_COMPONENT(000)
     dCHECK(char, char&     , false);
 }
 
+#endif // !dHAS_ENUM_CLASS
 #endif // !TEST_TYPE_OF_ENUM
 
