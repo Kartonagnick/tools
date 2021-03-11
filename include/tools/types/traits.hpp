@@ -164,6 +164,31 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_SELECT_USED_
 
+//================================================================================
+//================================================================================
+#ifndef dTOOLS_ENUM_TYPE_USED_ 
+#define dTOOLS_ENUM_TYPE_USED_ 1
+namespace tools
+{
+    namespace detail
+    {
+        template<class t, bool = ::std::is_enum<t>::value >
+        struct type_of_enum
+            { using type = ::std::underlying_type_t<t>; };
+
+        template<class t>
+        struct type_of_enum<t, false>
+            { using type = t; };
+
+    } // namespace detail
+
+    template<class t> 
+    using type_of_enum_t
+        = typename ::tools::detail::type_of_enum<t>::type;
+
+} // tools
+#endif // !dTOOLS_ENUM_TYPE_USED_
+
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_TRAITS_USED_

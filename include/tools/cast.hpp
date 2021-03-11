@@ -12,9 +12,8 @@
 
 #ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
-#else
-    #include <tools/types/traits.hpp>
 #endif
+#include <tools/types/traits.hpp>
 //================================================================================
 //================================================================================
 //================================================================================
@@ -42,14 +41,17 @@ namespace tools
         {
             typedef typename 
             my::remove_cv<ret_type>::type 
-                ret;
+                ret_t;
 
             typedef typename 
             my::remove_cv<from_type>::type
-                from;
+                from_t;
 
-            //using from = ::tools::type_of_enum_t<origin_from>;
-            //using ret  = ::tools::type_of_enum_t<origin_ret>;
+            typedef tools::type_of_enum_t<ret_t>
+                ret;
+
+            typedef tools::type_of_enum_t<from_t>
+                from;
 
             enum { a = my::is_floating_point<from>::value };
             enum { b = my::is_floating_point<ret>::value  };
@@ -187,14 +189,25 @@ namespace tools
     {
         namespace x = ::tools::detail_cast;
         typedef typename remove_cv<ret>::type 
-            ret_t;
+            ret_ty;
         typedef typename remove_cv<from>::type 
+            from_ty;
+
+        typedef tools::type_of_enum_t<ret_ty>
+            ret_t;
+
+        typedef tools::type_of_enum_t<from_ty>
             from_t;
+
         typedef x::help<ret_t, from_t> 
             help;
+
         typedef x::agent<help::value> 
             agent;
-        return agent::template can<ret_t, from_t>(v);
+
+        return agent::template can<ret_t, from_t>(
+            static_cast<from_t>(v)
+        );
     }
 
 } // namespace tools

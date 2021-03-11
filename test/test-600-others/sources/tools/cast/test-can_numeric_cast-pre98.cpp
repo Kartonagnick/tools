@@ -474,7 +474,7 @@ TEST_COMPONENT(006)
     test( int64_t  , int64max     ,  true    );
     test( int64_t  , int64min     ,  true    );
 }
-#if 0
+
 //=================================================================================
 //=== [enumerations types] ========================================================
 TEST_COMPONENT(007)
@@ -505,9 +505,8 @@ TEST_COMPONENT(007)
     test( u_char_t ,  s_enum::eSIG   ,   true   );
     test( u_enum   ,  u_enum::eONE   ,   true   );
     test( u_enum   ,  s_enum::eSIG   ,   true   );
-
 }
-#endif
+
 //=================================================================================
 //=================================================================================
 #endif // !TEST_TOOLS_CAST
