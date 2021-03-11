@@ -2,6 +2,7 @@
 // [2020y-12-01d][14:06:17] Idrisov Denis R.
 // [2021y-02-20d][18:40:18] Idrisov Denis R.
 // [2021y-03-10d][05:33:36] Idrisov Denis R.
+// [2021y-03-11d][22:15:01] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_NUMERIC_CAST_USED_ 
 #define dTOOLS_NUMERIC_CAST_USED_ 1
@@ -14,9 +15,7 @@
 #endif
 #include <tools/types/traits.hpp>
 //================================================================================
-//================================================================================
-//================================================================================
-//================================================================================
+//=== [can_numeric_cast] =========================================================
 namespace tools
 {
     namespace detail_cast
@@ -26,42 +25,6 @@ namespace tools
         #else
             namespace my = ::tools;
         #endif
-
-        template<class a, class b, int> 
-            struct select_big_;
-
-        template<class a, class b, int> struct select_big_
-        {
-            enum { v = sizeof(a) >= sizeof(b) };
-            typedef my::conditional<v, a, b> x;
-            typedef typename x::type type;
-        };
-
-        template<class a, class b> struct select_big_<a,b,false>
-        {
-            enum { v = tools::is_unsigned<a>::value };
-            typedef my::conditional<v, a, b> x;
-            typedef typename x::type type;
-        };
-
-        template<class a, class b> struct select_big
-        {
-            enum { v = sizeof(a) != sizeof(b) };
-            typedef select_big_<a, b, v> x;
-            typedef typename x::type type;
-        };
-
-        template<class r, class t>
-        dCONSTEXPR_CPP11 r max_value() dNOEXCEPT
-        {
-            return static_cast<r>(tools::limit<t>::max_value);
-        }
-
-        template<class r,class t>
-        dCONSTEXPR_CPP11 r min_value() dNOEXCEPT
-        {
-            return static_cast<r>(tools::limit<t>::min_value);
-        }
 
         template<class ret_type, class from_type>
         struct adapt
@@ -116,29 +79,39 @@ namespace tools
                 );
             #endif
 
+            enum { floating   = my::is_floating_point<from>::value };
             enum { same_types = my::is_same<from, ret>::value };
-            enum { capacious = sizeof(ret) >= sizeof(from) };
+            enum { capacious  = sizeof(ret) >= sizeof(from) };
 
-            enum { floating = my::is_floating_point<from>::value };
             enum { ret_signed  = my::is_signed<ret >::value };
             enum { from_signed = my::is_signed<from>::value };
 
-            enum { ret_unsigned  = !ret_signed  };
-            enum { from_unsigned = !from_signed };
-        
-            enum { greater_uint =  capacious && ret_unsigned && from_unsigned };
-            enum { less_uint    = !capacious && ret_unsigned && from_unsigned };
+            enum { unsigned_grt_unsigned =  capacious && !ret_signed && !from_signed };
+            enum { unsigned_lss_unsigned = !capacious && !ret_signed && !from_signed };
+
+            enum { signed_grt_signed =  capacious && ret_signed && from_signed };
+            enum { signed_lss_signed = !capacious && ret_signed && from_signed };
+
+            enum { signed_grt_unsigned =  capacious && ret_signed && !from_signed };
+            enum { signed_lss_unsigned = !capacious && ret_signed && !from_signed };
+
+            enum { unsigned_grt_signed =  capacious && !ret_signed && from_signed };
+            enum { unsigned_lss_signed = !capacious && !ret_signed && from_signed };
 
             enum { mode = 
-                 floating     ?                  0:
-                 same_types   ?                  1: 
-                 greater_uint ?                  2:
-                 less_uint    ?                  3: 
-                 ret_signed   && from_unsigned ? 4: 
-                 ret_unsigned && from_signed   ? 5: 
-                 ret_signed   && from_signed   ? 6:
-                                                 7 
+                 floating              ?         0:
+                 same_types            ?         1: 
+                 unsigned_grt_unsigned ?         2:
+                 unsigned_lss_unsigned ?         3: 
+                 signed_grt_signed     ?         4:
+                 signed_lss_signed     ?         5: 
+                 signed_grt_unsigned   ?         6:
+                 signed_lss_unsigned   ?         7: 
+                 unsigned_grt_signed   ?         8:
+                 unsigned_lss_signed   ?         9: 
+                 10
             };
+
         public:
             ~help()
             {
@@ -146,13 +119,26 @@ namespace tools
                     (a && b) || (c && d),
                     SUPPORT_ONLY_FLOATING_WITH_FLOATING_OR_INTEGER_WITH_INTEGER
                 );
-                dSTATIC_ASSERT(mode != 7, ERROR_INTERNAL);
+                dSTATIC_ASSERT(mode >= 0, ERROR_INTERNAL);
+                dSTATIC_ASSERT(mode < 10, ERROR_INTERNAL);
             }
 
             help(); 
 
             enum { value = mode };
         };
+
+        template<class r, class t>
+        dCONSTEXPR_CPP11 r max_value() dNOEXCEPT
+        {
+            return static_cast<r>(tools::limit<t>::max_value);
+        }
+
+        template<class r,class t>
+        dCONSTEXPR_CPP11 r min_value() dNOEXCEPT
+        {
+            return static_cast<r>(tools::limit<t>::min_value);
+        }
 
         template<unsigned> struct agent;
 
@@ -174,7 +160,7 @@ namespace tools
                 { return true; }
         };
 
-        // --- small -> big       (unsigned)
+        // --- from(small-unsigned) -> big-unsigned
         template<> struct agent<2>
         {
             template<class ret, class from>
@@ -183,7 +169,7 @@ namespace tools
                 { return true; }
         };
 
-        // --- big -> small       (unsigned)
+        // --- from(big-unsigned) -> small-unsigned
         template<> struct agent<3>
         {
             template<class ret, class from>
@@ -194,51 +180,69 @@ namespace tools
             }
         };
 
-        // --- from(unsigned) to signed
+        // from(small-signed) to big-signed
         template<> struct agent<4>
         {
             template<class ret, class from>
-            static dCONSTEXPR_CPP11 bool can(const from v) dNOEXCEPT
-            {
-                typedef select_big<ret, from> x;
-                typedef typename x::type big;
-                return max_value<big,ret>() >= static_cast<big>(v);
-            }
+            static dCONSTEXPR_CPP11
+            bool can(const from) dNOEXCEPT
+                { return true; }
         };
 
-        template<class t>
-        dCONSTEXPR_CPP11
-        bool compare_bug(const t l, const t r) dNOEXCEPT
-            { return l >= r; }
-
-        // from(signed) to unsigned
+        // from(big-signed) to small-signed
         template<> struct agent<5>
         {
             template<class ret, class from>
             static dCONSTEXPR_CPP11
             bool can(const from v) dNOEXCEPT
             {
-                typedef select_big<ret, from> x;
-                typedef typename x::type big;
-                return v < 0 ? false:
-                    // mingw810: without this function
-                    // compiler generate warning
-                    compare_bug(max_value<big,ret>(), static_cast<big>(v));
+                return
+                    max_value<from, ret>() >= v &&
+                    min_value<from, ret>() <  v ;
             }
         };
 
-        // from(signed) to signed
+        // --- from(small-unsigned) to big-signed
         template<> struct agent<6>
+        {
+            template<class ret, class from>
+            static dCONSTEXPR_CPP11 
+            bool can(const from v) dNOEXCEPT
+            {
+                return  ((void)v,  sizeof(ret) > sizeof(from) || max_value<from,ret>() >= v);
+                //return max_value<from,ret>() >= v;
+            }
+        };
+
+        // --- from(big-unsigned) to small-signed
+        template<> struct agent<7>
+        {
+            template<class ret, class from>
+            static dCONSTEXPR_CPP11 
+            bool can(const from v) dNOEXCEPT
+            {
+                return max_value<from,ret>() >= v;
+            }
+        };
+
+        // from(small-signed) to big-unsigned
+        template<> struct agent<8>
+        {
+            template<class ret, class from>
+            static dCONSTEXPR_CPP11
+            bool can(const from v) dNOEXCEPT
+                { return v >= 0; }
+        };
+
+        // from(big-signed) to small-unsigned
+        template<> struct agent<9>
         {
             template<class ret, class from>
             static dCONSTEXPR_CPP11
             bool can(const from v) dNOEXCEPT
             {
-                typedef select_big<ret, from> x;
-                typedef typename x::type big;
-                return
-                    max_value<big,ret>() >= static_cast<big>(v) &&
-                    min_value<big,ret>() <  static_cast<big>(v) ;
+                return v < 0 ? false:
+                    max_value<from,ret>() >= v;
             }
         };
 

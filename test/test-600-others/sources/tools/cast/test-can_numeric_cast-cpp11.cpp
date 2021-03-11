@@ -207,13 +207,6 @@ TEST_COMPONENT(004)
 //=== [from(signed) to unsigned] ==================================================
 TEST_COMPONENT(005)
 {
-    //const bool ok = me::can_numeric_cast<uint8_t>(int8_t(0));
-    //const bool ok = me::can_numeric_cast<uint32_t>(int8_t(-1));
-    //std::cout << ok << '\n';
-
-
-    //test( uint8_t  , int8_t(0)    ,  true    );
-
     // --- cast from 'signed' to 'unsigned'
 
     //  |  type    |    input     | expected |

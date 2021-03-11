@@ -29,8 +29,7 @@
     #define TEST_TOOLS_CONV                                 // ready!
     #define TEST_TOOLS_SEH                                  // ready!
     //#define TEST_TOOLS_URL                                // ready!
-
-    #define TEST_TOOLS_CAST                                 // in progress...
+    #define TEST_TOOLS_CAST                                 // ready!
 //==============================================================================
 //==============================================================================
 
