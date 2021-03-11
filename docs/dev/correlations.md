@@ -9,14 +9,15 @@
 
 version 0.1.5
 
-| **ID** | **компоненты**       |  used           |  
-|:------:|:--------------------:|:---------------:|  
-|  0000  | [dfor_lvalue][00]    | utf8.hpp        |  
-|  0001  | [str_length][01]     | utf8_win.cpp    |  
-|  0002  | [str_length][01]     | utf8_commin.cpp |  
-|  0003  | [int_to_string_][03] | errno.cpp       |  
-|  0004  | [tokenizePath][04]   | seh_path.hpp    |  
-|  0005  | [shortPath][05]      | seh_path.hpp    |  
+| **ID** | **компоненты**       |  used            |      Include guard      |  
+|:------:|:--------------------:|:----------------:|:-----------------------:|  
+|  0000  | [dfor_lvalue][00]    | utf8.hpp         | dTOOLS_FOR_LVALUE_USED_ |  
+|  0001  | [str_length][01]     | utf8_win.cpp     |                         |  
+|  0002  | [str_length][01]     | utf8_commin.cpp  |                         |  
+|  0003  | [int_to_string_][03] | errno.cpp        |                         |  
+|  0004  | [tokenizePath][04]   | seh_path.hpp     |                         |  
+|  0005  | [shortPath][05]      | seh_path.hpp     |                         |  
+|  0006  | [remove_cv][06]      | numeric_cast.hpp |                         |  
 
 <br />
 <br />
@@ -27,6 +28,7 @@ version 0.1.5
 [03]: #int_to_string_      "преобразует int в строку. (старые компиляторы не поддерживают std::to_string)"  
 [04]: #tokenizePath        "сплитит файловый путь на токены-каталоги. в перспективе может переехать в fsystem"  
 [05]: #shortPath           "умеет укорачивать длинный файловый путь. в перспективе может переехать в fsystem"  
+[06]: #remove_cv           "служебная мета-функция: удаляет квалификаторы типов"  
 
 1) [История](../history.md)  
 
