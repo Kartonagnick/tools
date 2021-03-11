@@ -14,7 +14,7 @@
 //===== tools ==============================================||==================
     // #define TEST_TOOLS_SYNC_CONSEPT                      // ready!
     // #define TEST_TOOLS_MARKER                            // ready!
-    #define TEST_TOOLS_RANDOM                               // ready!
+    // #define TEST_TOOLS_RANDOM                            // ready!
     // #define TEST_TOOLS_COPIES                            // ready!
     // #define TEST_TOOLS_COUNTER                           // ready!
     // #define TEST_TOOLS_SECURE                            // ready!
@@ -28,6 +28,7 @@
     // #define TEST_TOOLS_CONV                              // ready!
     // #define TEST_TOOLS_SEH                               // ready!
     // #define TEST_TOOLS_URL                               // ready!
+    #define TEST_TOOLS_CAST                                 // ready!
 //==============================================================================
 //==============================================================================
 // in progress...

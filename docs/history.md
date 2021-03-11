@@ -10,6 +10,25 @@
 
 **История изменений**  
 
+**Версия 0.1.9 (предварительная)**  
+----------------------------------
+[2021y-03m-11d][22:05:57]
+1) добавлен: tools/numeric_сфые.hpp  
+     - can_numeric_cast  
+2) апгрейд: tools/types/fixed.hpp  
+     - fixed-cpp98  
+     - fixed-cpp11  
+3) добавлен: tools/types:  
+     - is_same  
+     - remove_cv  
+     - is_signed  
+     - is_floating_point  
+     - is_integral  
+     - conditional  
+     - enable_if  
+     - type_of_enum (msvc2012)  
+
+
 **Версия 0.1.8 (предварительная)**  
 ----------------------------------
 [2021y-03m-11d][00:30:56]

@@ -1,22 +1,25 @@
 
 [![logo](../logo.png)](../home.md "for developers") 
 
-[P1]: ../images/progress.png  "2021y-03m-05d"
-[X1]: ../images/failed.png    "2021y-03m-05d"
-[V1]: ../images/success.png   "2021y-03m-05d"
-[E1]: ../images/nodata.png    "2021y-03m-05d"
-[N1]: ../images/na.png        "2021y-03m-05d"
+[P1]: ../images/progress.png  "2021y-03m-11d"
+[X1]: ../images/failed.png    "2021y-03m-11d"
+[V1]: ../images/success.png   "2021y-03m-11d"
+[E1]: ../images/nodata.png    "2021y-03m-11d"
+[N1]: ../images/na.png        "2021y-03m-11d"
 
-version 0.1.5
+version 0.1.9
 
-| **ID** | **компоненты**       |  used           |  
-|:------:|:--------------------:|:---------------:|  
-|  0000  | [dfor_lvalue][00]    | utf8.hpp        |  
-|  0001  | [str_length][01]     | utf8_win.cpp    |  
-|  0002  | [str_length][01]     | utf8_commin.cpp |  
-|  0003  | [int_to_string_][03] | errno.cpp       |  
-|  0004  | [tokenizePath][04]   | seh_path.hpp    |  
-|  0005  | [shortPath][05]      | seh_path.hpp    |  
+| **ID** | **компоненты**       |  used            |      include guard      |  
+|:------:|:--------------------:|:----------------:|:-----------------------:|  
+|  0000  | [dfor_lvalue][00]    | utf8.hpp         | dTOOLS_FOR_LVALUE_USED_ |  
+|  0001  | [str_length][01]     | utf8_win.cpp     |                         |  
+|  0002  | [str_length][01]     | utf8_commin.cpp  |                         |  
+|  0003  | [int_to_string_][03] | errno.cpp        |                         |  
+|  0004  | [tokenizePath][04]   | seh_path.hpp     |                         |  
+|  0005  | [shortPath][05]      | seh_path.hpp     |                         |  
+|  0006  | [remove_cv][06]      | types/fixed.hp p | dTOOLS_REMOVE_CV_USED_  |  
+|  0007  | [is_signed][07]      | types/fixed.hp p | dTOOLS_REMOVE_CV_USED_  |  
+|  0008  | [limit][08]          | types/fixed.hp p | dTOOLS_LIMIT_USED_      |  
 
 <br />
 <br />
@@ -27,6 +30,10 @@ version 0.1.5
 [03]: #int_to_string_      "преобразует int в строку. (старые компиляторы не поддерживают std::to_string)"  
 [04]: #tokenizePath        "сплитит файловый путь на токены-каталоги. в перспективе может переехать в fsystem"  
 [05]: #shortPath           "умеет укорачивать длинный файловый путь. в перспективе может переехать в fsystem"  
+[06]: #remove_cv           "служебная мета-функция: удаляет квалификаторы типов"  
+[07]: #is_signed           "служебная мета-функция: определяет: является ли тип знаковым"  
+[08]: #limit               "служебная мета-функция: определяет макс/мин значение типа"  
+
 
 1) [История](../history.md)  
 

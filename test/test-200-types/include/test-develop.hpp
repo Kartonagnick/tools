@@ -11,9 +11,17 @@
     #define INCLUDE_LONG_TESTS
 
 //==============================================================================
-//===== modern/types =======================================||==================
+//===== tools/types ========================================||==================
     #define TEST_FIXED                                      // ready!
+    #define TEST_IS_FLOATING                                // ready!
+    #define TEST_IS_SIGNED                                  // ready!
+    #define TEST_IS_INTEGRAL                                // ready!
+    #define TEST_REMOVE_CV                                  // ready!
+    #define TEST_CONDITIONAL                                // ready!
+    #define TEST_IS_SAME                                    // ready!
+    #define TEST_ENABLE_IF                                  // ready!
 
+    #define TEST_TYPE_OF_ENUM                               // ready!
 //==============================================================================
 //==============================================================================
 // in progress...
