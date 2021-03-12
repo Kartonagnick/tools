@@ -9,7 +9,7 @@
     #define dASSERT(...)
 #else
     #include <cassert>
-    #define dASSERT(...) assert(__VA_ARGS__)
+    #define dASSERT(...) assert((__VA_ARGS__))
 #endif
 
 //==============================================================================

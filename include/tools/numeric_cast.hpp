@@ -3,17 +3,19 @@
 // [2021y-02-20d][18:40:18] Idrisov Denis R.
 // [2021y-03-10d][05:33:36] Idrisov Denis R.
 // [2021y-03-11d][22:15:01] Idrisov Denis R.
+// [2021y-03-12d][20:27:51] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_NUMERIC_CAST_USED_ 
-#define dTOOLS_NUMERIC_CAST_USED_ 1
+#define dTOOLS_NUMERIC_CAST_USED_ 2
 
 #include <tools/features.hpp>
 #include <tools/types/fixed.hpp>
+#include <tools/types/traits.hpp>
 
 #ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
 #endif
-#include <tools/types/traits.hpp>
+
 //================================================================================
 //=== [can_numeric_cast] =========================================================
 namespace tools
@@ -202,6 +204,24 @@ namespace tools
             }
         };
 
+
+        template<bool> struct unsigned_signed
+        {
+            template<class ret, class from>
+            static dCONSTEXPR_CPP11 
+            bool can(const from) dNOEXCEPT { return  true; }
+        };
+
+        template<> struct unsigned_signed<false>
+        {
+            template<class ret, class from>
+            static dCONSTEXPR_CPP11 
+            bool can(const from v) dNOEXCEPT 
+            {
+                return max_value<from,ret>() >= v;
+            }
+        };
+
         // --- from(small-unsigned) to big-signed
         template<> struct agent<6>
         {
@@ -209,8 +229,10 @@ namespace tools
             static dCONSTEXPR_CPP11 
             bool can(const from v) dNOEXCEPT
             {
-                return  ((void)v,  sizeof(ret) > sizeof(from) || max_value<from,ret>() >= v);
-                //return max_value<from,ret>() >= v;
+                typedef unsigned_signed< (sizeof(ret) > sizeof(from)) >
+                    impl;
+                return impl::template can<ret, from>(v);
+                //return  ((void)v,  sizeof(ret) > sizeof(from) || max_value<from,ret>() >= v);
             }
         };
 
@@ -266,6 +288,69 @@ namespace tools
         return agent::template can<ret_t, from_t>(
             static_cast<from_t>(v)
         );
+    }
+
+} // namespace tools
+
+//================================================================================
+//================================================================================
+
+#include <tools/assert.hpp>
+#include <typeinfo>
+#include <sstream>
+#include <cassert>
+#include <string>
+
+
+namespace tools
+{
+    typedef ::std::string
+        str_t;
+
+    namespace detail_cast
+    {
+        template<class ret, class from>
+        ret throw_error(const from val)
+        {
+            #ifdef dHAS_ENUM_CLASS
+                typedef typename 
+                ::tools::type_of_enum<from>::type 
+                    from_;
+
+                const from_ v = static_cast<from_>(val);
+            #else
+                const from& v = val;
+            #endif
+
+            const str_t t = typeid(ret).name();
+            std::stringstream ss;
+            ss << v;
+            const str_t s = ss.str();
+            throw ::std::out_of_range(
+                "tools::can_numeric_cast<" + t + ">(" + s + "): failed"
+            );
+        }
+
+    } // namespace detail_cast
+
+    template<class ret, class from>
+    dCONSTEXPR_CPP11 dNODISCARD 
+    ret numeric_cast(const from val) 
+    {
+        namespace x = ::tools::detail_cast;
+        return ::tools::can_numeric_cast<ret, from>(val) ?
+            static_cast<ret>(val):
+            x::throw_error<ret>(val);
+    }
+
+    template<class ret, class from>
+    dCONSTEXPR_CPP11 dNODISCARD 
+    ret assert_numeric_cast(const from val) dNOEXCEPT
+    {
+        dASSERT(
+            ::tools::can_numeric_cast<ret, from>(val)
+        );
+        return static_cast<ret>(val);
     }
 
 } // namespace tools
