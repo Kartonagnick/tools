@@ -11,7 +11,7 @@
 [E1]: ../images/nodata.png         "2021y-03m-13d"
 [N1]: ../images/na.png             "2021y-03m-13d"
 
-version 0.2.2  ![P1]]
+version 0.2.2
 
 | **ID** | **компоненты**      |  mingw810   |  mingw730   |  msvc720    |  
 |:------:|:-------------------:|:-----------:|:-----------:|:-----------:|  
@@ -207,8 +207,6 @@ template<class ret, class from>
 dCONSTEXPR_CPP11 dNODISCARD 
 bool can_numeric_cast(const from v) dNOEXCEPT
 ```
-
-
 
 
 
