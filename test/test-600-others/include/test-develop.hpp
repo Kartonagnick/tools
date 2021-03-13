@@ -28,7 +28,7 @@
     // #define TEST_TOOLS_CONV                              // ready!
     // #define TEST_TOOLS_SEH                               // ready!
     // #define TEST_TOOLS_URL                               // ready!
-    #define TEST_TOOLS_NUMERIC                              // in progress...
+    #define TEST_TOOLS_NUMERIC                              // ready!
 //==============================================================================
 //==============================================================================
 // in progress...
