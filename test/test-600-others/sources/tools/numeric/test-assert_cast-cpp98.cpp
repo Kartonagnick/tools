@@ -3,31 +3,32 @@
 //=================================================================================
 //=================================================================================
 
-#ifdef TEST_TOOLS_CAST
+#ifdef TEST_TOOLS_NUMERIC
 
-#define dTEST_COMPONENT tools
-#define dTEST_METHOD assert_numeric_cast
+#define dTEST_COMPONENT tools, numeric
+#define dTEST_METHOD assert_cast
 #define dTEST_TAG cpp98
 
-#include <tools/numeric_cast.hpp>
+#include <tools/numeric.hpp>
 #include <tools/types/fixed.hpp>
 #include "test-staff.hpp"
 
-namespace me = ::tools;
+namespace ut = ::tools;
+namespace me = ut::numeric;
 //=================================================================================
 //=================================================================================
 namespace
 {
-    #define dINVALID(ret, value)                \
-        ASSERT_DEATH_DEBUG(                     \
-            me::assert_numeric_cast<ret>(value) \
+    #define dINVALID(ret, value)        \
+        ASSERT_DEATH_DEBUG(             \
+            me::assert_cast<ret>(value) \
         )
 
     #ifdef dHAS_ENUM_CLASS
     template<class t> 
-    typename me::type_of_enum<t>::type adopt(const t v)
+    typename ut::type_of_enum<t>::type adopt(const t v)
     {
-        typedef typename me::type_of_enum<t>::type x;
+        typedef typename ut::type_of_enum<t>::type x;
         return static_cast<x>(v);
     }
     #else
@@ -41,7 +42,7 @@ namespace
         const ret etalon)
     {
         dASSERT(msg);
-        const ret real = me::assert_numeric_cast<ret>(value);
+        const ret real = me::assert_cast<ret>(value);
         ASSERT_EQ(real, etalon)
             << msg << '\n'
             << "etalon = " << adopt(etalon) << '\n'
@@ -49,11 +50,11 @@ namespace
         ;
     }
 
-    #define test(ret, input, etalon)                      \
-        test_can_cast<ret>(                               \
-            "assert_numeric_cast<" #ret ">(" #input "): " \
-            "failed",                                     \
-            input, etalon                                 \
+    #define test(ret, input, etalon)                              \
+        test_can_cast<ret>(                                       \
+            "tools::numeric::assert_cast<" #ret ">(" #input "): " \
+            "failed",                                             \
+            input, etalon                                         \
         )
 
 } // namespace
@@ -430,17 +431,14 @@ TEST_COMPONENT(007)
 // [floating]
 TEST_COMPONENT(008)
 {
-    ASSERT_THROW(me::numeric_cast<float>(13.13) , ::std::exception);
-    ASSERT_THROW(me::numeric_cast<float>(13.13l), ::std::exception);
+    ASSERT_THROW(me::cast<float>(13.13) , ::std::exception);
+    ASSERT_THROW(me::cast<float>(13.13l), ::std::exception);
     bool check = !may_be;
 
     // implementation behavior
     if(check)
     {
-        ASSERT_THROW(
-            me::numeric_cast<double>(13.13l),
-            ::std::exception
-        );
+        ASSERT_THROW(me::cast<double>(13.13l), ::std::exception);
     }
 }
 
@@ -627,4 +625,4 @@ TEST_COMPONENT(018)
 
 //=================================================================================
 //=================================================================================
-#endif // !TEST_TOOLS_CAST
+#endif // !TEST_TOOLS_NUMERIC
