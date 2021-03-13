@@ -297,7 +297,7 @@ namespace tools
 } // namespace tools
 
 //================================================================================
-//================================================================================
+//=== [cast/assert_cast] =========================================================
 
 #include <tools/assert.hpp>
 #include <typeinfo>
@@ -358,6 +358,62 @@ namespace tools
             );
             return static_cast<ret>(val);
         }
+
+        #ifdef dFORBID_SAFE_CAST
+            template<class ret, class from>
+            dCONSTEXPR_CPP11 dNODISCARD ret safe_cast(const from val) dNOEXCEPT
+            {
+                #ifdef dHAS_STATIC_ASSERT
+                    static_assert(
+                        detail::my::is_same<from, const from>::value,
+                        "'safe_cast' is forbidden to use"
+                    );
+                #else
+                    dSTATIC_ASSERT(false && ERROR_SAFE_CAST_FORBIDDEN);
+                #endif
+                return val;
+            }
+
+            template<class ret, class from>
+            dCONSTEXPR_CPP11 dNODISCARD
+            ret assert_safe_cast(const from val) dNOEXCEPT
+            {
+                #ifdef dHAS_STATIC_ASSERT
+                    static_assert(
+                        detail::my::is_same<from, const from>::value,
+                        "'assert_safe_cast' is forbidden to use"
+                    );
+                #else
+                    dSTATIC_ASSERT(false && ERROR_ASSERT_SAFE_CAST_FORBIDDEN);
+                #endif
+                return val;
+            }
+
+        #else
+
+        template<class ret, class from>
+        dCONSTEXPR_CPP11 dNODISCARD
+        ret safe_cast(const from val)
+        {
+            #ifndef dDISABLE_SAFE_CAST
+                return ::tools::numeric::cast<ret>(val);
+            #else
+                return val;
+            #endif
+        }
+
+        template<class ret, class from>
+        dCONSTEXPR_CPP11 dNODISCARD
+        ret assert_safe_cast(const from val) dNOEXCEPT
+        {
+            #ifndef dDISABLE_SAFE_CAST
+                return ::tools::numeric::assert_cast<ret>(val);
+            #else
+                return val;
+            #endif
+        }
+
+        #endif // !dFORBID_SAFE_CAST
 
     } // namespace numeric
 
