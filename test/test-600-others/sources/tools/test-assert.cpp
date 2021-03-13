@@ -29,6 +29,16 @@ namespace
     }
     #endif 
 
+
+    template<class a, class b>
+    struct some
+    {
+        bool compare(const a v1, const b v2) const
+        {
+            return v1 == v2;
+        }
+    };
+
 }//namespace
 //==============================================================================
 //==============================================================================
@@ -59,6 +69,11 @@ TEST_COMPONENT(003)
 {
     void(*ptr)() = foo;
     ASSERT_TRUE(ptr);
+}
+
+TEST_COMPONENT(004)
+{
+    dASSERT(some<int, int>().compare(1, 1));
 }
 
 //==============================================================================
