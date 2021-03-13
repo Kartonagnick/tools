@@ -3,7 +3,7 @@
 //=================================================================================
 //=================================================================================
 
-#ifdef TEST_TOOLS_CAST
+#ifdef TEST_TOOLS_NUMERIC
 
 #include <tools/features.hpp>
 #ifndef dHAS_CONSTEXPR_CPP11
@@ -588,4 +588,4 @@ TEST_COMPONENT(010)
 //=================================================================================
 
 #endif // !dHAS_CONSTEXPR_CPP11
-#endif // !TEST_TOOLS_CAST
+#endif // !TEST_TOOLS_NUMERIC
