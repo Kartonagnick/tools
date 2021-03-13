@@ -21,6 +21,31 @@ version 0.1.9
 |  0007  | [is_signed][07]      | types/fixed.hp p | dTOOLS_REMOVE_CV_USED_  |  
 |  0008  | [limit][08]          | types/fixed.hp p | dTOOLS_LIMIT_USED_      |  
 
+dDISABLE_SAFE_CAST
+---
+
+Отключает все проверки в функцииях:  
+  - assert_safe_cast  
+  - safe_cast  
+
+```
+#define dDISABLE_SAFE_CAST
+```
+
+dFORBID_SAFE_CAST
+---
+
+```
+#define dFORBID_SAFE_CAST
+```
+
+Запрещает использовать функции:  
+  - assert_safe_cast  
+  - safe_cast  
+
+
+
+
 <br />
 <br />
 
