@@ -7,15 +7,15 @@
 
 #ifdef TEST_TOOLS_CAST
 
-#define dTEST_COMPONENT tools
-#define dTEST_METHOD can_numeric_cast
+#define dTEST_COMPONENT tools, numeric
+#define dTEST_METHOD can_cast
 #define dTEST_TAG cpp98
 
-#include <tools/numeric_cast.hpp>
+#include <tools/numeric.hpp>
 #include <tools/types/fixed.hpp>
 #include "test-staff.hpp"
 
-namespace me = ::tools;
+namespace me = ::tools::numeric;
 //=================================================================================
 //=== [constants] =================================================================
 namespace
@@ -25,8 +25,7 @@ namespace
         const bool etalon)
     {
         dASSERT(msg);
-        const bool real 
-            = me::can_numeric_cast<ret>(value);
+        const bool real = me::can_cast<ret>(value);
         ASSERT_EQ(real, etalon)
             << msg << '\n'
             << "etalon = " << etalon << '\n'
@@ -34,11 +33,11 @@ namespace
         ;
     }
 
-    #define test(ret, input, etalon)                   \
-        test_can_cast<ret>(                            \
-            "can_numeric_cast<" #ret ">(" #input "): " \
-            "failed",                                  \
-            input, etalon                              \
+    #define test(ret, input, etalon)                           \
+        test_can_cast<ret>(                                    \
+            "tools::numeric::can_cast<" #ret ">(" #input "): " \
+            "failed",                                          \
+            input, etalon                                      \
         )
 
 } // namespace

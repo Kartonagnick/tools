@@ -5,35 +5,56 @@
 
 #ifdef TEST_TOOLS_CAST
 
-#include <tools/features.hpp>
-#ifndef dHAS_CONSTEXPR_CPP11
-dMESSAGE("[test] tools: disabled -> dHAS_CONSTEXPR_CPP11")
-#else
-dMESSAGE("[test] tools: enabled -> dHAS_CONSTEXPR_CPP11")
+#define dTEST_COMPONENT tools, numeric
+#define dTEST_METHOD assert_cast
+#define dTEST_TAG cpp98
 
-#define dTEST_COMPONENT tools
-#define dTEST_METHOD numeric_cast
-#define dTEST_TAG cpp11
-
-#include <tools/numeric_cast.hpp>
+#include <tools/numeric.hpp>
 #include <tools/types/fixed.hpp>
 #include "test-staff.hpp"
 
-namespace me = ::tools;
+namespace ut = ::tools;
+namespace me = ut::numeric;
 //=================================================================================
 //=================================================================================
 namespace
 {
-    #define dINVALID(ret, value)           \
-        ASSERT_THROW(                      \
-            me::numeric_cast<ret>(value),  \
-            ::std::exception               \
+    #define dINVALID(ret, value)        \
+        ASSERT_DEATH_DEBUG(             \
+            me::assert_cast<ret>(value) \
         )
 
-    #define test(ret, input, etalon)                      \
-        static_assert(                                    \
-            me::numeric_cast<ret>(input) == etalon,       \
-            "numeric_cast<" #ret ">(" #input "): failed"  \
+    #ifdef dHAS_ENUM_CLASS
+    template<class t> 
+    typename ut::type_of_enum<t>::type adopt(const t v)
+    {
+        typedef typename ut::type_of_enum<t>::type x;
+        return static_cast<x>(v);
+    }
+    #else
+    template<class t> t adopt(const t v)
+        { return v; }
+    #endif
+
+
+    template<class ret, class from>
+    void test_can_cast(const char* msg, const from value,
+        const ret etalon)
+    {
+        dASSERT(msg);
+        const ret real = me::assert_cast<ret>(value);
+        ASSERT_EQ(real, etalon)
+            << msg << '\n'
+            << "etalon = " << adopt(etalon) << '\n'
+            << "real = "   << adopt(real)   << '\n'
+        ;
+    }
+
+    #define test(ret, input, etalon)                              \
+        test_can_cast<ret>(                                       \
+            "tools::numeric::assert_cast<" #ret ">(" #input "): " \
+            "failed",                                             \
+            input, etalon                                         \
         )
 
 } // namespace
@@ -41,7 +62,7 @@ using namespace test_can_numeric_cast;
 
 //=================================================================================
 //=== [floating] ==================================================================
-namespace
+TEST_COMPONENT(000)
 {
     //  |    type       |      input  |   expected   |
     test( float         , 13.13f      , 13.13f       );
@@ -55,7 +76,7 @@ namespace
 
 //=================================================================================
 //=== [same types] ================================================================
-namespace
+TEST_COMPONENT(001)
 {
     //  | type     |     input    |    expected   |
     test( int      ,      10      ,      10       );
@@ -101,7 +122,7 @@ namespace
 
 //=================================================================================
 //=== [from-unsigned < to-unsigned] ===============================================
-namespace
+TEST_COMPONENT(002)
 {
     // --- sizeof(from-unsigned) <= sizeof(to-unsigned)
 
@@ -140,7 +161,7 @@ namespace
 
 //=================================================================================
 //=== [from-unsigned > to-unsigned] ===============================================
-namespace
+TEST_COMPONENT(003)
 {
     // --- sizeof(from-unsigned) > sizeof(to-unsigned)
 
@@ -158,7 +179,7 @@ namespace
 
 //=================================================================================
 //=== [from(unsigned) to signed] ==================================================
-namespace
+TEST_COMPONENT(004)
 {
     // --- cast from 'unsigned' to 'signed'
 
@@ -195,7 +216,7 @@ namespace
 
 //=================================================================================
 //=== [from(signed) to unsigned] ==================================================
-namespace
+TEST_COMPONENT(005)
 {
     // --- cast from 'signed' to 'unsigned'
 
@@ -271,7 +292,7 @@ namespace
 
 //=================================================================================
 //=== [from(signed) to signed] ====================================================
-namespace
+TEST_COMPONENT(006)
 {
     // --- cast from 'signed' to 'signed'
 
@@ -376,52 +397,53 @@ namespace
 
 //=================================================================================
 //=== [enumerations types] ========================================================
-namespace
+#ifdef dHAS_ENUM_CLASS
+TEST_COMPONENT(007)
 {
     enum class u_enum : unsigned char { eONE = 128 };
     enum class s_enum : signed   char { eSIG = 125 };
 
-    using s_char_t = signed char;
-    using u_char_t = unsigned char;
+    //typedef signed char         s_char_t;
+
+    typedef unsigned char 
+        u_char_t;
 
     //  |  type    |      input      |    expected     |
 //................................................................................. signed
     test( s_enum   , s_enum::eSIG    , s_enum::eSIG    );
     test( s_enum   ,      125        , s_enum::eSIG    );
-    test( s_enum   , unsigned{125}   , s_enum::eSIG    );
+    test( s_enum   , unsigned(125)   , s_enum::eSIG    );
     test(  int     , s_enum::eSIG    ,      125        );
 //................................................................................. unsigned
     test( u_enum   , u_enum::eONE    , u_enum::eONE    );
-    test( u_enum   , unsigned{128}   , u_enum::eONE    );
+    test( u_enum   , unsigned(128)   , u_enum::eONE    );
     test( u_enum   ,      128        , u_enum::eONE    );
-    test( unsigned , u_enum::eONE    , unsigned{128}   );
+    test( unsigned , u_enum::eONE    , unsigned(128)   );
 //.................................................................................
-    //test( s_char_t ,  u_enum::eONE   , s_char_t{128}   );  // <--- защита времени компиляции
-    test( u_char_t ,  u_enum::eONE   , u_char_t{128}   );
+  //test( s_char_t ,  u_enum::eONE   , s_char_t(128)   );  // <--- safety compile time
+    test( u_char_t ,  u_enum::eONE   , u_char_t(128)   );
 
 } // namespace
-
+#endif // !dHAS_ENUM_CLASS
 //=================================================================================
 //=================================================================================
 
 // [floating]
-TEST_COMPONENT(000)
+TEST_COMPONENT(008)
 {
-    ASSERT_THROW(me::numeric_cast<float>(13.13) , ::std::exception);
-    ASSERT_THROW(me::numeric_cast<float>(13.13l), ::std::exception);
+    ASSERT_THROW(me::cast<float>(13.13) , ::std::exception);
+    ASSERT_THROW(me::cast<float>(13.13l), ::std::exception);
+    bool check = !may_be;
 
     // implementation behavior
-    if(!may_be)
+    if(check)
     {
-        ASSERT_THROW(
-            me::numeric_cast<double>(13.13l),
-            ::std::exception
-        );
+        ASSERT_THROW(me::cast<double>(13.13l), ::std::exception);
     }
 }
 
 // [from-unsigned > to-unsigned]
-TEST_COMPONENT(001)
+TEST_COMPONENT(009)
 {
     //      |   ret   |     value     |
     dINVALID(uint8_t  , uint8maxPlus  );
@@ -430,7 +452,7 @@ TEST_COMPONENT(001)
 }
 
 // [from(unsigned) to signed]
-TEST_COMPONENT(002)
+TEST_COMPONENT(010)
 {
     //      |   ret   |     value     |
     dINVALID(int8_t   , uint8maxPlus  );
@@ -442,7 +464,7 @@ TEST_COMPONENT(002)
 //=================================================================================
 
 // [uint8_t][from(signed) to unsigned]
-TEST_COMPONENT(003)
+TEST_COMPONENT(011)
 {
     //      |   ret   |       value      |
     dINVALID(uint8_t  , int8_t(-1)       );
@@ -467,7 +489,7 @@ TEST_COMPONENT(003)
 }
 
 // [uint16_t][from(signed) to unsigned]
-TEST_COMPONENT(004)
+TEST_COMPONENT(012)
 {
     //      |   ret    |       value   |
     dINVALID(uint16_t  , int8_t(-1)    );
@@ -490,7 +512,7 @@ TEST_COMPONENT(004)
 }
 
 // [uint32_t][from(signed) to unsigned]
-TEST_COMPONENT(005)
+TEST_COMPONENT(013)
 {
     //      |   ret   |     value     |
     dINVALID(uint32_t , int8_t(-1)    );
@@ -511,7 +533,7 @@ TEST_COMPONENT(005)
 }
 
 // [uint64_t][from(signed) to unsigned]
-TEST_COMPONENT(006)
+TEST_COMPONENT(014)
 {
     //      |   ret   |       value   |
     dINVALID(uint64_t , int8_t(-1)    );
@@ -534,7 +556,7 @@ TEST_COMPONENT(006)
 //=================================================================================
 
 // [uint8_t][from(signed) to signed]
-TEST_COMPONENT(007)
+TEST_COMPONENT(015)
 {
     //      |   ret  |     value     |
     dINVALID( int8_t , int8maxPlus   );
@@ -555,7 +577,7 @@ TEST_COMPONENT(007)
 }
 
 // [uint16_t][from(signed) to signed]
-TEST_COMPONENT(008)
+TEST_COMPONENT(016)
 {
     //      |   ret   |     value     |
     dINVALID( int16_t , int16maxPlus  );
@@ -571,7 +593,7 @@ TEST_COMPONENT(008)
 }
 
 // [uint32_t][from(signed) to signed]
-TEST_COMPONENT(009)
+TEST_COMPONENT(017)
 {
     //      |   ret   |     value     |
     dINVALID( int32_t , int32maxPlus  );
@@ -582,16 +604,25 @@ TEST_COMPONENT(009)
 }
 
 // [enumeration]
-TEST_COMPONENT(010)
+#if defined(dHAS_ENUM_CLASS) && !defined(NDEBUG)
+TEST_COMPONENT(018)
 {
+    enum class u_enum : unsigned char { eONE = 128 };
+    enum class s_enum : signed   char { eSIG = 125 };
+
+    typedef signed char
+            s_char_t;
+
+    typedef unsigned char
+        u_char_t;
+
     //      | ret-type |     value     |
     dINVALID( s_char_t , u_enum::eONE  );
-    dINVALID( s_enum   , u_char_t{128} );
+    dINVALID( s_enum   , u_char_t(128) );
     dINVALID( s_enum   , u_enum::eONE  );
 }
+#endif
 
 //=================================================================================
 //=================================================================================
-
-#endif // !dHAS_CONSTEXPR_CPP11
 #endif // !TEST_TOOLS_CAST

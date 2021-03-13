@@ -5,29 +5,28 @@
 
 #ifdef TEST_TOOLS_CAST
 
-#define dTEST_COMPONENT tools
-#define dTEST_METHOD assert_numeric_cast
+#define dTEST_COMPONENT tools, numeric
+#define dTEST_METHOD cast
 #define dTEST_TAG cpp98
 
-#include <tools/numeric_cast.hpp>
+#include <tools/numeric.hpp>
 #include <tools/types/fixed.hpp>
 #include "test-staff.hpp"
 
-namespace me = ::tools;
+namespace ut = ::tools;
+namespace me = ut::numeric;
 //=================================================================================
 //=================================================================================
 namespace
 {
-    #define dINVALID(ret, value)                \
-        ASSERT_DEATH_DEBUG(                     \
-            me::assert_numeric_cast<ret>(value) \
-        )
+    #define dINVALID(ret, value) \
+        ASSERT_THROW(me::cast<ret>(value), ::std::exception)
 
     #ifdef dHAS_ENUM_CLASS
     template<class t> 
-    typename me::type_of_enum<t>::type adopt(const t v)
+    typename ut::type_of_enum<t>::type adopt(const t v)
     {
-        typedef typename me::type_of_enum<t>::type x;
+        typedef typename ut::type_of_enum<t>::type x;
         return static_cast<x>(v);
     }
     #else
@@ -35,13 +34,12 @@ namespace
         { return v; }
     #endif
 
-
     template<class ret, class from>
     void test_can_cast(const char* msg, const from value,
         const ret etalon)
     {
         dASSERT(msg);
-        const ret real = me::assert_numeric_cast<ret>(value);
+        const ret real = me::cast<ret>(value);
         ASSERT_EQ(real, etalon)
             << msg << '\n'
             << "etalon = " << adopt(etalon) << '\n'
@@ -49,11 +47,11 @@ namespace
         ;
     }
 
-    #define test(ret, input, etalon)                      \
-        test_can_cast<ret>(                               \
-            "assert_numeric_cast<" #ret ">(" #input "): " \
-            "failed",                                     \
-            input, etalon                                 \
+    #define test(ret, input, etalon)               \
+        test_can_cast<ret>(                        \
+            "numeric_cast<" #ret ">(" #input "): " \
+            "failed",                              \
+            input, etalon                          \
         )
 
 } // namespace
@@ -396,13 +394,16 @@ TEST_COMPONENT(006)
 
 //=================================================================================
 //=== [enumerations types] ========================================================
-#ifdef dHAS_ENUM_CLASS
+#if defined(dHAS_ENUM_CLASS) && !defined(NDEBUG)
 TEST_COMPONENT(007)
 {
     enum class u_enum : unsigned char { eONE = 128 };
     enum class s_enum : signed   char { eSIG = 125 };
 
-    //typedef signed char         s_char_t;
+    /*
+    typedef signed char 
+        s_char_t;
+    */
 
     typedef unsigned char 
         u_char_t;
@@ -419,7 +420,7 @@ TEST_COMPONENT(007)
     test( u_enum   ,      128        , u_enum::eONE    );
     test( unsigned , u_enum::eONE    , unsigned(128)   );
 //.................................................................................
-  //test( s_char_t ,  u_enum::eONE   , s_char_t(128)   );  // <--- safety compile time
+  //test( s_char_t ,  u_enum::eONE   , s_char_t(128)   );  // <--- safety compile time 
     test( u_char_t ,  u_enum::eONE   , u_char_t(128)   );
 
 } // namespace
@@ -430,15 +431,15 @@ TEST_COMPONENT(007)
 // [floating]
 TEST_COMPONENT(008)
 {
-    ASSERT_THROW(me::numeric_cast<float>(13.13) , ::std::exception);
-    ASSERT_THROW(me::numeric_cast<float>(13.13l), ::std::exception);
+    ASSERT_THROW(me::cast<float>(13.13) , ::std::exception);
+    ASSERT_THROW(me::cast<float>(13.13l), ::std::exception);
     bool check = !may_be;
 
     // implementation behavior
     if(check)
     {
         ASSERT_THROW(
-            me::numeric_cast<double>(13.13l),
+            me::cast<double>(13.13l),
             ::std::exception
         );
     }
@@ -606,14 +607,14 @@ TEST_COMPONENT(017)
 }
 
 // [enumeration]
-#if defined(dHAS_ENUM_CLASS) && !defined(NDEBUG)
+#ifdef dHAS_ENUM_CLASS
 TEST_COMPONENT(018)
 {
     enum class u_enum : unsigned char { eONE = 128 };
     enum class s_enum : signed   char { eSIG = 125 };
 
     typedef signed char
-            s_char_t;
+        s_char_t;
 
     typedef unsigned char
         u_char_t;

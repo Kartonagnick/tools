@@ -13,24 +13,24 @@ dMESSAGE("[test] tools: disabled -> dHAS_CONSTEXPR_CPP11")
 #else
 dMESSAGE("[test] tools: enabled -> dHAS_CONSTEXPR_CPP11")
 
-#define dTEST_COMPONENT tools
-#define dTEST_METHOD can_numeric_cast
+#define dTEST_COMPONENT tools, numeric
+#define dTEST_METHOD can_cast
 #define dTEST_TAG cpp11
 
-#include <tools/numeric_cast.hpp>
+#include <tools/numeric.hpp>
 #include <tools/types/fixed.hpp>
 #include "test-staff.hpp"
 
-namespace me = ::tools;
+namespace me = ::tools::numeric;
 //=================================================================================
 //=== [constants] =================================================================
 namespace
 {
-    #define test(ret, input, etalon)                    \
-        static_assert(                                  \
-            me::can_numeric_cast<ret>(input) == etalon, \
-            "can_numeric_cast<" #ret ">(" #input "): "  \
-            "failed"                                    \
+    #define test(ret, input, etalon)                            \
+        static_assert(                                          \
+            me::can_cast<ret>(input) == etalon,                 \
+            "tools::numeric::can_cast<" #ret ">(" #input "): "  \
+            "failed"                                            \
         )
 
 } // namespace

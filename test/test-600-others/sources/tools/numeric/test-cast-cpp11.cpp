@@ -11,28 +11,26 @@ dMESSAGE("[test] tools: disabled -> dHAS_CONSTEXPR_CPP11")
 #else
 dMESSAGE("[test] tools: enabled -> dHAS_CONSTEXPR_CPP11")
 
-#define dTEST_COMPONENT tools
-#define dTEST_METHOD assert_numeric_cast
+#define dTEST_COMPONENT tools, numeric
+#define dTEST_METHOD cast
 #define dTEST_TAG cpp11
 
-#include <tools/numeric_cast.hpp>
+#include <tools/numeric.hpp>
 #include <tools/types/fixed.hpp>
 #include "test-staff.hpp"
 
-namespace me = ::tools;
+namespace me = ::tools::numeric;
 //=================================================================================
 //=================================================================================
 namespace
 {
-    #define dINVALID(ret, value)                \
-        ASSERT_DEATH_DEBUG(                     \
-            me::assert_numeric_cast<ret>(value) \
-        )
+    #define dINVALID(ret, value)           \
+        ASSERT_THROW(me::cast<ret>(value), ::std::exception)
 
-    #define test(ret, input, etalon)                       \
-        static_assert(                                     \
-            me::assert_numeric_cast<ret>(input) == etalon, \
-            "numeric_cast<" #ret ">(" #input "): failed"   \
+    #define test(ret, input, etalon)                             \
+        static_assert(                                           \
+            me::cast<ret>(input) == etalon,                      \
+            "tools::numeric::cast<" #ret ">(" #input "): failed" \
         )
 
 } // namespace
@@ -395,7 +393,7 @@ namespace
     test( u_enum   ,      128        , u_enum::eONE    );
     test( unsigned , u_enum::eONE    , unsigned{128}   );
 //.................................................................................
-    //test( s_char_t ,  u_enum::eONE   , s_char_t{128}   );  // <--- safety compile time
+    //test( s_char_t ,  u_enum::eONE   , s_char_t{128}   );  // <--- защита времени компиляции
     test( u_char_t ,  u_enum::eONE   , u_char_t{128}   );
 
 } // namespace
@@ -406,16 +404,13 @@ namespace
 // [floating]
 TEST_COMPONENT(000)
 {
-    ASSERT_THROW(me::numeric_cast<float>(13.13) , ::std::exception);
-    ASSERT_THROW(me::numeric_cast<float>(13.13l), ::std::exception);
+    ASSERT_THROW(me::cast<float>(13.13) , ::std::exception);
+    ASSERT_THROW(me::cast<float>(13.13l), ::std::exception);
 
     // implementation behavior
     if(!may_be)
     {
-        ASSERT_THROW(
-            me::numeric_cast<double>(13.13l),
-            ::std::exception
-        );
+        ASSERT_THROW(me::cast<double>(13.13l), ::std::exception);
     }
 }
 
