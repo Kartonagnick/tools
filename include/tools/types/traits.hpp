@@ -1,9 +1,37 @@
 // [2021y-03-11d][01:46:56] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 1
+#define dTOOLS_TRAITS_USED_ 2
 
 #include <tools/features.hpp>
+
+//==============================================================================
+//=== decay ====================================================================
+#ifndef dTOOLS_DECAY_USED_ 
+#define dTOOLS_DECAY_USED_ 1
+namespace tools
+{
+    template<class t> struct decay
+    {
+        typedef t type;
+    };
+    template<class t, size_t n> struct decay<t[n]>
+    {
+        typedef t* type;
+    };
+    template<class t, size_t n> struct decay<t(&)[n]>
+    {
+        typedef t* type;
+    };
+    #ifdef dHAS_RVALUE_REFERENCES
+    template<class t, size_t n> struct decay<t(&&)[n]>
+    {
+        typedef t* type;
+    };
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_DECAY_USED_
 
 //==============================================================================
 //=== is_same ==================================================================
@@ -41,6 +69,25 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_REMOVE_CV_USED_
 
+//==============================================================================
+//=== remove_reference =========================================================
+#ifndef dTOOLS_REMOVE_REFERENCE_USED_ 
+#define dTOOLS_REMOVE_REFERENCE_USED_ 1
+namespace tools
+{
+    template<class t> struct remove_reference
+        { typedef t type; };
+
+    template<class t> struct remove_reference <t&>           
+        { typedef t type; };
+
+    #ifdef dHAS_RVALUE_REFERENCES
+    template<class t> struct remove_reference <t&&>        
+        { typedef t type; };
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_REMOVE_REFERENCE_USED_
 //==============================================================================
 //=== is_signed ================================================================
 #ifndef dTOOLS_IS_SIGNED_USED_ 

@@ -20,8 +20,9 @@
     #define TEST_CONDITIONAL                                // ready!
     #define TEST_IS_SAME                                    // ready!
     #define TEST_ENABLE_IF                                  // ready!
-
     #define TEST_TYPE_OF_ENUM                               // ready!
+    #define TEST_REMOVE_REFERENCE                           // ready!
+    #define TEST_DECAY                                      // ready!
 //==============================================================================
 //==============================================================================
 // in progress...

@@ -11,6 +11,9 @@
     #define INCLUDE_LONG_LONG_TESTS
     #define INCLUDE_LONG_TESTS
 
+//===== tools\algorithm ====================================||==================
+    #define TEST_TOOLS_FIND_FIRST_OF                        // in progress...
+    #define TEST_TOOLS_TOKENIZER                            // in progress...
 //==============================================================================
 //===== tools ==============================================||==================
     #define TEST_TOOLS_SYNC_CONSEPT                         // ready!
@@ -28,8 +31,9 @@
     #define TEST_TOOLS_UTF8                                 // ready!
     #define TEST_TOOLS_CONV                                 // ready!
     #define TEST_TOOLS_SEH                                  // ready!
-    //#define TEST_TOOLS_URL                                // ready!
+    // #define TEST_TOOLS_URL                               // ready!
     #define TEST_TOOLS_NUMERIC                              // ready!
+    #define TEST_TOOLS_VALID                                // in progress...
 //==============================================================================
 //==============================================================================
 
