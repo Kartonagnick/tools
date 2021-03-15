@@ -165,6 +165,105 @@ TEST_COMPONENT(012)
 
 //==============================================================================
 //==============================================================================
+#ifndef NDEBUG
+TEST_COMPONENT(013)
+{
+    const char* b  = 0;
+    const char* e  = "";
+    const char s[] = " ,;";
+    const char* r = 0;
+    ASSERT_DEATH_DEBUG(r = me::find_first_of(b, e, s, s + 3));
+    (void)b;
+    (void)e;
+    (void)s;
+    (void)r;
+}
+TEST_COMPONENT(014)
+{
+    const char* b  = "";
+    const char* e  = 0;
+    const char s[] = " ,;";
+    const char* r = 0;
+    ASSERT_DEATH_DEBUG(r = me::find_first_of(b, e, s, s + 3));
+    (void)b;
+    (void)e;
+    (void)s;
+    (void)r;
+}
+TEST_COMPONENT(015)
+{
+    const char* b  = "";
+    const char* e  = "";
+    const char* sb = 0;
+    const char* se = "";
+    const char* r  = 0;
+    ASSERT_DEATH_DEBUG(r = me::find_first_of(b, e, sb, se));
+    (void)b;
+    (void)e;
+    (void)sb;
+    (void)se;
+    (void)r;
+}
+TEST_COMPONENT(016)
+{
+    const char* b  = "";
+    const char* e  = "";
+    const char* sb = "";
+    const char* se = 0;
+    const char* r  = 0;
+    ASSERT_DEATH_DEBUG(r = me::find_first_of(b, e, sb, se));
+    (void)b;
+    (void)e;
+    (void)sb;
+    (void)se;
+    (void)r;
+}
+TEST_COMPONENT(017)
+{
+    const char* b  = "";
+    const char* e  = 0;
+    const char* sb = "";
+    const char* se = 0;
+    const char* r  = 0;
+    ASSERT_DEATH_DEBUG(r = me::find_first_of(b, e, sb, se));
+    (void)b;
+    (void)e;
+    (void)sb;
+    (void)se;
+    (void)r;
+}
+TEST_COMPONENT(018)
+{
+    const char* b  = "";
+    const char* e  = 0;
+    const char* sb = 0;
+    const char* se = 0;
+    const char* r  = 0;
+    ASSERT_DEATH_DEBUG(r = me::find_first_of(b, e, sb, se));
+    (void)b;
+    (void)e;
+    (void)sb;
+    (void)se;
+    (void)r;
+}
+TEST_COMPONENT(019)
+{
+    const char* b  = 0;
+    const char* e  = 0;
+    const char* sb = 0;
+    const char* se = 0;
+    const char* r  = 0;
+    ASSERT_DEATH_DEBUG(r = me::find_first_of(b, e, sb, se));
+    (void)b;
+    (void)e;
+    (void)sb;
+    (void)se;
+    (void)r;
+}
+#endif
+
+//==============================================================================
+//==============================================================================
 #endif // !TEST_TOOLS_FIND_FIRST_OF
 
 

@@ -12,6 +12,7 @@
 
 //==============================================================================
 //===== tools/features =====================================||==================
+    #define TEST_TOOLS_FEATURE_AGGREGATE_INITIALIZE         // ready
     #define TEST_TOOLS_FEATURE_ATOMIC                       // ready
     #define TEST_TOOLS_FEATURE_DFUNCTION                    // ready
     #define TEST_TOOLS_FEATURE_THREAD_LOCAL                 // ready

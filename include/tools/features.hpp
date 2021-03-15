@@ -1,8 +1,9 @@
 // [2021y-02m-05d][18:41:19] Idrisov Denis R.
 // [2021y-03m-10d][23:23:35] Idrisov Denis R. 108
+// [2021y-03m-15d][18:28:44] Idrisov Denis R. 109
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 108
+#define dTOOLS_FEATURES_USED_ 109
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -103,6 +104,7 @@
     // #pragma message("build for msvc2013 (or newer) or other compiler")
     // #pragma message("build for c++11 (or newer)")
     #define dHAS_TEMPLATE_FUNCTION_DEFAULT_PARAM 1
+    #define dHAS_AGGREGATE_INITIALIZE 1
     #define dHAS_DELETING_FUNCTIONS 1
     #define dHAS_VARIADIC_TEMPLATE 1
     #define dHAS_USING_ALIAS 1
