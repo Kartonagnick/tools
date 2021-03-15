@@ -12,7 +12,7 @@
 
 //===== tools\algorithm ====================================||==================
     #define TEST_TOOLS_FIND_FIRST_OF                        // ready!
-    // #define TEST_TOOLS_TOKENIZER                         // in progress...
+    #define TEST_TOOLS_TOKENIZER                            // in progress...
 //==============================================================================
 //===== tools ==============================================||==================
     // #define TEST_TOOLS_SYNC_CONSEPT                      // ready!
