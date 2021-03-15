@@ -20,7 +20,7 @@
 // [2021y-03m-13d][22:23:34] Idrisov Denis R. 021
 // [2021y-03m-13d][23:55:32] Idrisov Denis R. 022
 // [2021y-03m-14d][23:55:31] Idrisov Denis R. 023
-// [2021y-03m-15d][01:41:10] Idrisov Denis R. 024 PRE
+// [2021y-03m-15d][20:59:03] Idrisov Denis R. 024 PRE
 #pragma once
 #ifndef dTOOLS_CONFBUILD_USED_
 #define dTOOLS_CONFBUILD_USED_ 024 PRE
