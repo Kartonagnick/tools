@@ -87,6 +87,7 @@ namespace tools
 
     #undef dNOEXCEPT_PREDICAT_
     #undef dNOEXCEPT_COMPARE_
+    #undef dADOPT_
 
 } // namespace tools
 
