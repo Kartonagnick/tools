@@ -7,7 +7,7 @@
 [E1]: ../images/nodata.png    "2021y-03m-11d"
 [N1]: ../images/na.png        "2021y-03m-11d"
 
-version 0.1.9
+version 0.2.4
 
 | **ID** | **компоненты**       |  used            |      include guard      |  
 |:------:|:--------------------:|:----------------:|:-----------------------:|  
@@ -17,34 +17,47 @@ version 0.1.9
 |  0003  | [int_to_string_][03] | errno.cpp        |                         |  
 |  0004  | [tokenizePath][04]   | seh_path.hpp     |                         |  
 |  0005  | [shortPath][05]      | seh_path.hpp     |                         |  
-|  0006  | [remove_cv][06]      | types/fixed.hp p | dTOOLS_REMOVE_CV_USED_  |  
-|  0007  | [is_signed][07]      | types/fixed.hp p | dTOOLS_REMOVE_CV_USED_  |  
-|  0008  | [limit][08]          | types/fixed.hp p | dTOOLS_LIMIT_USED_      |  
+|  0006  | [remove_cv][06]      | types/fixed.hpp  | dTOOLS_REMOVE_CV_USED_  |  
+|  0007  | [is_signed][07]      | types/fixed.hpp  | dTOOLS_IS_SIGNED_USED_  |  
+
+
+| **ID** | **макрос**               |  used       |        описание         |  
+|:------:|:------------------------:|:-----------:|:-----------------------:|  
+|  0000  | [dDISABLE_SAFE_CAST][00] | numeric.hpp | отключает проверки      |  
+|  0001  | [dFORBID_SAFE_CAST][01]  | numeric.hpp | запрещает использование |  
+
+[00]: #dDISABLE_SAFE_CAST "отключает проверку правомерности каста в функциях safe_cast/assert_safe_cast" 
+[01]: #dFORBID_SAFE_CAST  "запрещает использовать функции safe_cast/assert_safe_cast" 
+
+<br />
+<br />
+
 
 dDISABLE_SAFE_CAST
 ---
-
-Отключает все проверки в функцииях:  
-  - assert_safe_cast  
-  - safe_cast  
+Если активирован:  
 
 ```
 #define dDISABLE_SAFE_CAST
 ```
+Тогда отключает все проверки в функциях:  
+  - assert_safe_cast  
+  - safe_cast  
+
+<br />
+<br />
+
 
 dFORBID_SAFE_CAST
 ---
+Если активирован:  
 
 ```
 #define dFORBID_SAFE_CAST
 ```
-
-Запрещает использовать функции:  
+Тогда запрещает использовать функции:  
   - assert_safe_cast  
   - safe_cast  
-
-
-
 
 <br />
 <br />

@@ -10,7 +10,7 @@
 
 Разработка
 ----------
-1) [Таблица](public/table.md)  
+1) [Таблица](table/table.md)  
 2) [Корреляции](dev/correlations.md)  
 3) [История](history.md)  
 

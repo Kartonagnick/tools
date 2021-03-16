@@ -1,0 +1,53 @@
+
+test-600-others
+---
+  - [x] `others версии 024`  
+    - [x] algorithm  
+      - [x] tokenizer.hpp  
+  - [x] `others версии 023`  
+    - [x] valid  
+    - [x] algorithm  
+      - [x] find_first_of.hpp  
+  - [x] `others версии 019`  
+    - [x] numeric  
+  - [x] `others версии 018`  
+    - [ ] types (тестируется в другом проекте)  
+  - [x] `others версии 017`  
+    - [ ] macro (тестируется в другом проекте)  
+  - [x] `others версии 015`  
+    - [x] url  
+  - [x] `others версии 014`  
+    - [x] marker  
+  - [x] `others версии 013`  
+    - [x] secure  
+    - [x] seh  
+  - [x] `others версии 012`  
+    - [x] conv  
+  - [x] `others версии 011`  
+    - [x] utf8  
+  - [x] `others версии 010`  
+    - [x] random  
+  - [x] `others версии 009`  
+    - [x] errno  
+    - [x] hash  
+      - [x] hash\combine  
+      - [x] hash\accum  
+      - [x] hash\hash  
+  - [x] `others версии 007`  
+    - [x] flag  
+      - [x] flag\flag_synch  
+      - [x] flag\flag_void  
+      - [x] flag\function  
+      - [x] flag\template  
+  - [x] `others версии 006`  
+    - [ ] dfunction
+  - [x] `others версии 003`  
+    - [x] counter  
+    - [x] copies  
+    - [x] synch  
+    - [x] windows  
+  - [x] `others версии 002`  
+    - [x] raise  
+  - [x] `others версии 001`  
+    - [ ] features (тестируется в другом проекте)  
+    - [x] assert  
