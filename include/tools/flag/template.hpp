@@ -11,7 +11,7 @@
 #pragma once
 
 #ifndef dTOOLS_FLAG_TEMPLATE_USED_ 
-#define dTOOLS_FLAG_TEMPLATE_USED_ 1
+#define dTOOLS_FLAG_TEMPLATE_USED_ 100
 //==============================================================================
 //==============================================================================
 

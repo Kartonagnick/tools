@@ -7,7 +7,7 @@
 // [2021y-03-13d][21:34:16] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_CAST_NUMERIC_USED_ 
-#define dTOOLS_CAST_NUMERIC_USED_ 3 PRE
+#define dTOOLS_CAST_NUMERIC_USED_ 3
 
 #include <tools/features.hpp>
 #include <tools/types/fixed.hpp>
@@ -104,16 +104,16 @@ namespace tools
                 enum { unsigned_lss_signed = !capacious && !ret_signed && from_signed };
 
                 enum { mode = 
-                     floating              ?         0:
-                     same_types            ?         1: 
-                     unsigned_grt_unsigned ?         2:
-                     unsigned_lss_unsigned ?         3: 
-                     signed_grt_signed     ?         4:
-                     signed_lss_signed     ?         5: 
-                     signed_grt_unsigned   ?         6:
-                     signed_lss_unsigned   ?         7: 
-                     unsigned_grt_signed   ?         8:
-                     unsigned_lss_signed   ?         9: 
+                     floating              ? 0:
+                     same_types            ? 1: 
+                     unsigned_grt_unsigned ? 2:
+                     unsigned_lss_unsigned ? 3: 
+                     signed_grt_signed     ? 4:
+                     signed_lss_signed     ? 5: 
+                     signed_grt_unsigned   ? 6:
+                     signed_lss_unsigned   ? 7: 
+                     unsigned_grt_signed   ? 8:
+                     unsigned_lss_signed   ? 9: 
                      10
                 };
 
