@@ -50,7 +50,7 @@ Tools`s version 0.2.4
 |  0017  | [url][17]           | 0.1.5 | 1.0.0  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]                          |  
 |  0018  | [macro][18]         | 0.1.7 | 0.0.1  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]                          |  
 |  0019  | [types][19]         | 0.1.8 | 1.0.0  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]                          |  
-|  0020  | [numeric][20]       | 0.1.4 | 0.0.3  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]                          |  
+|  0020  | [numeric][20]       | 0.1.9 | 0.0.3  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]                          |  
 |  0021  | [valid][21]         | 0.2.3 | 0.0.1  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]                          |  
 |  0022  | [algorithm][22]     | 0.2.3 | 0.0.1  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]                          |  
 

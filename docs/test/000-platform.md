@@ -1,0 +1,46 @@
+
+test-000-platform  
+---
+  - [x] `макросы версии 109             [024]`  
+    - [x] dHAS_AGGREGATE_INITIALIZE  
+  - [x] `макросы версии 108             [018]`  
+    - [x] dHAS_CSTDINT
+    - [x] dCONSTANT
+  - [x] `макросы версии 107             [014]`  
+    - [x] dHAS_EMPLACE  
+  - [x] `макросы версии 106             [010]`  
+    - [x] dTHREAD_LOCAL_EXTENSION  
+    - [x] dHAS_THREAD_LOCAL  
+    - [x] dHAS_TYPE_TRAITS  
+    - [x] dHAS_TYPE_TRAITS  
+    - [x] dHAS_CHRONO  
+  - [x] `макросы версии 105             [009]`  
+    - [x] dHAS_VARIADIC_TEMPLATE  
+    - [x] dHAS_HASH  
+  - [x] `макросы версии 104             [008]`  
+    - [x] dHAS_STATIC_ASSERT  
+    - [x] dSTATIC_ASSERT  
+  - [x] `макросы версии 103             [007]`  
+    - [x] dHAS_ENUM_CLASS
+  - [x] `макросы версии 102             [003]`  
+    - [x] dHAS_ATOMIC
+    - [x] dHAS_NULLPTR
+  - [x] `макросы версии 101             [001]`  
+    - [x] dMESSAGE  
+    - [x] dHAS_RVALUE_REFERENCES  
+    - [x] dHAS_ENUM_CLASS  
+    - [x] dHAS_CPP11  
+    - [x] dHAS_CONSTEXPR_CPP11  
+    - [x] dCONSTEXPR_CPP11  
+    - [x] dHAS_TEMPLATE_FUNCTION_DEFAULT_PARAM  
+    - [x] dHAS_DELETING_FUNCTIONS  
+    - [x] dHAS_USING_ALIAS  
+    - [x] dNOCOPYABLE  
+    - [x] dHAS_NOEXCEPT  
+    - [x] dNOEXCEPT  
+    - [x] dCONSTEXPR_CPP14  
+    - [x] dHAS_CONSTEXPR_CPP14  
+    - [x] dHAS_CPP14  
+    - [x] dHAS_RVALUE_ARRAY  
+    - [x] dHAS_CPP17  
+    - [x] dNODISCARD  
