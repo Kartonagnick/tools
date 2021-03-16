@@ -6,7 +6,7 @@
 [E]: ../images/empty.png
 [N]: ../images/na.png
 
-version 1.0.0  [![P]][0]
+version 1.0.0
 ---
 
 | **ID** | 2019      | 20017     | 2015      | 2013      | 2012      | 2010      | 2008      |  

@@ -6,7 +6,7 @@
 [E]: ../images/empty.png
 [N]: ../images/na.png
 
-version 1.0.2  [![P]][0]
+version 1.0.2
 ---
 
 | **ID** | 2019      | 20017     | 2015      | 2013      | 2012      | 2010      | 2008      |  
@@ -22,14 +22,7 @@ version 1.0.2  [![P]][0]
 
 synch
 -----
-особенность:  
-
-```
-if dHAS_ATOMIC
-    используется std::recursive_mutex
-else
-    используется winapi CRITICAL_SECTION
-```
+класс-мутекс
 
 synch_dummy
 -----
@@ -39,3 +32,16 @@ synch_dummy
 synch_lock
 -----
 RAII-guard для synch  
+
+
+
+[![V]][0] особенность
+----
+
+```
+if dHAS_ATOMIC
+    используется std::recursive_mutex
+else
+    используется winapi CRITICAL_SECTION
+```
+

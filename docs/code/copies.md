@@ -6,7 +6,7 @@
 [E]: ../images/empty.png
 [N]: ../images/na.png
 
-version 1.0.0  [![P]][0]
+version 1.0.0
 ---
 
 | **ID** | 2019      | 20017     | 2015      | 2013      | 2012      | 2010      | 2008      |  
@@ -39,7 +39,8 @@ static size_t instances() dNOEXCEPT;
 
 ```
 
-особенность:  
+[![V]][0] особенность  
+---
 
 ```
 if dHAS_ATOMIC

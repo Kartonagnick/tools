@@ -6,7 +6,7 @@
 [E]: ../images/empty.png
 [N]: ../images/na.png
 
-version 1.0.1  [![P]][M]
+version 1.0.1
 ---
 
 | **ID** | элементы     | версия | mingw 830, 720 710 | msvc 2019, 2017, 2015 | msvc 2013, 2012, 2010, 2008             |  
@@ -18,7 +18,7 @@ version 1.0.1  [![P]][M]
 [VS-NEW]:  #msvc-new         "поддержка новых компиляторов msvc"  
 [VS-OLD]:  #msvc-old         "поддержка старых компиляторов msvc"  
 [2]:       #msvc-old         "поддержка старых компиляторов msvc"  
-[3]:       #msvc-old         "минимальное требование: msvc2012"  
+[3]:       #-особенности     "минимальное требование: msvc2012"  
 
 [00]: #random                "функция рандомайзер"  
 
@@ -31,17 +31,17 @@ template<class T>
 T random(const T& a, const T& b) dNOEXCEPT
 ```
 
-особенности:
+[![D]][M] особенности  
+---------------------
 
 ```
-if !dHAS_CHRONO
+if !dHAS_CHRONO (msvc2012)
     ошибка: не поддерживается
 
 if dHAS_THREAD_LOCAL
     используется thread_local
 else
     используется synch
-
 ```
 
 
