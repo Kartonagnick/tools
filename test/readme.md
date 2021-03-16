@@ -17,6 +17,6 @@ unit tests
 
 [00]: ../docs/test/000-platform.md  "тесты features"
 [01]: ../docs/test/100-macro.md     "тесты макросов"
-[02]: ../docs/test/200-types.md     "тесты метафункций"
+[02]: ../docs/test/200-types.md     "тесты мета-функций"
 [06]: ../docs/test/600-others.md    "тесты мелких инструментов"
 
