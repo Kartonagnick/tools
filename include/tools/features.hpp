@@ -1,9 +1,10 @@
 // [2021y-02m-05d][18:41:19] Idrisov Denis R.
 // [2021y-03m-10d][23:23:35] Idrisov Denis R. 108
 // [2021y-03m-15d][18:28:44] Idrisov Denis R. 109
+// [2021y-03m-17d][23:19:45] Idrisov Denis R. 110
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 109
+#define dTOOLS_FEATURES_USED_ 110
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -48,7 +49,6 @@
     #define dSTATIC_ASSERT(expr, msg) \
         static_assert(expr, #msg)
 #else
-
     namespace static_
     {
         template<bool> struct assert_;
@@ -61,7 +61,6 @@
         ::static_::assert_<(expr)> msg; \
         (void) msg;                     \
     } void()
-
 #endif
 
 //==============================================================================
@@ -195,6 +194,13 @@
 #else
     #define dNODISCARD
 #endif
+
+//==============================================================================
+//=== dHAS_ZERO_SIZE_ARRAY =====================================================
+
+#ifndef _MSC_VER
+    #define dHAS_ZERO_SIZE_ARRAY 1
+#endif 
 
 //==============================================================================
 //==============================================================================
