@@ -26,8 +26,8 @@ version 0.2.4
 |  0000  | [dDISABLE_SAFE_CAST][00] | numeric.hpp | отключает проверки      |  
 |  0001  | [dFORBID_SAFE_CAST][01]  | numeric.hpp | запрещает использование |  
 
-[00]: #dDISABLE_SAFE_CAST "отключает проверку правомерности каста в функциях safe_cast/assert_safe_cast" 
-[01]: #dFORBID_SAFE_CAST  "запрещает использовать функции safe_cast/assert_safe_cast" 
+[00]: ../code/numeric.md/#safe_cast "отключает проверку правомерности каста в функциях safe_cast/assert_safe_cast" 
+[01]: ../code/numeric.md/#safe_cast "запрещает использовать функции safe_cast/assert_safe_cast" 
 
 <br />
 <br />
