@@ -12,7 +12,6 @@
 
 //==============================================================================
 //===== tools/types ========================================||==================
-    #define TEST_FIXED                                      // ready!
     #define TEST_IS_FLOATING                                // ready!
     #define TEST_IS_SIGNED                                  // ready!
     #define TEST_IS_INTEGRAL                                // ready!
@@ -23,6 +22,17 @@
     #define TEST_TYPE_OF_ENUM                               // ready!
     #define TEST_REMOVE_REFERENCE                           // ready!
     #define TEST_DECAY                                      // ready!
+
+//==============================================================================
+//===== tools/types/common =================================||==================
+    #define TEST_TOOLS_DEGRADATE                            // in progress...
+    #define TEST_TOOLS_FOR_LVALUE                           // in progress...
+    #define TEST_TOOLS_FOR_RVALUE                           // in progress...
+
+//==============================================================================
+//===== tools/types ========================================||==================
+    #define TEST_FIXED                                      // ready!
+
 //==============================================================================
 //==============================================================================
 // in progress...
