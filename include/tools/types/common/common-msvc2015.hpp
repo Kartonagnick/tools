@@ -1,12 +1,11 @@
-// [2021y-02-20d][18:40:18] Idrisov Denis R.
+// [2021y-02m-20d][18:40:18] Idrisov Denis R.
+// [2021y-03m-17d][23:05:40] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
 #define dTOOLS_COMMON_NEW_USED_ 100
-
 // msvc2013 has bug: std::is_lvalue_reference is not worked
 // dHAS_TEMPLATE_FUNCTION_DEFAULT_PARAM
 // dHAS_USING_ALIAS
-
 #include <type_traits>
 
 //==============================================================================
