@@ -18,6 +18,7 @@
 //================================================================================
 
 #include <tools/features.hpp>
+#include <tools/types/common.hpp>
 #include <tools/assert.hpp>
 #include <cassert>
 #include <cstddef>
