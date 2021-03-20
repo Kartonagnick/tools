@@ -1,7 +1,14 @@
 
 test-200-types
 ---
-  - [x] `fixed версии 100 [018]`  
+
+  - [x] `common версии 100 [026]`  
+    - [x] degradate 
+    - [x] dfor_lvalue 
+    - [x] dfor_rvalue  
+
+<br />
+<br />
 
   - [x] `traits версии 2 [023]`  
     - [x] remove_reference  
@@ -15,3 +22,11 @@ test-200-types
     - [x] conditional  
     - [x] enable_if  
     - [x] type_of_enum (msvc2012)  
+
+<br />
+<br />
+
+  - [x] `fixed версии 100 [018]`  
+
+
+
