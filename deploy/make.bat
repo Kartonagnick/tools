@@ -23,7 +23,7 @@ rem ============================================================================
     set "MG72=mingw720:64:release:static"
     set "MG=%MG72%;%MG73%;%MG81%;"
 
-    rem set "order=%VC%"
+    rem set "order=%VC19%"
     rem set "order=%MG%"
     rem set "order=%VC%; %MG%"
     set "order=%VC%;%MG%"

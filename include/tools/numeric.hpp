@@ -300,6 +300,7 @@ namespace tools
 //=== [cast/assert_cast] =========================================================
 
 #include <tools/assert.hpp>
+#include <stdexcept>
 #include <typeinfo>
 #include <sstream>
 #include <cassert>

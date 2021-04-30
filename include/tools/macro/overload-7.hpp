@@ -67,6 +67,8 @@
 
 #if 0
     // usage: 
+    #include <tools/macro/overload-7.hpp>
+
     #define dPRINT_0() \
         std::cout <<"empty\n"
     
@@ -82,8 +84,15 @@
     #define dPRINT_4(a1, a2, a3, a4) \
         std::cout << a1 << ", " << a2 << ", " << a3 << ", " << a4 << '\n'
     
-    #define dPRINT_7(a1, a2, a3, a4, a5) \
+    #define dPRINT_5(a1, a2, a3, a4, a5) \
         std::cout << a1 << ", " << a2 << ", "<< a3 << ", " << a4 << ", " << a5 << '\n'
+
+    #define dPRINT_6(a1, a2, a3, a4, a5, a6) \
+        std::cout << a1 << ", " << a2 << ", "<< a3 << ", " << a4 << ", " << a5 << ", " << a6 << '\n'
+
+    #define dPRINT_7(a1, a2, a3, a4, a5, a6, a7) \
+        std::cout << a1 << ", " << a2 << ", "<< a3 << ", " << a4 << ", " << a5 << ", " << a6 << ", " << a7 << '\n'
+
     
     #define dPRINT(...) \
         dMACRO_CHOOSER_7(dPRINT, __VA_ARGS__)(__VA_ARGS__)
@@ -107,6 +116,8 @@
         dPRINT(1,2,3);
         dPRINT(1,2,3,4);
         dPRINT(1,2,3,4,5);
+        dPRINT(1,2,3,4,5,6);
+        dPRINT(1,2,3,4,5,6,7);
         std::cout << dGET_ARGS_COUNT_MAX_7(1, 2, 3, 4, 5) << '\n';
 
         dCALL_ONE_OR_MORE(1,2);
