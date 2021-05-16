@@ -1,6 +1,8 @@
 
 test-000-platform  
 ---
+  - [x] `макросы версии 110             [025]`  
+    - [x] dHAS_ZERO_SIZE_ARRAY  
   - [x] `макросы версии 109             [024]`  
     - [x] dHAS_AGGREGATE_INITIALIZE  
   - [x] `макросы версии 108             [018]`  
